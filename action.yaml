@@ -2,4 +2,4 @@ action: done
 gpus: 0
 test: false
 milestone: core_claim_plus
-notes: "Packaging audit passed: no external artifacts are required, download.sh is intentionally empty, and validation reports no shared-path or ignored-import issues."
+notes: "Final verification passed; workspace is ready as a scaled core_claim_plus gym."
