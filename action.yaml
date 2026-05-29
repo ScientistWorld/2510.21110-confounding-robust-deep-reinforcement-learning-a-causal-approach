@@ -27,8 +27,6 @@
 #   milestone: core_claim
 #   notes: "Reproduced the core claim. Environment packaged."
 
-action: submit
-gpus: 0
-test: true
-milestone: core_claim
-notes: "Run multi-seed scaled CMDP reproduction with seeds 0 1 2 using aggregated evaluator; target core_claim_plus if the effect is consistent."
+action: done
+milestone: core_claim_plus
+notes: "Causal-DQN core claim reproduced on the tracked hidden-confounder CMDP and confirmed across seeds 0 1 2; environment packaged and validated."

@@ -45,4 +45,4 @@
 - Stopping at `core_claim_plus`; the remaining Atari-scale benchmark is documented as a larger follow-up rather than part of this CPU-scale gym.
 
 ## Stop Justification
-- Reproduced the central algorithmic claim on the tracked hidden-confounder CMDP and confirmed it across three training seeds. The full paper benchmark uses 12 masked Atari games with demonstrators and 1M environment steps per run, which is outside the intended scope of this packaged CPU-scale reproduction.
+- Completed at milestone `core_claim_plus`.
