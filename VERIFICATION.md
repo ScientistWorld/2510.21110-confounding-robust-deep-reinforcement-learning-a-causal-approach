@@ -10,6 +10,7 @@ The workspace claimed `core_claim_plus` and had working method, baseline, evalua
 - Minor: `briefing/evaluation.md` did not list the full scored metric set now present in `reference.json`.
 - Minor: `scoring/scores.json` lacked the full metrics already computed by the train/test evaluators.
 - Minor: `scripts/reproduce.sh` defaulted to only the base variant and one seed instead of the two-variant, three-seed setup supporting `core_claim_plus`.
+- Packaging: `scripts/run.sh` evaluated ignored checkpoint artifacts directly, which was not fresh-clone robust.
 
 ## Fixes Applied
 
@@ -17,6 +18,7 @@ The workspace claimed `core_claim_plus` and had working method, baseline, evalua
 - Expanded `briefing/evaluation.md` to document `tail_return_10pct`, `explicit_safe_state_rate`, and `valid_action_rate`.
 - Filled in the missing metrics in `scoring/scores.json` using the existing evaluated policy results.
 - Updated `scripts/reproduce.sh` defaults to run `base weaker_bias` over seeds `0 1 2`.
+- Updated `scripts/run.sh` to call `scripts/reproduce.sh`, regenerating artifacts before `python validate.py --compare`.
 - Re-ran `python validate.py --compare`; all checks passed.
 
 ## Final Judgment

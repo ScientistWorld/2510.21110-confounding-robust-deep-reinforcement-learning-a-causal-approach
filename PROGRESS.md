@@ -8,6 +8,7 @@
 - Implemented `method/causal_dqn.py` with the paper's all-action target: standard backup for the logged action and reward-floor plus worst-next-state backup for non-logged actions.
 - Implemented `baseline/confounded_dqn.py` as the causally unaware off-policy DQN baseline.
 - Implemented `eval/evaluate_cmdp.py`; it reads saved policy artifacts and does not import from `method/`.
+- `scripts/run.sh` now regenerates method and baseline artifacts through `scripts/reproduce.sh` before scoring, so compute submissions do not depend on ignored checkpoints.
 
 ## Results
 
@@ -19,6 +20,7 @@
 - On `weaker_bias_cmdp`, Confounded DQN mean return was `-1.504` with risky action rate `1.000`; Causal-DQN mean return was `0.923` with safe action rate `0.889`.
 - CPU test job `e6f5da67-7e9` reran both variants over seeds `0 1 2` on the current Double-DQN bootstrap revision and passed `python validate.py --compare`.
 - Current milestone is `core_claim_plus`: the causal backup has been validated beyond the minimum setting, but not on the full Atari benchmark.
+- Continuing-agent audit found and fixed a fresh-clone robustness issue in `scripts/run.sh`; a CPU test submission is queued to validate the corrected end-to-end entry point.
 
 ## Remaining
 
@@ -34,6 +36,7 @@
 - Job `76913160-30f` validated the tightened setup and passed `python validate.py --compare`.
 - Job `e1d5cddb-bd5` validated the multi-seed aggregation path and passed `python validate.py --compare`.
 - Follow-up fidelity cleanup: updated both scaled learners to use Double DQN action selection/evaluation for bootstrap targets, matching the appendix. Job `e6f5da67-7e9` validated this exact code revision.
+- Continuing-agent audit found `scripts/run.sh` evaluated ignored checkpoint artifacts directly. Fixed by routing the compute entry point through `scripts/reproduce.sh`; local `bash -n` and `python validate.py --compare` passed before submission.
 
 ## Deviations from Paper
 

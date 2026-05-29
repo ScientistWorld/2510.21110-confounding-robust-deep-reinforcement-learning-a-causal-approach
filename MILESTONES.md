@@ -36,3 +36,8 @@
 - Final verification preserved the milestone.
 - Cleaned method-agnostic scoring documentation, completed `scores.json` metric coverage, and aligned `scripts/reproduce.sh` defaults with the scored two-variant, three-seed setup.
 - `python validate.py --compare` passed.
+
+### [2026-05-29 06:28] - core_claim_plus
+- Continuing-agent audit found that `scripts/run.sh` depended on ignored checkpoint JSONs.
+- Updated `scripts/run.sh` to regenerate artifacts through `scripts/reproduce.sh` before validation.
+- Local shell syntax checks and `python validate.py --compare` passed; submitting a CPU test job to validate the fresh end-to-end entry point.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compute-node entry point for the default scoring audit.
+# Compute-node entry point for a fresh end-to-end reproduction.
 
 set -euo pipefail
 
@@ -9,18 +9,6 @@ export EVAL_EPISODES="${EVAL_EPISODES:-2000}"
 
 rm -f scoring/scores.json
 
-bash scripts/evaluate.sh \
-  checkpoints/conf_dqn_base_seed0.json \
-  checkpoints/conf_dqn_base_seed1.json \
-  checkpoints/conf_dqn_base_seed2.json \
-  checkpoints/causal_dqn_base_seed0.json \
-  checkpoints/causal_dqn_base_seed1.json \
-  checkpoints/causal_dqn_base_seed2.json \
-  checkpoints/conf_dqn_weaker_bias_seed0.json \
-  checkpoints/conf_dqn_weaker_bias_seed1.json \
-  checkpoints/conf_dqn_weaker_bias_seed2.json \
-  checkpoints/causal_dqn_weaker_bias_seed0.json \
-  checkpoints/causal_dqn_weaker_bias_seed1.json \
-  checkpoints/causal_dqn_weaker_bias_seed2.json
+bash scripts/reproduce.sh
 
 python validate.py --compare
