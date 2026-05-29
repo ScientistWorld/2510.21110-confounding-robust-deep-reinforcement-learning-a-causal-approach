@@ -9,6 +9,7 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 
 python method/causal_dqn.py \
   --output checkpoints/causal_dqn_policy.json \

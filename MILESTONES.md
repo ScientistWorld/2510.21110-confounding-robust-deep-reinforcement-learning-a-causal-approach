@@ -20,5 +20,9 @@
 - Implemented a scaled hidden-confounder CMDP, Causal-DQN, a confounded DQN baseline, and method-agnostic evaluation scripts.
 - Prepared a compute job to verify the full reproduction pipeline before claiming `method_runs`.
 
+### [2026-05-29 00:35] - none
+- First compute job reached the container and installed dependencies.
+- Training did not start due to a Python import-path issue; scripts now export `PYTHONPATH=/home/user`.
+
 ## Stop Justification
 - Not stopped.

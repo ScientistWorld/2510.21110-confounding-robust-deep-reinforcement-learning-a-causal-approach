@@ -16,6 +16,7 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 
 NAME="${1:-conf_dqn}"
 

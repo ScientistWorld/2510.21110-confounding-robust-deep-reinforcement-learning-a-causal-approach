@@ -17,6 +17,7 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 
 mkdir -p checkpoints scoring
 
