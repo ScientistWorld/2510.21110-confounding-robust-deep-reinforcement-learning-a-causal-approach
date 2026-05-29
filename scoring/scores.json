@@ -1,0 +1,22 @@
+{
+  "experiments": {
+    "scaled_confounded_cmdp": {
+      "results": {
+        "conf_dqn": {
+          "mean_return": -1.174,
+          "std_return": 2.3718608728169532,
+          "risky_action_rate": 1.0,
+          "safe_action_rate": 0.0,
+          "covered_states": 1.0
+        },
+        "causal_dqn": {
+          "mean_return": -0.062,
+          "std_return": 1.926695616852854,
+          "risky_action_rate": 0.6666666666666666,
+          "safe_action_rate": 0.33333333333333337,
+          "covered_states": 1.0
+        }
+      }
+    }
+  }
+}
