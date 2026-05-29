@@ -30,5 +30,5 @@
 action: submit
 gpus: 0
 test: true
-milestone: none
-notes: "Retry CPU smoke job after reducing the MLP/update count and adding progress logs; expect baseline and Causal-DQN artifacts plus scores.json."
+milestone: method_runs
+notes: "Run tightened scaled CMDP after method_runs: 500 demos, 1000 updates, evaluate whether Causal-DQN now reaches the core claim."
