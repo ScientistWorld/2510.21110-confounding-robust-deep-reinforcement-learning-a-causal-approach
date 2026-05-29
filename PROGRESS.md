@@ -15,12 +15,13 @@
 - CPU test job `9afc19ef-8d1` completed end-to-end. Confounded DQN learned the all-risky policy with mean return `-1.174`; Causal-DQN improved to `-0.062`, but still chose risky actions at rate `0.667`. This earns `method_runs` only, not `core_claim`.
 - CPU test job `76913160-30f` reproduced the core claim on the tightened scaled CMDP. Confounded DQN learned the all-risky policy with mean return `-2.714`; Causal-DQN learned the all-safe policy with mean return `1.500`, safe action rate `1.000`, and risky action rate `0.000`.
 - CPU test job `e1d5cddb-bd5` repeated the tightened run across seeds `0 1 2`. The aggregated result remained unchanged: Confounded DQN mean return `-2.714`; Causal-DQN mean return `1.500`, safe action rate `1.000`, risky action rate `0.000`.
-- A new CPU test job is being submitted to run both `base` and `weaker_bias` variants over seeds `0 1 2`; results are pending.
+- CPU test job `3ffe5bba-0a3` completed both `base` and `weaker_bias` variants over seeds `0 1 2` and passed `python validate.py --compare`.
+- On `weaker_bias_cmdp`, Confounded DQN mean return was `-1.504` with risky action rate `1.000`; Causal-DQN mean return was `0.923` with safe action rate `0.889`.
 
 ## Remaining
 
 - Full masked-Atari reproduction remains as future work: integrate the diamond/sebulba demonstrator data, Atari preprocessing, and Nature DQN CNN training at the paper's scale.
-- After the pending variant job finishes, update `scores.json`, `MILESTONES.md`, and checklist status based on whether `weaker_bias_cmdp` supports the same causal robustness claim.
+- To go beyond `core_claim_plus`, implement a larger Atari-like visual environment or integrate the diamond/sebulba demonstrator and masked Atari preprocessing.
 
 ## Issues
 

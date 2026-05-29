@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim**
+**Current: core_claim_plus**
 
 ## Progress Log
 
@@ -14,5 +14,10 @@
 - Added a second tracked CMDP variant, `weaker_bias_cmdp`, to test the same Causal-DQN computation under a different hidden-confounding strength.
 - Submitted a CPU test job to run both variants over seeds `0 1 2`; milestone remains `core_claim` until that job completes successfully.
 
+### [2026-05-29 01:45] - core_claim_plus
+- CPU test job `3ffe5bba-0a3` completed both CMDP variants over seeds `0 1 2` and passed `python validate.py --compare`.
+- In `scaled_confounded_cmdp`, Causal-DQN reached mean return `1.500` versus Confounded DQN `-2.714`.
+- In `weaker_bias_cmdp`, Causal-DQN reached mean return `0.923` versus Confounded DQN `-1.504`, with safe action rate `0.889`.
+
 ## Stop Justification
-- Current turn submits the additional-setting job needed to restore or exceed `core_claim_plus`.
+- Completed at milestone `core_claim_plus`; full masked-Atari reproduction remains beyond this scaled benchmark package.
