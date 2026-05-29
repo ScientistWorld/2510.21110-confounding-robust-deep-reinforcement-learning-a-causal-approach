@@ -16,4 +16,5 @@
 
 set -e
 
-# uv pip install --system <packages>
+python -m pip install uv
+uv pip install --system numpy torch

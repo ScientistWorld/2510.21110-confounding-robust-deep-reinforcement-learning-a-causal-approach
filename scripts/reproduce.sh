@@ -18,7 +18,8 @@ set -e
 
 cd /home/user
 
-# TODO: implement full reproduction pipeline
-# e.g.:
-#   bash scripts/baseline.sh
-#   bash scripts/method.sh
+mkdir -p checkpoints scoring
+
+EVALUATE_AFTER=0 bash scripts/baseline.sh conf_dqn
+EVALUATE_AFTER=0 bash scripts/method.sh
+bash scripts/evaluate.sh checkpoints/conf_dqn_policy.json checkpoints/causal_dqn_policy.json

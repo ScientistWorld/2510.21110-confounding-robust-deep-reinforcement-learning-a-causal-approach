@@ -26,5 +26,11 @@ cd /home/user
 
 mkdir -p scoring
 
-# TODO: implement evaluation using code in eval/
-# Must write scoring/scores.json at the end
+if [ "$#" -eq 0 ]; then
+  set -- checkpoints/conf_dqn_policy.json checkpoints/causal_dqn_policy.json
+fi
+
+python eval/evaluate_cmdp.py "$@" \
+  --episodes "${EVAL_EPISODES:-2000}" \
+  --seed "${EVAL_SEED:-123}" \
+  --output scoring/scores.json

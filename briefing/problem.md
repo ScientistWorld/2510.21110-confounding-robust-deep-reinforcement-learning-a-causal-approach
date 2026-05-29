@@ -1,17 +1,8 @@
-# Problem Definition
+# Problem
 
-What problem does this paper address? Write this so that someone with no knowledge of the paper can understand what needs to be solved and how success is measured.
+Learn a policy from off-policy trajectories collected by a demonstrator whose actions are affected by variables hidden from the learner. The learner observes state, action, reward, and next observed state, but not the latent factor that jointly influences the demonstrator action and the observed outcome.
 
-Do NOT describe the paper's method or solution here — only the problem itself. Think about if a future scientist agent try to solve this problem from scratch without knowing what approach the paper took. If you leak the solution, you compromise the benchmark.
+The central challenge is that standard off-policy Q-learning treats the logged action-outcome association as causal. Under unobserved confounding, this can make actions look better in the log than they are under intervention.
 
-## Research Question
+This reproduction uses a small tracked finite-horizon CMDP with two actions. One action is safe and has a modest stable reward. The other is risky and is profitable only in a hidden favorable context. The demonstrator sees that hidden context and tends to choose the risky action only when it is favorable, so the offline data is biased.
 
-<!-- What problem or challenge does this paper tackle? What gap in existing work does it address? -->
-
-## Why It Matters
-
-<!-- Why is this problem important? What would a good solution enable? Make it short -->
-
-## Success Criteria
-
-<!-- What would a successful solution look like? What properties should it have? This is about the goal, not the paper's specific approach. Make it short -->

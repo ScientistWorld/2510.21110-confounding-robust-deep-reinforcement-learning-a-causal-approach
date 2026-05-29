@@ -10,5 +10,13 @@ set -e
 
 cd /home/user
 
-# TODO: run the paper's method
-# TODO: call scripts/evaluate.sh to score
+python method/causal_dqn.py \
+  --output checkpoints/causal_dqn_policy.json \
+  --seed "${SEED:-0}" \
+  --demo-episodes "${DEMO_EPISODES:-500}" \
+  --updates "${UPDATES:-2500}" \
+  --batch-size "${BATCH_SIZE:-128}"
+
+if [ "${EVALUATE_AFTER:-1}" = "1" ]; then
+  bash scripts/evaluate.sh checkpoints/causal_dqn_policy.json
+fi

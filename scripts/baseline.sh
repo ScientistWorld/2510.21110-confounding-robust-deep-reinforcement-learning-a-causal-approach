@@ -17,4 +17,23 @@ set -e
 
 cd /home/user
 
-# TODO: run baseline
+NAME="${1:-conf_dqn}"
+
+case "$NAME" in
+  conf_dqn)
+    python baseline/confounded_dqn.py \
+      --output checkpoints/conf_dqn_policy.json \
+      --seed "${SEED:-0}" \
+      --demo-episodes "${DEMO_EPISODES:-500}" \
+      --updates "${UPDATES:-2500}" \
+      --batch-size "${BATCH_SIZE:-128}"
+    ;;
+  *)
+    echo "Unknown baseline: $NAME" >&2
+    exit 2
+    ;;
+esac
+
+if [ "${EVALUATE_AFTER:-1}" = "1" ]; then
+  bash scripts/evaluate.sh checkpoints/conf_dqn_policy.json
+fi

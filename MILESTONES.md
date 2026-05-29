@@ -15,7 +15,10 @@
 
 ## Progress Log
 
-<!-- Write your progress here -->
+### [2026-05-29 00:00] - none
+- Read the paper and identified Causal-DQN's causal Bellman lower-bound update as the core algorithm.
+- Implemented a scaled hidden-confounder CMDP, Causal-DQN, a confounded DQN baseline, and method-agnostic evaluation scripts.
+- Prepared a compute job to verify the full reproduction pipeline before claiming `method_runs`.
 
 ## Stop Justification
-- Completed at milestone `none`.
+- Not stopped.

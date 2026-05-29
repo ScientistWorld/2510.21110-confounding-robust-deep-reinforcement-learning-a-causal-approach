@@ -1,14 +1,6 @@
 # Overview
 
-- **Paper ID:** <!-- e.g. 1706.03762 -->
-- **Title:** <!-- e.g. Attention Is All You Need -->
-- **Domain:** <!-- e.g. Computer Vision / Object Detection -->
-- **TL;DR:** <!-- One sentence: what this paper does and why it matters -->
+This paper studies deep RL from confounded off-policy data. It proposes Causal-DQN, which replaces the standard DQN backup with a causal Bellman lower-bound backup so the learned policy is robust to hidden action-outcome confounders.
 
-## Short Summary
+The original experiments use masked Atari games and expert demonstrators. This workspace implements the paper's actual Causal-DQN update on a small confounded CMDP, plus a standard confounded DQN baseline, and evaluates both by interventional rollouts in the same hidden-confounder environment.
 
-<!-- 3-5 sentences covering the problem, approach, and main findings -->
-
-## Key Results
-
-<!-- 2-3 bullet points: main findings or numbers in bullet points -->

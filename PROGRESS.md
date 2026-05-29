@@ -2,36 +2,28 @@
 
 ## What Works
 
-<!-- What has been successfully reproduced so far. -->
+- Paper analysis is complete for the core claim: Causal-DQN learns from confounded off-policy demonstrator data using a pessimistic causal Bellman lower-bound target.
+- Implemented a small tracked CMDP where the demonstrator sees a hidden confounder that the learner cannot observe.
+- Implemented `method/causal_dqn.py` with the paper's all-action target: standard backup for the logged action and reward-floor plus worst-next-state backup for non-logged actions.
+- Implemented `baseline/confounded_dqn.py` as the causally unaware off-policy DQN baseline.
+- Implemented `eval/evaluate_cmdp.py`; it reads saved policy artifacts and does not import from `method/`.
 
 ## Results
 
-<!-- Reproduced numbers compared to the paper's reported numbers. -->
+- No completed compute-job results yet. The next job runs baseline, Causal-DQN, evaluation, and validation.
 
 ## Remaining
 
-<!-- What still needs to be done to reach higher milestones. -->
+- Run the full pipeline on a compute node.
+- If Causal-DQN beats the confounded DQN baseline and chooses the safe policy, update `MILESTONES.md` to `core_claim`.
+- Optionally expand to more seeds or a second CMDP setting for `core_claim_plus`.
 
 ## Issues
 
-<!-- Blockers, bugs, or difficulties encountered. -->
+- The paper does not provide an author Causal-DQN code release. It cites open demonstrator resources for Atari, but reproducing the full 12-game benchmark is too large for a first-pass core-claim job.
 
 ## Deviations from Paper
 
-<!-- Do not edit this section unless you deviated from the paper's original setup.
-     For each deviation, document: what the paper used, what you substituted, and why.
-
-     ACCEPTABLE deviations (data/resource/scale substitutions — milestones still valid):
-       - Replaced a proprietary dataset with a public one
-       - Used a smaller model of the same architecture
-       - Scaled down training (fewer epochs, smaller batch)
-       - Used a different library for the same algorithm
-
-     UNACCEPTABLE deviations (algorithm substitutions — milestones above 'none' are void):
-       - Replaced the paper's algorithm with a fundamentally different one
-       - Wrote a generic model trained to approximate the method's outputs
-         instead of implementing the method's computational steps
-
-     The test: could someone reading your code identify which algorithm from
-     the paper you implemented? If not, you replaced the method. -->
-
+- Paper setup: 12 masked Atari games, diamond/sebulba demonstrators, Nature DQN CNNs, 1M steps, 5 seeds.
+- Reproduction setup: a small finite-horizon hidden-confounder CMDP with an MLP Q-network, generated demonstrator replay, and interventional evaluation.
+- Reason: the author code is not released and the full Atari setup would require substantial demonstrator integration and many GPU-hours. The algorithmic computation is preserved: replay data from a hidden-confounder demonstrator and the causal all-action Bellman lower-bound update from Algorithm 2 / Eq. 26.
