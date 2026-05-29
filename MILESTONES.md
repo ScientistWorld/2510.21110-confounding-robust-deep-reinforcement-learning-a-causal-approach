@@ -20,4 +20,4 @@
 - In `weaker_bias_cmdp`, Causal-DQN reached mean return `0.923` versus Confounded DQN `-1.504`, with safe action rate `0.889`.
 
 ## Stop Justification
-- Completed at milestone `core_claim_plus`; full masked-Atari reproduction remains beyond this scaled benchmark package.
+- Completed at milestone `core_claim_plus`.
