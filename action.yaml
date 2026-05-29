@@ -2,4 +2,4 @@ action: done
 gpus: 0
 test: false
 milestone: core_claim_plus
-notes: "Core claim supported: Causal-DQN beats confounded DQN on both hidden-confounder CMDP variants while preserving high safe-action and low risky-action rates; train/test split has 32 emitted/24 active metric values per slice with mean-return gaps <=0.017."
+notes: "Packaging audit passed: no external artifacts are required, download.sh is intentionally empty, and validation reports no shared-path or ignored-import issues."
