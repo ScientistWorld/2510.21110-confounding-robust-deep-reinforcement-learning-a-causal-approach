@@ -1,8 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: done
-gpus: 0
-test: true
-milestone: core_claim_plus
-notes: "Job 3ffe5bba-0a3 validated both CMDP variants over seeds 0 1 2; environment is packaged and validated."
+action: pending
+gpus: 1
+test: false
+milestone: core_claim
+notes: ""
