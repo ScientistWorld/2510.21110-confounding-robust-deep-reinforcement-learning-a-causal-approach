@@ -26,3 +26,8 @@
 ### [2026-05-29 06:04] - core_claim_plus
 - Job `e6f5da67-7e9` validated the current Double-DQN Causal-DQN and confounded DQN code across `base` and `weaker_bias` variants over seeds `0 1 2`.
 - The run passed `python validate.py --compare` and restored the prior `core_claim_plus` evidence on the current code revision.
+
+### [2026-05-29 06:19] - core_claim_plus
+- Job `99d1d814-ec3` ran the independent train/test CMDP split on the saved final policy artifacts.
+- Both slices preserved the central claim signal: Causal-DQN beat confounded DQN on `mean_return` in both CMDP variants while maintaining substantially higher safe-action rates and lower risky-action rates.
+- `python validate.py --compare` passed after narrowing `scoring/reference.json` to the two executable CMDP experiments.

@@ -1,34 +1,5 @@
 {
   "experiments": {
-    "diamond_atari_aggregate": {
-      "description": "Paper Table 1 aggregate normalized returns on 12 masked Atari games with the diamond demonstrator after 1M environment steps.",
-      "weight": 0.0,
-      "primary_metric": "normalized_mean_return",
-      "metrics": {
-        "normalized_mean_return": {
-          "higher_is_better": true,
-          "coefficient": 1.0,
-          "description": "Mean Atari return normalized between random and demonstrator performance."
-        },
-        "normalized_iqm_return": {
-          "higher_is_better": true,
-          "coefficient": 0.7,
-          "description": "Interquartile mean normalized return, reducing sensitivity to a few outlier games."
-        },
-        "normalized_median_return": {
-          "higher_is_better": true,
-          "coefficient": 0.4,
-          "description": "Median normalized return across games, checking that aggregate gains are not concentrated in one title."
-        }
-      },
-      "results": {
-        "random": {"type": "baseline", "normalized_mean_return": 0.0, "normalized_iqm_return": 0.03, "normalized_median_return": 0.03},
-        "interv_dqn": {"type": "baseline", "normalized_mean_return": 0.13, "normalized_iqm_return": 0.13, "normalized_median_return": 0.13},
-        "conf_dqn": {"type": "baseline", "normalized_mean_return": 0.10, "normalized_iqm_return": 0.13, "normalized_median_return": 0.14},
-        "conf_lstm_dqn": {"type": "baseline", "normalized_mean_return": 0.09, "normalized_iqm_return": 0.11, "normalized_median_return": 0.10},
-        "causal_dqn": {"type": "proposed", "normalized_mean_return": 1.04, "normalized_iqm_return": 1.02, "normalized_median_return": 1.01}
-      }
-    },
     "scaled_confounded_cmdp": {
       "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy setup and Causal-DQN backup. Reference values are analytic targets for this gym, not Atari paper numbers.",
       "weight": 0.5,
