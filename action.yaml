@@ -31,4 +31,4 @@ action: submit
 gpus: 0
 test: true
 milestone: none
-notes: "CPU smoke job: install dependencies, run confounded DQN and Causal-DQN on the scaled CMDP, evaluate saved policies, and validate scores."
+notes: "Retry CPU smoke job after reducing the MLP/update count and adding progress logs; expect baseline and Causal-DQN artifacts plus scores.json."
