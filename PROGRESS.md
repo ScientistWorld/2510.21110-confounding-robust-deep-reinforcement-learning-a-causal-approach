@@ -10,20 +10,21 @@
 
 ## Results
 
-- No completed compute-job results yet. The next job runs baseline, Causal-DQN, evaluation, and validation.
 - CPU test job `f4b7194a-87e` completed the confounded DQN baseline once, then was preempted and restarted before producing the Causal-DQN artifact. I cancelled it after 40 minutes because the default smoke workload was too slow for a one-CPU test node.
+- CPU test job `9afc19ef-8d1` completed end-to-end. Confounded DQN learned the all-risky policy with mean return `-1.174`; Causal-DQN improved to `-0.062`, but still chose risky actions at rate `0.667`. This earns `method_runs` only, not `core_claim`.
 
 ## Remaining
 
-- Run the full pipeline on a compute node with the reduced smoke workload: 200 demonstration episodes, 300 updates per learner, batch size 64, and 1000 evaluation episodes.
-- If Causal-DQN beats the confounded DQN baseline and chooses the safe policy, update `MILESTONES.md` to `core_claim`.
+- Run the full pipeline on a compute node with the tightened CMDP setting: 500 demonstration episodes, 1000 updates per learner, batch size 64, and 1000 evaluation episodes.
+- If Causal-DQN beats the confounded DQN baseline and mostly chooses the safe policy, update `MILESTONES.md` to `core_claim`.
 - Optionally expand to more seeds or a second CMDP setting for `core_claim_plus`.
 
 ## Issues
 
 - The paper does not provide an author Causal-DQN code release. It cites open demonstrator resources for Atari, but reproducing the full 12-game benchmark is too large for a first-pass core-claim job.
 - Job `ddbc01d9-67a` installed dependencies successfully, then failed before training because direct script execution from `baseline/` did not include the workspace root on Python's import path. Fixed by exporting `PYTHONPATH=/home/user` in run/evaluate/method/baseline scripts.
-- Job `f4b7194a-87e` showed the pipeline could start training but the CPU smoke defaults were too expensive. The next submission uses a smaller MLP, one PyTorch thread, shorter defaults, and progress logging every 50 updates.
+- Job `f4b7194a-87e` showed the pipeline could start training but the CPU smoke defaults were too expensive. The next submissions use a smaller MLP, one PyTorch thread, shorter defaults, and periodic progress logging.
+- Job `9afc19ef-8d1` showed the original scaled CMDP was not separating the conservative target strongly enough: the method's value estimates improved return but still preferred risky actions in most states. The next run keeps the hidden-confounding structure but lowers favorable hidden-context probabilities below the marginal break-even point in every state.
 
 ## Deviations from Paper
 

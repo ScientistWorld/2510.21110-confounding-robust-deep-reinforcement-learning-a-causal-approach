@@ -29,7 +29,7 @@
         "std_return": {"higher_is_better": false, "coefficient": -0.05}
       },
       "results": {
-        "conf_dqn": {"type": "baseline", "mean_return": -1.2, "safe_action_rate": 0.0, "risky_action_rate": 1.0, "covered_states": 1.0, "std_return": 2.4},
+        "conf_dqn": {"type": "baseline", "mean_return": -2.7, "safe_action_rate": 0.0, "risky_action_rate": 1.0, "covered_states": 1.0, "std_return": 2.18},
         "causal_dqn": {"type": "proposed", "mean_return": 1.5, "safe_action_rate": 1.0, "risky_action_rate": 0.0, "covered_states": 1.0, "std_return": 0.0}
       }
     }

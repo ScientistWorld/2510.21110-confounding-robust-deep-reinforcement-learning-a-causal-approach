@@ -46,9 +46,10 @@ class HiddenConfounderCMDP:
         return self.state
 
     def _hidden(self, state: int) -> int:
-        # Favorable hidden contexts are deliberately not rare, but risky
-        # actions are still suboptimal after marginalizing over the hidden state.
-        p_favorable = 0.35 + 0.10 * (state % 2)
+        # Favorable hidden contexts are frequent enough for the observational
+        # demonstrator replay to make risky actions look attractive, but below
+        # the marginal break-even point for the learner's unconfounded policy.
+        p_favorable = 0.25 + 0.05 * (state % 2)
         return int(self.rng.random() < p_favorable)
 
     def demonstrator_action(self, state: int, hidden: int, epsilon: float = 0.05) -> int:
@@ -137,4 +138,3 @@ def evaluate_tabular_policy(
         "risky_action_rate": float(risky / max(total, 1)),
         "safe_action_rate": float(1.0 - risky / max(total, 1)),
     }
-
