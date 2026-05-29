@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim**
+**Current: core_claim_plus**
 
 <!-- Milestone levels (update "Current" above as you progress):
   none             — just started, no meaningful progress yet
@@ -39,5 +39,10 @@
 - Causal-DQN learned the all-safe policy with mean return `1.500`, safe action rate `1.000`, and risky action rate `0.000`.
 - Added multi-seed reproduction support for the next run to test robustness beyond the minimum core claim.
 
+### [2026-05-29 06:25] - core_claim_plus
+- Multi-seed run over seeds `0 1 2` completed successfully.
+- Aggregated metrics still matched the scaled target: Confounded DQN mean return `-2.714`, Causal-DQN mean return `1.500`, Causal-DQN safe action rate `1.000`.
+- Stopping at `core_claim_plus`; the remaining Atari-scale benchmark is documented as a larger follow-up rather than part of this CPU-scale gym.
+
 ## Stop Justification
-- Not stopped.
+- Reproduced the central algorithmic claim on the tracked hidden-confounder CMDP and confirmed it across three training seeds. The full paper benchmark uses 12 masked Atari games with demonstrators and 1M environment steps per run, which is outside the intended scope of this packaged CPU-scale reproduction.
