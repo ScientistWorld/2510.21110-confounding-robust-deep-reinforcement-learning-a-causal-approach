@@ -2,12 +2,24 @@
   "experiments": {
     "diamond_atari_aggregate": {
       "description": "Paper Table 1 aggregate normalized returns on 12 masked Atari games with the diamond demonstrator after 1M environment steps.",
-      "weight": 0.25,
+      "weight": 0.05,
       "primary_metric": "normalized_mean_return",
       "metrics": {
-        "normalized_mean_return": {"higher_is_better": true, "coefficient": 1.0},
-        "normalized_iqm_return": {"higher_is_better": true, "coefficient": 0.7},
-        "normalized_median_return": {"higher_is_better": true, "coefficient": 0.4}
+        "normalized_mean_return": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Mean Atari return normalized between random and demonstrator performance."
+        },
+        "normalized_iqm_return": {
+          "higher_is_better": true,
+          "coefficient": 0.7,
+          "description": "Interquartile mean normalized return, reducing sensitivity to a few outlier games."
+        },
+        "normalized_median_return": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Median normalized return across games, checking that aggregate gains are not concentrated in one title."
+        }
       },
       "results": {
         "random": {"type": "baseline", "normalized_mean_return": 0.0, "normalized_iqm_return": 0.03, "normalized_median_return": 0.03},
@@ -19,34 +31,144 @@
     },
     "scaled_confounded_cmdp": {
       "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy setup and Causal-DQN backup. Reference values are analytic targets for this gym, not Atari paper numbers.",
-      "weight": 0.4,
+      "weight": 0.475,
       "primary_metric": "mean_return",
       "metrics": {
-        "mean_return": {"higher_is_better": true, "coefficient": 1.0},
-        "safe_action_rate": {"higher_is_better": true, "coefficient": 0.3},
-        "risky_action_rate": {"higher_is_better": false, "coefficient": -0.3},
-        "covered_states": {"higher_is_better": true, "coefficient": 0.1},
-        "std_return": {"higher_is_better": false, "coefficient": -0.05}
+        "mean_return": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average interventional return of the saved policy in the confounded CMDP."
+        },
+        "tail_return_10pct": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Mean of the lowest-return decile, catching policies that improve the mean by accepting hidden-confounder downside."
+        },
+        "safe_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.3,
+          "description": "Fraction of executed actions choosing the safe intervention."
+        },
+        "risky_action_rate": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Fraction of executed actions choosing the confounded risky intervention."
+        },
+        "explicit_safe_state_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.2,
+          "description": "Fraction of CMDP states explicitly mapped to the safe action, preventing omitted states from looking safe by default."
+        },
+        "valid_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.2,
+          "description": "Fraction of explicit policy entries using a legal action ID."
+        },
+        "covered_states": {
+          "higher_is_better": true,
+          "coefficient": 0.1,
+          "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
+        },
+        "std_return": {
+          "higher_is_better": false,
+          "coefficient": -0.05,
+          "description": "Episode-return standard deviation, penalizing unnecessary stochastic downside."
+        }
       },
       "results": {
-        "conf_dqn": {"type": "baseline", "mean_return": -2.7, "safe_action_rate": 0.0, "risky_action_rate": 1.0, "covered_states": 1.0, "std_return": 2.18},
-        "causal_dqn": {"type": "proposed", "mean_return": 1.5, "safe_action_rate": 1.0, "risky_action_rate": 0.0, "covered_states": 1.0, "std_return": 0.0}
+        "conf_dqn": {
+          "type": "baseline",
+          "mean_return": -2.7,
+          "tail_return_10pct": -6.0,
+          "safe_action_rate": 0.0,
+          "risky_action_rate": 1.0,
+          "explicit_safe_state_rate": 0.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 2.18
+        },
+        "causal_dqn": {
+          "type": "proposed",
+          "mean_return": 1.5,
+          "tail_return_10pct": 1.5,
+          "safe_action_rate": 1.0,
+          "risky_action_rate": 0.0,
+          "explicit_safe_state_rate": 1.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 0.0
+        }
       }
     },
     "weaker_bias_cmdp": {
       "description": "Additional scaled CMDP setting with weaker but still harmful hidden confounding; preserves the same off-policy demonstrator and Causal-DQN backup.",
-      "weight": 0.35,
+      "weight": 0.475,
       "primary_metric": "mean_return",
       "metrics": {
-        "mean_return": {"higher_is_better": true, "coefficient": 1.0},
-        "safe_action_rate": {"higher_is_better": true, "coefficient": 0.3},
-        "risky_action_rate": {"higher_is_better": false, "coefficient": -0.3},
-        "covered_states": {"higher_is_better": true, "coefficient": 0.1},
-        "std_return": {"higher_is_better": false, "coefficient": -0.05}
+        "mean_return": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average interventional return under weaker but still harmful hidden confounding."
+        },
+        "tail_return_10pct": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Mean of the lowest-return decile, catching residual risky-action exposure under the weaker-bias setting."
+        },
+        "safe_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.3,
+          "description": "Fraction of executed actions choosing the safe intervention."
+        },
+        "risky_action_rate": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Fraction of executed actions choosing the confounded risky intervention."
+        },
+        "explicit_safe_state_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.2,
+          "description": "Fraction of CMDP states explicitly mapped to the safe action, preventing omitted states from looking safe by default."
+        },
+        "valid_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.2,
+          "description": "Fraction of explicit policy entries using a legal action ID."
+        },
+        "covered_states": {
+          "higher_is_better": true,
+          "coefficient": 0.1,
+          "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
+        },
+        "std_return": {
+          "higher_is_better": false,
+          "coefficient": -0.05,
+          "description": "Episode-return standard deviation, penalizing unnecessary stochastic downside."
+        }
       },
       "results": {
-        "conf_dqn": {"type": "baseline", "mean_return": -1.5, "safe_action_rate": 0.0, "risky_action_rate": 1.0, "covered_states": 1.0, "std_return": 2.39},
-        "causal_dqn": {"type": "proposed", "mean_return": 1.2, "safe_action_rate": 1.0, "risky_action_rate": 0.0, "covered_states": 1.0, "std_return": 0.0}
+        "conf_dqn": {
+          "type": "baseline",
+          "mean_return": -1.5,
+          "tail_return_10pct": -5.19,
+          "safe_action_rate": 0.0,
+          "risky_action_rate": 1.0,
+          "explicit_safe_state_rate": 0.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 2.39
+        },
+        "causal_dqn": {
+          "type": "proposed",
+          "mean_return": 1.2,
+          "tail_return_10pct": 1.2,
+          "safe_action_rate": 1.0,
+          "risky_action_rate": 0.0,
+          "explicit_safe_state_rate": 1.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 0.0
+        }
       }
     }
   }
