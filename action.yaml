@@ -1,4 +1,4 @@
-action: submit
+action: done
 gpus: 0
 test: false
-notes: "Run CPU train/test CMDP split evaluators against all checkpoint JSON artifacts; populate scoring/scores_{train,test}.json."
+notes: "Independent rollout-seed CMDP split; 32 emitted/24 active train metric values and 32 emitted/24 active test metric values; mean-return train/test gaps <=0.017, with saturated covered/valid diagnostics zero-weighted."

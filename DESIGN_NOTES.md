@@ -21,7 +21,8 @@
 
 ## Runtime Concerns for Runner Iteration
 
-- I did not execute `scripts/evaluate_train.sh` or `scripts/evaluate_test.sh` in this design-only pass.
-- The new `tail_return_10pct` values should be checked for stability with the default 2000 episodes and three seeds per slice. If noisy, increase `EVAL_EPISODES` in the runner job rather than changing the protocol.
+- Runner job `99d1d814-ec3` executed `scripts/evaluate_train.sh` and `scripts/evaluate_test.sh` successfully with `EVAL_EPISODES=2000`.
+- The new `tail_return_10pct` values were stable at the method level: the deterministic safe base policy scored 1.5 on both slices, while the weaker-bias policy and confounded baseline showed only small train/test differences.
 - The visible train and held-out test slices currently differ by rollout seeds, not by a new hidden CMDP variant. This is adequate for catching finite-seed and malformed-artifact shortcuts, but a future design pass could strengthen OOD pressure by adding a third CMDP variant in `data/` and making it held out.
-- `diamond_atari_aggregate` remains in `reference.json` as paper context, but the split scripts only score saved CMDP policy artifacts. The CMDP experiments now carry 95% of the weight.
+- `covered_states` and `valid_action_rate` saturated at 1.0 for all current artifacts. They remain emitted as diagnostics, but their reference coefficients are zero so they do not create constant ranking credit.
+- `diamond_atari_aggregate` remains in `reference.json` as paper context, but the split scripts only score saved CMDP policy artifacts. Its split weight is zero and the two CMDP experiments now carry the full active score weight.

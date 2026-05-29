@@ -2,7 +2,7 @@
   "experiments": {
     "diamond_atari_aggregate": {
       "description": "Paper Table 1 aggregate normalized returns on 12 masked Atari games with the diamond demonstrator after 1M environment steps.",
-      "weight": 0.05,
+      "weight": 0.0,
       "primary_metric": "normalized_mean_return",
       "metrics": {
         "normalized_mean_return": {
@@ -31,7 +31,7 @@
     },
     "scaled_confounded_cmdp": {
       "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy setup and Causal-DQN backup. Reference values are analytic targets for this gym, not Atari paper numbers.",
-      "weight": 0.475,
+      "weight": 0.5,
       "primary_metric": "mean_return",
       "metrics": {
         "mean_return": {
@@ -61,12 +61,12 @@
         },
         "valid_action_rate": {
           "higher_is_better": true,
-          "coefficient": 0.2,
+          "coefficient": 0.0,
           "description": "Fraction of explicit policy entries using a legal action ID."
         },
         "covered_states": {
           "higher_is_better": true,
-          "coefficient": 0.1,
+          "coefficient": 0.0,
           "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
         },
         "std_return": {
@@ -102,7 +102,7 @@
     },
     "weaker_bias_cmdp": {
       "description": "Additional scaled CMDP setting with weaker but still harmful hidden confounding; preserves the same off-policy demonstrator and Causal-DQN backup.",
-      "weight": 0.475,
+      "weight": 0.5,
       "primary_metric": "mean_return",
       "metrics": {
         "mean_return": {
@@ -132,12 +132,12 @@
         },
         "valid_action_rate": {
           "higher_is_better": true,
-          "coefficient": 0.2,
+          "coefficient": 0.0,
           "description": "Fraction of explicit policy entries using a legal action ID."
         },
         "covered_states": {
           "higher_is_better": true,
-          "coefficient": 0.1,
+          "coefficient": 0.0,
           "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
         },
         "std_return": {
