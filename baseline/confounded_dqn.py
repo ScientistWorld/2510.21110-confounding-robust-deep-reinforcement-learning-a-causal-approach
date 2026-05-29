@@ -10,7 +10,7 @@ import numpy as np
 import torch
 from torch import nn
 
-from data.confounded_cmdp import N_ACTIONS, N_STATES, generate_demonstrations, transition_arrays
+from data.confounded_cmdp import N_ACTIONS, N_STATES, VARIANTS, generate_demonstrations, transition_arrays
 
 
 class QNetwork(nn.Module):
@@ -34,7 +34,7 @@ def train_confounded_dqn(args: argparse.Namespace) -> dict[str, object]:
     np.random.seed(args.seed)
     rng = np.random.default_rng(args.seed)
 
-    data = transition_arrays(generate_demonstrations(args.demo_episodes, seed=args.seed))
+    data = transition_arrays(generate_demonstrations(args.demo_episodes, seed=args.seed, variant=args.variant))
     n = len(data["states"])
     q = QNetwork()
     target = QNetwork()
@@ -73,6 +73,8 @@ def train_confounded_dqn(args: argparse.Namespace) -> dict[str, object]:
     policy = {str(s): int(np.argmax(q_values[s])) for s in range(N_STATES)}
     return {
         "method": "conf_dqn",
+        "variant": args.variant,
+        "experiment": VARIANTS[args.variant].experiment,
         "seed": args.seed,
         "demo_episodes": args.demo_episodes,
         "updates": args.updates,
@@ -94,6 +96,7 @@ def main() -> None:
     parser.add_argument("--gamma", type=float, default=0.95)
     parser.add_argument("--target-interval", type=int, default=100)
     parser.add_argument("--log-interval", type=int, default=100)
+    parser.add_argument("--variant", choices=sorted(VARIANTS), default="base")
     args = parser.parse_args()
 
     artifact = train_confounded_dqn(args)

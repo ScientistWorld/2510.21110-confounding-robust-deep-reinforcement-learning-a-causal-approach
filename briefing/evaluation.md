@@ -1,6 +1,6 @@
 # Evaluation
 
-Evaluation is method-agnostic. A method writes a policy artifact containing an action for each observed state. `scripts/evaluate.sh` calls `eval/evaluate_cmdp.py`, which loads saved policy artifacts and evaluates them by intervening in the CMDP with the saved policy.
+Evaluation is method-agnostic. A method writes a policy artifact containing an action for each observed state and, optionally, the CMDP variant name. `scripts/evaluate.sh` calls `eval/evaluate_cmdp.py`, which loads saved policy artifacts and evaluates them by intervening in the corresponding CMDP with the saved policy.
 
 Metrics:
 
@@ -11,4 +11,3 @@ Metrics:
 - `std_return`: standard deviation of evaluation returns.
 
 The benefit metric is return. The constraint metrics are action-composition metrics: a method should not improve apparent logged value by exploiting the hidden-confounded risky action.
-

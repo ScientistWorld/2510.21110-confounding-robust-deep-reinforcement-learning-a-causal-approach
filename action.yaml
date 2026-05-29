@@ -1,8 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: done
+action: submit
 gpus: 0
 test: true
 milestone: core_claim
-notes: "Packaged core-claim reproduction is complete and validated with python validate.py --compare."
+notes: "Run both CMDP variants over seeds 0 1 2 to validate the additional-setting core_claim_plus reproduction."

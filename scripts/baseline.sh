@@ -28,7 +28,8 @@ case "$NAME" in
       --demo-episodes "${DEMO_EPISODES:-500}" \
       --updates "${UPDATES:-1000}" \
       --batch-size "${BATCH_SIZE:-64}" \
-      --log-interval "${LOG_INTERVAL:-100}"
+      --log-interval "${LOG_INTERVAL:-100}" \
+      --variant "${VARIANT:-base}"
     ;;
   *)
     echo "Unknown baseline: $NAME" >&2

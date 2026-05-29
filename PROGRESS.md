@@ -4,6 +4,7 @@
 
 - Paper analysis is complete for the core claim: Causal-DQN learns from confounded off-policy demonstrator data using a pessimistic causal Bellman lower-bound target.
 - Implemented a small tracked CMDP where the demonstrator sees a hidden confounder that the learner cannot observe.
+- Added a second tracked CMDP variant, `weaker_bias`, with weaker but still harmful hidden confounding for a `core_claim_plus` check.
 - Implemented `method/causal_dqn.py` with the paper's all-action target: standard backup for the logged action and reward-floor plus worst-next-state backup for non-logged actions.
 - Implemented `baseline/confounded_dqn.py` as the causally unaware off-policy DQN baseline.
 - Implemented `eval/evaluate_cmdp.py`; it reads saved policy artifacts and does not import from `method/`.
@@ -14,10 +15,12 @@
 - CPU test job `9afc19ef-8d1` completed end-to-end. Confounded DQN learned the all-risky policy with mean return `-1.174`; Causal-DQN improved to `-0.062`, but still chose risky actions at rate `0.667`. This earns `method_runs` only, not `core_claim`.
 - CPU test job `76913160-30f` reproduced the core claim on the tightened scaled CMDP. Confounded DQN learned the all-risky policy with mean return `-2.714`; Causal-DQN learned the all-safe policy with mean return `1.500`, safe action rate `1.000`, and risky action rate `0.000`.
 - CPU test job `e1d5cddb-bd5` repeated the tightened run across seeds `0 1 2`. The aggregated result remained unchanged: Confounded DQN mean return `-2.714`; Causal-DQN mean return `1.500`, safe action rate `1.000`, risky action rate `0.000`.
+- A new CPU test job is being submitted to run both `base` and `weaker_bias` variants over seeds `0 1 2`; results are pending.
 
 ## Remaining
 
 - Full masked-Atari reproduction remains as future work: integrate the diamond/sebulba demonstrator data, Atari preprocessing, and Nature DQN CNN training at the paper's scale.
+- After the pending variant job finishes, update `scores.json`, `MILESTONES.md`, and checklist status based on whether `weaker_bias_cmdp` supports the same causal robustness claim.
 
 ## Issues
 
@@ -32,4 +35,5 @@
 
 - Paper setup: 12 masked Atari games, diamond/sebulba demonstrators, Nature DQN CNNs, 1M steps, 5 seeds.
 - Reproduction setup: a small finite-horizon hidden-confounder CMDP with an MLP Q-network, generated demonstrator replay, and interventional evaluation.
+- Additional setting: `weaker_bias_cmdp` changes only the environment's hidden favorable-context probability and safe reward while preserving the same procedure, artifact format, method implementation, and evaluator.
 - Reason: the author code is not released and the full Atari setup would require substantial demonstrator integration and many GPU-hours. The algorithmic computation is preserved: replay data from a hidden-confounder demonstrator and the causal all-action Bellman lower-bound update from Algorithm 2 / Eq. 26.

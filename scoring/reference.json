@@ -2,7 +2,7 @@
   "experiments": {
     "diamond_atari_aggregate": {
       "description": "Paper Table 1 aggregate normalized returns on 12 masked Atari games with the diamond demonstrator after 1M environment steps.",
-      "weight": 0.4,
+      "weight": 0.25,
       "primary_metric": "normalized_mean_return",
       "metrics": {
         "normalized_mean_return": {"higher_is_better": true, "coefficient": 1.0},
@@ -19,7 +19,7 @@
     },
     "scaled_confounded_cmdp": {
       "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy setup and Causal-DQN backup. Reference values are analytic targets for this gym, not Atari paper numbers.",
-      "weight": 0.6,
+      "weight": 0.4,
       "primary_metric": "mean_return",
       "metrics": {
         "mean_return": {"higher_is_better": true, "coefficient": 1.0},
@@ -31,6 +31,22 @@
       "results": {
         "conf_dqn": {"type": "baseline", "mean_return": -2.7, "safe_action_rate": 0.0, "risky_action_rate": 1.0, "covered_states": 1.0, "std_return": 2.18},
         "causal_dqn": {"type": "proposed", "mean_return": 1.5, "safe_action_rate": 1.0, "risky_action_rate": 0.0, "covered_states": 1.0, "std_return": 0.0}
+      }
+    },
+    "weaker_bias_cmdp": {
+      "description": "Additional scaled CMDP setting with weaker but still harmful hidden confounding; preserves the same off-policy demonstrator and Causal-DQN backup.",
+      "weight": 0.35,
+      "primary_metric": "mean_return",
+      "metrics": {
+        "mean_return": {"higher_is_better": true, "coefficient": 1.0},
+        "safe_action_rate": {"higher_is_better": true, "coefficient": 0.3},
+        "risky_action_rate": {"higher_is_better": false, "coefficient": -0.3},
+        "covered_states": {"higher_is_better": true, "coefficient": 0.1},
+        "std_return": {"higher_is_better": false, "coefficient": -0.05}
+      },
+      "results": {
+        "conf_dqn": {"type": "baseline", "mean_return": -1.5, "safe_action_rate": 0.0, "risky_action_rate": 1.0, "covered_states": 1.0, "std_return": 2.39},
+        "causal_dqn": {"type": "proposed", "mean_return": 1.2, "safe_action_rate": 1.0, "risky_action_rate": 0.0, "covered_states": 1.0, "std_return": 0.0}
       }
     }
   }

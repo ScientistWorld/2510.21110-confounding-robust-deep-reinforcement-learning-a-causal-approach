@@ -14,6 +14,7 @@ from data.confounded_cmdp import (
     N_ACTIONS,
     N_STATES,
     REWARD_FLOOR,
+    VARIANTS,
     generate_demonstrations,
     transition_arrays,
 )
@@ -40,7 +41,7 @@ def train_causal_dqn(args: argparse.Namespace) -> dict[str, object]:
     np.random.seed(args.seed)
     rng = np.random.default_rng(args.seed)
 
-    transitions = generate_demonstrations(args.demo_episodes, seed=args.seed)
+    transitions = generate_demonstrations(args.demo_episodes, seed=args.seed, variant=args.variant)
     data = transition_arrays(transitions)
     n = len(data["states"])
 
@@ -88,6 +89,8 @@ def train_causal_dqn(args: argparse.Namespace) -> dict[str, object]:
     policy = {str(s): int(np.argmax(q_values[s])) for s in range(N_STATES)}
     return {
         "method": "causal_dqn",
+        "variant": args.variant,
+        "experiment": VARIANTS[args.variant].experiment,
         "seed": args.seed,
         "demo_episodes": args.demo_episodes,
         "updates": args.updates,
@@ -110,6 +113,7 @@ def main() -> None:
     parser.add_argument("--gamma", type=float, default=0.95)
     parser.add_argument("--target-interval", type=int, default=100)
     parser.add_argument("--log-interval", type=int, default=100)
+    parser.add_argument("--variant", choices=sorted(VARIANTS), default="base")
     args = parser.parse_args()
 
     artifact = train_causal_dqn(args)

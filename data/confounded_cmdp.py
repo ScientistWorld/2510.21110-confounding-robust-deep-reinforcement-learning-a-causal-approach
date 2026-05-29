@@ -23,6 +23,30 @@ REWARD_FLOOR = -1.0
 
 
 @dataclass(frozen=True)
+class CMDPVariant:
+    experiment: str
+    safe_reward: float
+    favorable_base: float
+    favorable_odd_bonus: float
+
+
+VARIANTS = {
+    "base": CMDPVariant(
+        experiment="scaled_confounded_cmdp",
+        safe_reward=0.25,
+        favorable_base=0.25,
+        favorable_odd_bonus=0.05,
+    ),
+    "weaker_bias": CMDPVariant(
+        experiment="weaker_bias_cmdp",
+        safe_reward=0.20,
+        favorable_base=0.35,
+        favorable_odd_bonus=0.05,
+    ),
+}
+
+
+@dataclass(frozen=True)
 class Transition:
     state: int
     action: int
@@ -34,9 +58,13 @@ class Transition:
 class HiddenConfounderCMDP:
     """Finite-horizon CMDP with unobserved action-outcome confounding."""
 
-    def __init__(self, horizon: int = N_STATES, seed: int = 0):
+    def __init__(self, horizon: int = N_STATES, seed: int = 0, variant: str = "base"):
+        if variant not in VARIANTS:
+            raise ValueError(f"unknown CMDP variant {variant!r}; choose from {sorted(VARIANTS)}")
         self.horizon = horizon
         self.rng = np.random.default_rng(seed)
+        self.variant_name = variant
+        self.config = VARIANTS[variant]
         self.t = 0
         self.state = 0
 
@@ -49,7 +77,7 @@ class HiddenConfounderCMDP:
         # Favorable hidden contexts are frequent enough for the observational
         # demonstrator replay to make risky actions look attractive, but below
         # the marginal break-even point for the learner's unconfounded policy.
-        p_favorable = 0.25 + 0.05 * (state % 2)
+        p_favorable = self.config.favorable_base + self.config.favorable_odd_bonus * (state % 2)
         return int(self.rng.random() < p_favorable)
 
     def demonstrator_action(self, state: int, hidden: int, epsilon: float = 0.05) -> int:
@@ -60,7 +88,7 @@ class HiddenConfounderCMDP:
     def step(self, action: int) -> tuple[int, float, bool, dict[str, int]]:
         hidden = self._hidden(self.state)
         if action == SAFE_ACTION:
-            reward = 0.25
+            reward = self.config.safe_reward
         else:
             reward = 1.0 if hidden else -1.0
 
@@ -74,7 +102,7 @@ class HiddenConfounderCMDP:
         hidden = self._hidden(state)
         action = self.demonstrator_action(state, hidden, epsilon=epsilon)
         if action == SAFE_ACTION:
-            reward = 0.25
+            reward = self.config.safe_reward
         else:
             reward = 1.0 if hidden else -1.0
         self.t += 1
@@ -87,8 +115,9 @@ def generate_demonstrations(
     episodes: int,
     seed: int,
     demonstrator_epsilon: float = 0.05,
+    variant: str = "base",
 ) -> list[Transition]:
-    env = HiddenConfounderCMDP(seed=seed)
+    env = HiddenConfounderCMDP(seed=seed, variant=variant)
     transitions: list[Transition] = []
     for _ in range(episodes):
         env.reset()
@@ -115,8 +144,9 @@ def evaluate_tabular_policy(
     actions_by_state: dict[int, int],
     episodes: int,
     seed: int,
+    variant: str = "base",
 ) -> dict[str, float]:
-    env = HiddenConfounderCMDP(seed=seed)
+    env = HiddenConfounderCMDP(seed=seed, variant=variant)
     returns: list[float] = []
     risky = 0
     total = 0

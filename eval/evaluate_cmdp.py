@@ -10,18 +10,20 @@ from pathlib import Path
 from data.confounded_cmdp import N_STATES, evaluate_tabular_policy
 
 
-def load_policy(path: Path) -> tuple[str, dict[int, int]]:
+def load_policy(path: Path) -> tuple[str, str, dict[int, int]]:
     artifact = json.loads(path.read_text())
     method = artifact.get("method", path.stem)
+    variant = artifact.get("variant", "base")
+    experiment = artifact.get("experiment", "scaled_confounded_cmdp")
     raw_policy = artifact["policy"]
-    return method, {int(k): int(v) for k, v in raw_policy.items()}
+    return experiment, method, variant, {int(k): int(v) for k, v in raw_policy.items()}
 
 
-def evaluate_one(path: Path, episodes: int, seed: int) -> tuple[str, dict[str, float]]:
-    method, policy = load_policy(path)
-    metrics = evaluate_tabular_policy(policy, episodes=episodes, seed=seed)
+def evaluate_one(path: Path, episodes: int, seed: int) -> tuple[str, str, dict[str, float]]:
+    experiment, method, variant, policy = load_policy(path)
+    metrics = evaluate_tabular_policy(policy, episodes=episodes, seed=seed, variant=variant)
     metrics["covered_states"] = float(len(policy) / N_STATES)
-    return method, metrics
+    return experiment, method, metrics
 
 
 def average_metrics(runs: list[dict[str, float]]) -> dict[str, float]:
@@ -37,14 +39,16 @@ def main() -> None:
     parser.add_argument("--output", default="scoring/scores.json")
     args = parser.parse_args()
 
-    grouped: dict[str, list[dict[str, float]]] = defaultdict(list)
+    grouped: dict[tuple[str, str], list[dict[str, float]]] = defaultdict(list)
     for item in args.artifacts:
-        method, metrics = evaluate_one(Path(item), args.episodes, args.seed)
-        grouped[method].append(metrics)
+        experiment, method, metrics = evaluate_one(Path(item), args.episodes, args.seed)
+        grouped[(experiment, method)].append(metrics)
 
-    results = {method: average_metrics(runs) for method, runs in grouped.items()}
+    experiments: dict[str, dict[str, dict[str, dict[str, float]]]] = defaultdict(lambda: {"results": {}})
+    for (experiment, method), runs in grouped.items():
+        experiments[experiment]["results"][method] = average_metrics(runs)
 
-    scores = {"experiments": {"scaled_confounded_cmdp": {"results": results}}}
+    scores = {"experiments": dict(experiments)}
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(scores, indent=2))
