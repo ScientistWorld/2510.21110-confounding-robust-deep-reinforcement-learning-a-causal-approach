@@ -17,6 +17,24 @@
           "covered_states": 1.0
         }
       }
+    },
+    "weaker_bias_cmdp": {
+      "results": {
+        "conf_dqn": {
+          "mean_return": -1.5040000000000002,
+          "std_return": 2.392066888696886,
+          "risky_action_rate": 1.0,
+          "safe_action_rate": 0.0,
+          "covered_states": 1.0
+        },
+        "causal_dqn": {
+          "mean_return": 0.9226666666666664,
+          "std_return": 0.6509059900249886,
+          "risky_action_rate": 0.1111111111111111,
+          "safe_action_rate": 0.888888888888889,
+          "covered_states": 1.0
+        }
+      }
     }
   }
 }
