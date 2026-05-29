@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim_plus**
+**Current: core_claim**
 
 ## Progress Log
 
@@ -18,3 +18,7 @@
 ### [2026-05-29 05:49] - core_claim_plus
 - Job `3ffe5bba-0a3` ran both `base` and `weaker_bias` variants over seeds `0 1 2`.
 - Causal-DQN outperformed confounded DQN in both settings while reporting constraint metrics for risky and safe action rates.
+
+### [2026-05-29 08:12] - core_claim
+- Continuing-agent audit found the implementation and evaluator structurally sound, but the latest Double-DQN bootstrap cleanup has not yet been validated by a fresh job.
+- Temporarily tracking the active milestone as `core_claim` until the current-code validation run restores `core_claim_plus`.

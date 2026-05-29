@@ -4,5 +4,5 @@
 action: submit
 gpus: 0
 test: true
-milestone: core_claim_plus
-notes: "CPU validation rerun after updating Causal-DQN and confounded DQN to use Double DQN bootstrap targets."
+milestone: core_claim
+notes: "Validate the current Double-DQN Causal-DQN revision across base and weaker_bias CMDP variants over seeds 0 1 2; restore core_claim_plus if it matches prior results."
