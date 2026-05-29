@@ -38,5 +38,5 @@ case "$NAME" in
 esac
 
 if [ "${EVALUATE_AFTER:-1}" = "1" ]; then
-  bash scripts/evaluate.sh checkpoints/conf_dqn_policy.json
+  bash scripts/evaluate.sh "${OUTPUT:-checkpoints/conf_dqn_policy.json}"
 fi

@@ -50,7 +50,8 @@ def train_confounded_dqn(args: argparse.Namespace) -> dict[str, object]:
         dones = torch.as_tensor(data["dones"][idx], dtype=torch.float32)
 
         with torch.no_grad():
-            next_values = target(next_states).max(dim=1).values
+            next_actions = q(next_states).argmax(dim=1)
+            next_values = target(next_states).gather(1, next_actions[:, None]).squeeze(1)
             targets = rewards + args.gamma * (1.0 - dones) * next_values
 
         chosen_q = q(states).gather(1, actions[:, None]).squeeze(1)

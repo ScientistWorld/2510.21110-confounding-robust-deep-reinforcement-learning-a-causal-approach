@@ -61,11 +61,16 @@ def train_causal_dqn(args: argparse.Namespace) -> dict[str, object]:
         dones = torch.as_tensor(data["dones"][idx], dtype=torch.float32)
 
         with torch.no_grad():
-            next_values = target(next_states).max(dim=1).values
+            # Double DQN target: choose actions with the online network and
+            # evaluate them with the target network, matching the appendix.
+            next_actions = q(next_states).argmax(dim=1)
+            next_values = target(next_states).gather(1, next_actions[:, None]).squeeze(1)
             observed_targets = rewards + args.gamma * (1.0 - dones) * next_values
             # Paper Eq. 26: for actions not taken in the observational sample,
             # back up the reward floor and the worst next-state value.
-            worst_value = target(all_states).max(dim=1).values.min()
+            worst_actions = q(all_states).argmax(dim=1)
+            state_values = target(all_states).gather(1, worst_actions[:, None]).squeeze(1)
+            worst_value = state_values.min()
             pessimistic_target = REWARD_FLOOR + args.gamma * worst_value
             targets = torch.full((args.batch_size, N_ACTIONS), pessimistic_target.item())
             targets[torch.arange(args.batch_size), actions] = observed_targets

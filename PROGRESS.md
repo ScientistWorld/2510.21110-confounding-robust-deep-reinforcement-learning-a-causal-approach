@@ -17,6 +17,7 @@
 - CPU test job `e1d5cddb-bd5` repeated the tightened run across seeds `0 1 2`. The aggregated result remained unchanged: Confounded DQN mean return `-2.714`; Causal-DQN mean return `1.500`, safe action rate `1.000`, risky action rate `0.000`.
 - CPU test job `3ffe5bba-0a3` completed both `base` and `weaker_bias` variants over seeds `0 1 2` and passed `python validate.py --compare`.
 - On `weaker_bias_cmdp`, Confounded DQN mean return was `-1.504` with risky action rate `1.000`; Causal-DQN mean return was `0.923` with safe action rate `0.889`.
+- Current milestone is `core_claim_plus`: the causal backup has been validated beyond the minimum setting, but not on the full Atari benchmark.
 
 ## Remaining
 
@@ -31,6 +32,7 @@
 - Job `9afc19ef-8d1` showed the original scaled CMDP was not separating the conservative target strongly enough: the method's value estimates improved return but still preferred risky actions in most states. The next run keeps the hidden-confounding structure but lowers favorable hidden-context probabilities below the marginal break-even point in every state.
 - Job `76913160-30f` validated the tightened setup and passed `python validate.py --compare`.
 - Job `e1d5cddb-bd5` validated the multi-seed aggregation path and passed `python validate.py --compare`.
+- Follow-up fidelity cleanup: updated both scaled learners to use Double DQN action selection/evaluation for bootstrap targets, matching the appendix. A validation job is pending for this exact code revision.
 
 ## Deviations from Paper
 

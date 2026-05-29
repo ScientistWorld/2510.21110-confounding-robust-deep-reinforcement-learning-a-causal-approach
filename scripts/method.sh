@@ -21,5 +21,5 @@ python method/causal_dqn.py \
   --variant "${VARIANT:-base}"
 
 if [ "${EVALUATE_AFTER:-1}" = "1" ]; then
-  bash scripts/evaluate.sh checkpoints/causal_dqn_policy.json
+  bash scripts/evaluate.sh "${OUTPUT:-checkpoints/causal_dqn_policy.json}"
 fi
