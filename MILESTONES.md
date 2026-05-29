@@ -31,3 +31,8 @@
 - Job `99d1d814-ec3` ran the independent train/test CMDP split on the saved final policy artifacts.
 - Both slices preserved the central claim signal: Causal-DQN beat confounded DQN on `mean_return` in both CMDP variants while maintaining substantially higher safe-action rates and lower risky-action rates.
 - `python validate.py --compare` passed after narrowing `scoring/reference.json` to the two executable CMDP experiments.
+
+### [2026-05-29 06:25] - core_claim_plus
+- Final verification preserved the milestone.
+- Cleaned method-agnostic scoring documentation, completed `scores.json` metric coverage, and aligned `scripts/reproduce.sh` defaults with the scored two-variant, three-seed setup.
+- `python validate.py --compare` passed.

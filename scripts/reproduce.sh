@@ -22,9 +22,9 @@ export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 mkdir -p checkpoints scoring
 
 ARTIFACTS=()
-for RUN_VARIANT in ${VARIANTS:-base}; do
+for RUN_VARIANT in ${VARIANTS:-base weaker_bias}; do
   export VARIANT="$RUN_VARIANT"
-  for RUN_SEED in ${SEEDS:-0}; do
+  for RUN_SEED in ${SEEDS:-0 1 2}; do
     export SEED="$RUN_SEED"
     CONF_OUT="checkpoints/conf_dqn_${RUN_VARIANT}_seed${RUN_SEED}.json"
     CAUSAL_OUT="checkpoints/causal_dqn_${RUN_VARIANT}_seed${RUN_SEED}.json"

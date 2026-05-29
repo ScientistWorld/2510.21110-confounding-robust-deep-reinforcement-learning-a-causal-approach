@@ -2,7 +2,7 @@
 
 ## scaled_confounded_cmdp
 
-This experiment checks whether a learner trained from biased demonstrator trajectories chooses a policy that performs well when actually intervened in the environment. It compares standard confounded DQN against Causal-DQN on average return and on whether the learned policy avoids the confounded risky action. When several policy artifacts for the same method are supplied, the evaluator reports the mean metric across those runs.
+This experiment checks whether a learner trained from biased demonstrator trajectories chooses a policy that performs well when actually intervened in the environment. It compares submitted policy artifacts on average return, lower-tail return, state coverage, action validity, and whether the learned policy avoids the confounded risky action. When several policy artifacts for the same method are supplied, the evaluator reports the mean metric across those runs.
 
 ## weaker_bias_cmdp
 
