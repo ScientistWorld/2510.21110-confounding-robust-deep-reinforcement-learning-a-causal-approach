@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import defaultdict
 from pathlib import Path
 
 from data.confounded_cmdp import N_STATES, evaluate_tabular_policy
@@ -23,6 +24,11 @@ def evaluate_one(path: Path, episodes: int, seed: int) -> tuple[str, dict[str, f
     return method, metrics
 
 
+def average_metrics(runs: list[dict[str, float]]) -> dict[str, float]:
+    keys = runs[0].keys()
+    return {key: float(sum(run[key] for run in runs) / len(runs)) for key in keys}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("artifacts", nargs="+", help="Policy JSON artifacts to score")
@@ -31,10 +37,12 @@ def main() -> None:
     parser.add_argument("--output", default="scoring/scores.json")
     args = parser.parse_args()
 
-    results: dict[str, dict[str, float]] = {}
+    grouped: dict[str, list[dict[str, float]]] = defaultdict(list)
     for item in args.artifacts:
         method, metrics = evaluate_one(Path(item), args.episodes, args.seed)
-        results[method] = metrics
+        grouped[method].append(metrics)
+
+    results = {method: average_metrics(runs) for method, runs in grouped.items()}
 
     scores = {"experiments": {"scaled_confounded_cmdp": {"results": results}}}
     out = Path(args.output)

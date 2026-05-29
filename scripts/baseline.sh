@@ -23,7 +23,7 @@ NAME="${1:-conf_dqn}"
 case "$NAME" in
   conf_dqn)
     python baseline/confounded_dqn.py \
-      --output checkpoints/conf_dqn_policy.json \
+      --output "${OUTPUT:-checkpoints/conf_dqn_policy.json}" \
       --seed "${SEED:-0}" \
       --demo-episodes "${DEMO_EPISODES:-500}" \
       --updates "${UPDATES:-1000}" \

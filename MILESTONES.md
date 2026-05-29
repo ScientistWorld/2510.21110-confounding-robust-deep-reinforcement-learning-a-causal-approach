@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: method_runs**
+**Current: core_claim**
 
 <!-- Milestone levels (update "Current" above as you progress):
   none             — just started, no meaningful progress yet
@@ -32,6 +32,12 @@
 - CPU smoke job completed end-to-end and wrote both baseline and Causal-DQN policy artifacts plus `scoring/scores.json`.
 - Causal-DQN improved interventional return over Confounded DQN, but still selected the risky action in most states, so this does not yet justify `core_claim`.
 - Tightened the scaled CMDP confounder probabilities and increased the smoke update budget for the next run.
+
+### [2026-05-29 06:15] - core_claim
+- Tightened scaled CMDP run completed end-to-end.
+- Confounded DQN learned the all-risky confounded policy with mean return `-2.714`.
+- Causal-DQN learned the all-safe policy with mean return `1.500`, safe action rate `1.000`, and risky action rate `0.000`.
+- Added multi-seed reproduction support for the next run to test robustness beyond the minimum core claim.
 
 ## Stop Justification
 - Not stopped.

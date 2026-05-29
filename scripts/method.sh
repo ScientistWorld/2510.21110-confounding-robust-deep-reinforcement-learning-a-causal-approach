@@ -12,7 +12,7 @@ cd /home/user
 export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 
 python method/causal_dqn.py \
-  --output checkpoints/causal_dqn_policy.json \
+  --output "${OUTPUT:-checkpoints/causal_dqn_policy.json}" \
   --seed "${SEED:-0}" \
   --demo-episodes "${DEMO_EPISODES:-500}" \
   --updates "${UPDATES:-1000}" \

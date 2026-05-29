@@ -12,12 +12,12 @@
 
 - CPU test job `f4b7194a-87e` completed the confounded DQN baseline once, then was preempted and restarted before producing the Causal-DQN artifact. I cancelled it after 40 minutes because the default smoke workload was too slow for a one-CPU test node.
 - CPU test job `9afc19ef-8d1` completed end-to-end. Confounded DQN learned the all-risky policy with mean return `-1.174`; Causal-DQN improved to `-0.062`, but still chose risky actions at rate `0.667`. This earns `method_runs` only, not `core_claim`.
+- CPU test job `76913160-30f` reproduced the core claim on the tightened scaled CMDP. Confounded DQN learned the all-risky policy with mean return `-2.714`; Causal-DQN learned the all-safe policy with mean return `1.500`, safe action rate `1.000`, and risky action rate `0.000`.
 
 ## Remaining
 
-- Run the full pipeline on a compute node with the tightened CMDP setting: 500 demonstration episodes, 1000 updates per learner, batch size 64, and 1000 evaluation episodes.
-- If Causal-DQN beats the confounded DQN baseline and mostly chooses the safe policy, update `MILESTONES.md` to `core_claim`.
-- Optionally expand to more seeds or a second CMDP setting for `core_claim_plus`.
+- Run the multi-seed pipeline on a compute node with seeds `0 1 2`.
+- If Causal-DQN consistently beats the confounded DQN baseline and mostly chooses the safe policy across seeds, update `MILESTONES.md` to `core_claim_plus`.
 
 ## Issues
 
@@ -25,6 +25,7 @@
 - Job `ddbc01d9-67a` installed dependencies successfully, then failed before training because direct script execution from `baseline/` did not include the workspace root on Python's import path. Fixed by exporting `PYTHONPATH=/home/user` in run/evaluate/method/baseline scripts.
 - Job `f4b7194a-87e` showed the pipeline could start training but the CPU smoke defaults were too expensive. The next submissions use a smaller MLP, one PyTorch thread, shorter defaults, and periodic progress logging.
 - Job `9afc19ef-8d1` showed the original scaled CMDP was not separating the conservative target strongly enough: the method's value estimates improved return but still preferred risky actions in most states. The next run keeps the hidden-confounding structure but lowers favorable hidden-context probabilities below the marginal break-even point in every state.
+- Job `76913160-30f` validated the tightened setup and passed `python validate.py --compare`.
 
 ## Deviations from Paper
 
