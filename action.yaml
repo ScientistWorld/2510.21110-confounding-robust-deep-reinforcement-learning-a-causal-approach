@@ -30,5 +30,5 @@
 action: submit
 gpus: 0
 test: true
-milestone: method_runs
-notes: "Run tightened scaled CMDP after method_runs: 500 demos, 1000 updates, evaluate whether Causal-DQN now reaches the core claim."
+milestone: core_claim
+notes: "Run multi-seed scaled CMDP reproduction with seeds 0 1 2 using aggregated evaluator; target core_claim_plus if the effect is consistent."
