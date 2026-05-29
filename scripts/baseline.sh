@@ -25,9 +25,10 @@ case "$NAME" in
     python baseline/confounded_dqn.py \
       --output checkpoints/conf_dqn_policy.json \
       --seed "${SEED:-0}" \
-      --demo-episodes "${DEMO_EPISODES:-500}" \
-      --updates "${UPDATES:-2500}" \
-      --batch-size "${BATCH_SIZE:-128}"
+      --demo-episodes "${DEMO_EPISODES:-200}" \
+      --updates "${UPDATES:-300}" \
+      --batch-size "${BATCH_SIZE:-64}" \
+      --log-interval "${LOG_INTERVAL:-50}"
     ;;
   *)
     echo "Unknown baseline: $NAME" >&2

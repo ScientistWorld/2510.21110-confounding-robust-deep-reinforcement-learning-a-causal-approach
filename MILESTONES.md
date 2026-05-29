@@ -24,5 +24,9 @@
 - First compute job reached the container and installed dependencies.
 - Training did not start due to a Python import-path issue; scripts now export `PYTHONPATH=/home/user`.
 
+### [2026-05-29 05:50] - none
+- Second compute job completed the baseline once, but was preempted and restarted before the method artifact was written.
+- Reduced the smoke-run network and update count, pinned PyTorch to one thread, and added progress logs before resubmitting.
+
 ## Stop Justification
 - Not stopped.

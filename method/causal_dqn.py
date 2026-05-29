@@ -23,11 +23,11 @@ class QNetwork(nn.Module):
     def __init__(self, n_states: int = N_STATES, n_actions: int = N_ACTIONS):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(n_states, 64),
+            nn.Linear(n_states, 16),
             nn.ReLU(),
-            nn.Linear(64, 64),
+            nn.Linear(16, 16),
             nn.ReLU(),
-            nn.Linear(64, n_actions),
+            nn.Linear(16, n_actions),
         )
 
     def forward(self, states: torch.Tensor) -> torch.Tensor:
@@ -35,6 +35,7 @@ class QNetwork(nn.Module):
 
 
 def train_causal_dqn(args: argparse.Namespace) -> dict[str, object]:
+    torch.set_num_threads(1)
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
     rng = np.random.default_rng(args.seed)
@@ -76,6 +77,11 @@ def train_causal_dqn(args: argparse.Namespace) -> dict[str, object]:
 
         if (step + 1) % args.target_interval == 0:
             target.load_state_dict(q.state_dict())
+        if args.log_interval and ((step + 1) % args.log_interval == 0 or step == 0):
+            print(
+                f"causal_dqn step={step + 1}/{args.updates} loss={loss.item():.6f}",
+                flush=True,
+            )
 
     with torch.no_grad():
         q_values = q(all_states).numpy()
@@ -97,12 +103,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default="checkpoints/causal_dqn_policy.json")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--demo-episodes", type=int, default=500)
-    parser.add_argument("--updates", type=int, default=2500)
-    parser.add_argument("--batch-size", type=int, default=128)
+    parser.add_argument("--demo-episodes", type=int, default=200)
+    parser.add_argument("--updates", type=int, default=300)
+    parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--gamma", type=float, default=0.95)
     parser.add_argument("--target-interval", type=int, default=100)
+    parser.add_argument("--log-interval", type=int, default=50)
     args = parser.parse_args()
 
     artifact = train_causal_dqn(args)
@@ -114,4 +121,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

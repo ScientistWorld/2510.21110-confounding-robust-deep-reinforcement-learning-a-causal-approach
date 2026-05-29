@@ -13,6 +13,11 @@ set -e
 
 cd /home/user
 export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+export DEMO_EPISODES="${DEMO_EPISODES:-200}"
+export UPDATES="${UPDATES:-300}"
+export BATCH_SIZE="${BATCH_SIZE:-64}"
+export EVAL_EPISODES="${EVAL_EPISODES:-1000}"
+export LOG_INTERVAL="${LOG_INTERVAL:-50}"
 
 bash scripts/reproduce.sh
 python validate.py --compare
