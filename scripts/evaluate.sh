@@ -28,7 +28,12 @@ export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 mkdir -p scoring
 
 if [ "$#" -eq 0 ]; then
-  set -- checkpoints/conf_dqn_policy.json checkpoints/causal_dqn_policy.json
+  mapfile -t ARTIFACTS < <(find checkpoints -maxdepth 1 -type f -name '*.json' | sort)
+  if [ "${#ARTIFACTS[@]}" -eq 0 ]; then
+    echo "No policy JSON artifacts found under checkpoints/." >&2
+    exit 1
+  fi
+  set -- "${ARTIFACTS[@]}"
 fi
 
 python eval/evaluate_cmdp.py "$@" \

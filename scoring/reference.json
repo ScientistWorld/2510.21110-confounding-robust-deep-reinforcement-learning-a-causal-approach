@@ -1,7 +1,8 @@
 {
   "experiments": {
     "scaled_confounded_cmdp": {
-      "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy setup and Causal-DQN backup. Reference values are analytic targets for this gym, not Atari paper numbers.",
+      "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy learning setup.",
+      "notes": "The paper reports masked-Atari returns. This gym uses an explicitly documented scaled CMDP with analytic target values because the full Atari demonstrator pipeline was not released and exceeds the available reproduction budget.",
       "weight": 0.5,
       "primary_metric": "mean_return",
       "metrics": {
@@ -72,7 +73,8 @@
       }
     },
     "weaker_bias_cmdp": {
-      "description": "Additional scaled CMDP setting with weaker but still harmful hidden confounding; preserves the same off-policy demonstrator and Causal-DQN backup.",
+      "description": "Additional scaled CMDP setting with weaker but still harmful hidden confounding under the same off-policy demonstrator protocol.",
+      "notes": "The paper reports masked-Atari returns. This additional setting is a scaled robustness check for this gym and uses analytic target values rather than paper-reported Atari numbers.",
       "weight": 0.5,
       "primary_metric": "mean_return",
       "metrics": {

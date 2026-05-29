@@ -41,3 +41,8 @@
 - Continuing-agent audit found that `scripts/run.sh` depended on ignored checkpoint JSONs.
 - Updated `scripts/run.sh` to regenerate artifacts through `scripts/reproduce.sh` before validation.
 - Local shell syntax checks and `python validate.py --compare` passed; submitting a CPU test job to validate the fresh end-to-end entry point.
+
+### [2026-05-29 06:35] - core_claim_plus
+- Final verifier confirmed method/problem separation, scoring structure, train/test split wiring, and absence of committed `shared/` references.
+- Improved `scripts/evaluate.sh` artifact discovery and clarified scaled-reference notes in `scoring/reference.json`.
+- `bash -n` checks and `python validate.py --compare` passed.

@@ -1,5 +1,5 @@
-action: submit
+action: done
 gpus: 0
-test: true
+test: false
 milestone: core_claim_plus
-notes: "CPU test job to validate corrected scripts/run.sh, which now regenerates artifacts via scripts/reproduce.sh before scoring."
+notes: "Final verification passed for the scaled core_claim_plus gym; evaluator reuse and scoring notes were cleaned up."
