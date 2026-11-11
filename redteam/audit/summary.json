@@ -1,0 +1,837 @@
+{
+  "formula": "sum(weight * abs(coefficient) * directional(candidate-reference) / cohort_population_std); missing values skip",
+  "reference_source": "redteam/reference/recorded_scores_test.json",
+  "cohort": [
+    "reference",
+    "better_ensemble",
+    "stronger_training",
+    "weaker_no_causal",
+    "shortcut_constant_safe",
+    "shortcut_bruteforce_visible",
+    "shortcut_variant_swap",
+    "shortcut_data_reward",
+    "shortcut_empty_policy",
+    "shortcut_invalid_actions",
+    "shortcut_forged_fields",
+    "shortcut_partial_manifest",
+    "shortcut_empty_manifest",
+    "shortcut_duplicate_dilution"
+  ],
+  "caveat": "Diagnostic audit-cohort ranks, not predictions of unknown future-attempt normalizers.",
+  "normalizers": {
+    "scaled_confounded_cmdp": {
+      "causal_dqn": {
+        "mean_return": 2.284059154821903,
+        "tail_return_10pct": 3.5484519484302997,
+        "safe_action_rate": 0.42053056479286777,
+        "risky_action_rate": 0.42053056479286777,
+        "explicit_safe_state_rate": 0.4605614714931936,
+        "valid_action_rate": 0.36080121229410994,
+        "covered_states": 0.2664693550105965,
+        "std_return": 0.9177167368072725
+      },
+      "conf_dqn": {
+        "mean_return": 0.0,
+        "tail_return_10pct": 0.0,
+        "safe_action_rate": 0.0,
+        "risky_action_rate": 0.0,
+        "explicit_safe_state_rate": 0.0,
+        "valid_action_rate": 0.0,
+        "covered_states": 0.0,
+        "std_return": 0.0
+      }
+    },
+    "weaker_bias_cmdp": {
+      "causal_dqn": {
+        "mean_return": 1.9189328214398373,
+        "tail_return_10pct": 3.22740748040873,
+        "safe_action_rate": 0.4208386123267801,
+        "risky_action_rate": 0.4208386123267801,
+        "explicit_safe_state_rate": 0.45489053525330514,
+        "valid_action_rate": 0.37267799624996495,
+        "covered_states": 0.2763853991962833,
+        "std_return": 0.9881737114692878
+      },
+      "conf_dqn": {
+        "mean_return": 0.0,
+        "tail_return_10pct": 0.0,
+        "safe_action_rate": 0.0,
+        "risky_action_rate": 0.0,
+        "explicit_safe_state_rate": 0.0,
+        "valid_action_rate": 0.0,
+        "covered_states": 0.0,
+        "std_return": 0.0
+      }
+    }
+  },
+  "attempts": {
+    "reference": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": 0.9404444444444446
+      },
+      "scores_source": "redteam/reference/scores_test.json",
+      "rank_delta": 0.0,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "better_ensemble": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": 1.2000000000000006
+      },
+      "scores_source": "redteam/better_ensemble/scores_test.json",
+      "rank_delta": 0.23739858235986736,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 0.06763018294741632,
+          "causal_dqn/tail_return_10pct": 0.049575394793265,
+          "causal_dqn/safe_action_rate": 0.03960346360453501,
+          "causal_dqn/risky_action_rate": 0.03960346360453504,
+          "causal_dqn/explicit_safe_state_rate": 0.024425900848703965,
+          "causal_dqn/std_return": 0.016560176561412007,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "stronger_training": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": 0.6808888888888806
+      },
+      "scores_source": "redteam/stronger_training/scores_test.json",
+      "rank_delta": -0.2277314053857791,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": -0.06763018294741845,
+          "causal_dqn/tail_return_10pct": -0.049575394793265,
+          "causal_dqn/safe_action_rate": -0.039603463604535094,
+          "causal_dqn/risky_action_rate": -0.03960346360453504,
+          "causal_dqn/explicit_safe_state_rate": -0.02442590084870401,
+          "causal_dqn/std_return": -0.006892999587321516,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "weaker_no_causal": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": -2.6903333333333332,
+        "weaker_bias_cmdp": -1.505
+      },
+      "scores_source": "redteam/weaker_no_causal/scores_test.json",
+      "rank_delta": -4.184023092934144,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": -0.9172996514751104,
+          "causal_dqn/tail_return_10pct": -0.4227195469459698,
+          "causal_dqn/safe_action_rate": -0.3566922658139782,
+          "causal_dqn/risky_action_rate": -0.3566922658139782,
+          "causal_dqn/explicit_safe_state_rate": -0.21712628213512614,
+          "causal_dqn/std_return": -0.059448710968996385,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": -0.6371886543192139,
+          "causal_dqn/tail_return_10pct": -0.34454899381319287,
+          "causal_dqn/safe_action_rate": -0.3168277088362803,
+          "causal_dqn/risky_action_rate": -0.3168277088362803,
+          "causal_dqn/explicit_safe_state_rate": -0.19540720678963183,
+          "causal_dqn/std_return": -0.04324409718638533,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_constant_safe": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": 1.2000000000000006
+      },
+      "scores_source": "redteam/shortcut_constant_safe/scores_test.json",
+      "rank_delta": 0.23739858235986736,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 0.06763018294741632,
+          "causal_dqn/tail_return_10pct": 0.049575394793265,
+          "causal_dqn/safe_action_rate": 0.03960346360453501,
+          "causal_dqn/risky_action_rate": 0.03960346360453504,
+          "causal_dqn/explicit_safe_state_rate": 0.024425900848703965,
+          "causal_dqn/std_return": 0.016560176561412007,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_bruteforce_visible": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": 1.2000000000000006
+      },
+      "scores_source": "redteam/shortcut_bruteforce_visible/scores_test.json",
+      "rank_delta": 0.23739858235986736,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 0.06763018294741632,
+          "causal_dqn/tail_return_10pct": 0.049575394793265,
+          "causal_dqn/safe_action_rate": 0.03960346360453501,
+          "causal_dqn/risky_action_rate": 0.03960346360453504,
+          "causal_dqn/explicit_safe_state_rate": 0.024425900848703965,
+          "causal_dqn/std_return": 0.016560176561412007,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_variant_swap": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": 1.5
+      },
+      "scores_source": "redteam/shortcut_variant_swap/scores_test.json",
+      "rank_delta": 0.3341578031633452,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 0.1457986307034195,
+          "causal_dqn/tail_return_10pct": 0.0681661678407397,
+          "causal_dqn/safe_action_rate": 0.03960346360453501,
+          "causal_dqn/risky_action_rate": 0.03960346360453504,
+          "causal_dqn/explicit_safe_state_rate": 0.024425900848703965,
+          "causal_dqn/std_return": 0.016560176561412024,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_data_reward": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 6.0,
+        "weaker_bias_cmdp": 6.0
+      },
+      "scores_source": "redteam/shortcut_data_reward/scores_test.json",
+      "rank_delta": 3.0242661653076803,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.9850883219245875,
+          "causal_dqn/tail_return_10pct": 0.2536317281675819,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 1.3183253470434695,
+          "causal_dqn/tail_return_10pct": 0.34702776355285625,
+          "causal_dqn/safe_action_rate": 0.03960346360453501,
+          "causal_dqn/risky_action_rate": 0.03960346360453504,
+          "causal_dqn/explicit_safe_state_rate": 0.024425900848703965,
+          "causal_dqn/std_return": 0.016560176561412024,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_empty_policy": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": 1.2000000000000006
+      },
+      "scores_source": "redteam/shortcut_empty_policy/scores_test.json",
+      "rank_delta": -0.19956080741359458,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": -0.21712628213512614,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 0.06763018294741632,
+          "causal_dqn/tail_return_10pct": 0.049575394793265,
+          "causal_dqn/safe_action_rate": 0.03960346360453501,
+          "causal_dqn/risky_action_rate": 0.03960346360453504,
+          "causal_dqn/explicit_safe_state_rate": -0.19540720678963183,
+          "causal_dqn/std_return": 0.016560176561412007,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_invalid_actions": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": -2.6903333333333332,
+        "weaker_bias_cmdp": -1.505
+      },
+      "scores_source": "redteam/shortcut_invalid_actions/scores_test.json",
+      "rank_delta": -4.184023092934144,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": -0.9172996514751104,
+          "causal_dqn/tail_return_10pct": -0.4227195469459698,
+          "causal_dqn/safe_action_rate": -0.3566922658139782,
+          "causal_dqn/risky_action_rate": -0.3566922658139782,
+          "causal_dqn/explicit_safe_state_rate": -0.21712628213512614,
+          "causal_dqn/std_return": -0.059448710968996385,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": -0.6371886543192139,
+          "causal_dqn/tail_return_10pct": -0.34454899381319287,
+          "causal_dqn/safe_action_rate": -0.3168277088362803,
+          "causal_dqn/risky_action_rate": -0.3168277088362803,
+          "causal_dqn/explicit_safe_state_rate": -0.19540720678963183,
+          "causal_dqn/std_return": -0.04324409718638533,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_forged_fields": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": -2.6903333333333332,
+        "weaker_bias_cmdp": -1.505
+      },
+      "scores_source": "redteam/shortcut_forged_fields/scores_test.json",
+      "rank_delta": -4.184023092934144,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": -0.9172996514751104,
+          "causal_dqn/tail_return_10pct": -0.4227195469459698,
+          "causal_dqn/safe_action_rate": -0.3566922658139782,
+          "causal_dqn/risky_action_rate": -0.3566922658139782,
+          "causal_dqn/explicit_safe_state_rate": -0.21712628213512614,
+          "causal_dqn/std_return": -0.059448710968996385,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": -0.6371886543192139,
+          "causal_dqn/tail_return_10pct": -0.34454899381319287,
+          "causal_dqn/safe_action_rate": -0.3168277088362803,
+          "causal_dqn/risky_action_rate": -0.3168277088362803,
+          "causal_dqn/explicit_safe_state_rate": -0.19540720678963183,
+          "causal_dqn/std_return": -0.04324409718638533,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    },
+    "shortcut_partial_manifest": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.5,
+        "weaker_bias_cmdp": null
+      },
+      "scores_source": "redteam/shortcut_partial_manifest/scores_test.json",
+      "rank_delta": 0.0,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": 0.0,
+          "causal_dqn/tail_return_10pct": 0.0,
+          "causal_dqn/safe_action_rate": 0.0,
+          "causal_dqn/risky_action_rate": 0.0,
+          "causal_dqn/explicit_safe_state_rate": 0.0,
+          "causal_dqn/std_return": 0.0,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": [
+        "weaker_bias_cmdp/causal_dqn/mean_return",
+        "weaker_bias_cmdp/causal_dqn/tail_return_10pct",
+        "weaker_bias_cmdp/causal_dqn/safe_action_rate",
+        "weaker_bias_cmdp/causal_dqn/risky_action_rate",
+        "weaker_bias_cmdp/causal_dqn/explicit_safe_state_rate",
+        "weaker_bias_cmdp/causal_dqn/std_return"
+      ]
+    },
+    "shortcut_empty_manifest": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": null,
+        "weaker_bias_cmdp": null
+      },
+      "scores_source": "redteam/shortcut_empty_manifest/scores_test.json",
+      "rank_delta": 0.0,
+      "contributions": {
+        "scaled_confounded_cmdp": {},
+        "weaker_bias_cmdp": {}
+      },
+      "missing_scored_values": [
+        "scaled_confounded_cmdp/causal_dqn/mean_return",
+        "scaled_confounded_cmdp/causal_dqn/tail_return_10pct",
+        "scaled_confounded_cmdp/causal_dqn/safe_action_rate",
+        "scaled_confounded_cmdp/causal_dqn/risky_action_rate",
+        "scaled_confounded_cmdp/causal_dqn/explicit_safe_state_rate",
+        "scaled_confounded_cmdp/causal_dqn/std_return",
+        "scaled_confounded_cmdp/conf_dqn/mean_return",
+        "scaled_confounded_cmdp/conf_dqn/tail_return_10pct",
+        "scaled_confounded_cmdp/conf_dqn/safe_action_rate",
+        "scaled_confounded_cmdp/conf_dqn/risky_action_rate",
+        "scaled_confounded_cmdp/conf_dqn/explicit_safe_state_rate",
+        "scaled_confounded_cmdp/conf_dqn/std_return",
+        "weaker_bias_cmdp/causal_dqn/mean_return",
+        "weaker_bias_cmdp/causal_dqn/tail_return_10pct",
+        "weaker_bias_cmdp/causal_dqn/safe_action_rate",
+        "weaker_bias_cmdp/causal_dqn/risky_action_rate",
+        "weaker_bias_cmdp/causal_dqn/explicit_safe_state_rate",
+        "weaker_bias_cmdp/causal_dqn/std_return",
+        "weaker_bias_cmdp/conf_dqn/mean_return",
+        "weaker_bias_cmdp/conf_dqn/tail_return_10pct",
+        "weaker_bias_cmdp/conf_dqn/safe_action_rate",
+        "weaker_bias_cmdp/conf_dqn/risky_action_rate",
+        "weaker_bias_cmdp/conf_dqn/explicit_safe_state_rate",
+        "weaker_bias_cmdp/conf_dqn/std_return"
+      ]
+    },
+    "shortcut_malformed_failure": {
+      "hidden_test_exit_code": 1,
+      "test_means": {
+        "scaled_confounded_cmdp": null,
+        "weaker_bias_cmdp": null
+      },
+      "scores_source": "redteam/shortcut_malformed_failure/scores_test.json",
+      "rank_delta": null,
+      "note": "stale file; not written by successful hidden test",
+      "stale_file_values": {
+        "scaled_confounded_cmdp": 999,
+        "weaker_bias_cmdp": 999
+      }
+    },
+    "shortcut_duplicate_dilution": {
+      "hidden_test_exit_code": 0,
+      "test_means": {
+        "scaled_confounded_cmdp": 1.4178366013071895,
+        "weaker_bias_cmdp": 1.1469607843137268
+      },
+      "scores_source": "redteam/shortcut_duplicate_dilution/scores_test.json",
+      "rank_delta": 0.15070403970704374,
+      "contributions": {
+        "scaled_confounded_cmdp": {
+          "causal_dqn/mean_return": -0.017986267675982572,
+          "causal_dqn/tail_return_10pct": -0.00828861856756803,
+          "causal_dqn/safe_action_rate": -0.0069939659963525296,
+          "causal_dqn/risky_action_rate": -0.006993965996352515,
+          "causal_dqn/explicit_safe_state_rate": -0.004257378081080914,
+          "causal_dqn/std_return": -0.0011656609993920858,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        },
+        "weaker_bias_cmdp": {
+          "causal_dqn/mean_return": 0.05381020574611005,
+          "causal_dqn/tail_return_10pct": 0.041847465604903065,
+          "causal_dqn/safe_action_rate": 0.03261461708608764,
+          "causal_dqn/risky_action_rate": 0.03261461708608768,
+          "causal_dqn/explicit_safe_state_rate": 0.020115447757756193,
+          "causal_dqn/std_return": 0.015387543742827739,
+          "conf_dqn/mean_return": 0.0,
+          "conf_dqn/tail_return_10pct": 0.0,
+          "conf_dqn/safe_action_rate": 0.0,
+          "conf_dqn/risky_action_rate": 0.0,
+          "conf_dqn/explicit_safe_state_rate": 0.0,
+          "conf_dqn/std_return": 0.0
+        }
+      },
+      "missing_scored_values": []
+    }
+  },
+  "reference_seed_ranks": {
+    "0": -0.1198930647633521,
+    "1": 0.23739858235986736,
+    "2": -0.11750551759651533
+  },
+  "reference_seed_rank_range": 0.3572916471232195,
+  "reference_seed_metrics": {
+    "0": {
+      "scaled_confounded_cmdp": {
+        "mean_return": 1.5,
+        "std_return": 0.0,
+        "tail_return_10pct": 1.5,
+        "risky_action_rate": 0.0,
+        "safe_action_rate": 1.0,
+        "covered_states": 1.0,
+        "explicit_safe_state_rate": 1.0,
+        "valid_action_rate": 1.0
+      },
+      "weaker_bias_cmdp": {
+        "mean_return": 0.8059999999999999,
+        "std_return": 0.980983158489019,
+        "tail_return_10pct": -5.551115123125783e-17,
+        "risky_action_rate": 0.16666666666666666,
+        "safe_action_rate": 0.8333333333333334,
+        "covered_states": 1.0,
+        "explicit_safe_state_rate": 0.8333333333333334,
+        "valid_action_rate": 1.0
+      }
+    },
+    "1": {
+      "scaled_confounded_cmdp": {
+        "mean_return": 1.5,
+        "std_return": 0.0,
+        "tail_return_10pct": 1.5,
+        "risky_action_rate": 0.0,
+        "safe_action_rate": 1.0,
+        "covered_states": 1.0,
+        "explicit_safe_state_rate": 1.0,
+        "valid_action_rate": 1.0
+      },
+      "weaker_bias_cmdp": {
+        "mean_return": 1.2000000000000006,
+        "std_return": 6.661338147750939e-16,
+        "tail_return_10pct": 1.1999999999999957,
+        "risky_action_rate": 0.0,
+        "safe_action_rate": 1.0,
+        "covered_states": 1.0,
+        "explicit_safe_state_rate": 1.0,
+        "valid_action_rate": 1.0
+      }
+    },
+    "2": {
+      "scaled_confounded_cmdp": {
+        "mean_return": 1.5,
+        "std_return": 0.0,
+        "tail_return_10pct": 1.5,
+        "risky_action_rate": 0.0,
+        "safe_action_rate": 1.0,
+        "covered_states": 1.0,
+        "explicit_safe_state_rate": 1.0,
+        "valid_action_rate": 1.0
+      },
+      "weaker_bias_cmdp": {
+        "mean_return": 0.8153333333333332,
+        "std_return": 0.9827365777442473,
+        "tail_return_10pct": 1.1102230246251565e-16,
+        "risky_action_rate": 0.16666666666666666,
+        "safe_action_rate": 0.8333333333333334,
+        "covered_states": 1.0,
+        "explicit_safe_state_rate": 0.8333333333333334,
+        "valid_action_rate": 1.0
+      }
+    }
+  },
+  "reference_seed_metric_spreads": {
+    "scaled_confounded_cmdp": {
+      "mean_return": {
+        "min": 1.5,
+        "max": 1.5,
+        "range": 0.0
+      },
+      "tail_return_10pct": {
+        "min": 1.5,
+        "max": 1.5,
+        "range": 0.0
+      },
+      "safe_action_rate": {
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "risky_action_rate": {
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "explicit_safe_state_rate": {
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "valid_action_rate": {
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "covered_states": {
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "std_return": {
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      }
+    },
+    "weaker_bias_cmdp": {
+      "mean_return": {
+        "min": 0.8059999999999999,
+        "max": 1.2000000000000006,
+        "range": 0.3940000000000007
+      },
+      "tail_return_10pct": {
+        "min": -5.551115123125783e-17,
+        "max": 1.1999999999999957,
+        "range": 1.1999999999999957
+      },
+      "safe_action_rate": {
+        "min": 0.8333333333333334,
+        "max": 1.0,
+        "range": 0.16666666666666663
+      },
+      "risky_action_rate": {
+        "min": 0.0,
+        "max": 0.16666666666666666,
+        "range": 0.16666666666666666
+      },
+      "explicit_safe_state_rate": {
+        "min": 0.8333333333333334,
+        "max": 1.0,
+        "range": 0.16666666666666663
+      },
+      "valid_action_rate": {
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "covered_states": {
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "std_return": {
+        "min": 6.661338147750939e-16,
+        "max": 0.9827365777442473,
+        "range": 0.9827365777442466
+      }
+    }
+  },
+  "empty_policy_two_attempt_cohort": {
+    "rank_delta": 1.6500000000000004,
+    "contributions": {
+      "scaled_confounded_cmdp": {
+        "causal_dqn/mean_return": 0.0,
+        "causal_dqn/tail_return_10pct": 0.0,
+        "causal_dqn/safe_action_rate": 0.0,
+        "causal_dqn/risky_action_rate": 0.0,
+        "causal_dqn/explicit_safe_state_rate": -0.2,
+        "causal_dqn/std_return": 0.0,
+        "conf_dqn/mean_return": 0.0,
+        "conf_dqn/tail_return_10pct": 0.0,
+        "conf_dqn/safe_action_rate": 0.0,
+        "conf_dqn/risky_action_rate": 0.0,
+        "conf_dqn/explicit_safe_state_rate": 0.0,
+        "conf_dqn/std_return": 0.0
+      },
+      "weaker_bias_cmdp": {
+        "causal_dqn/mean_return": 1.0,
+        "causal_dqn/tail_return_10pct": 0.4,
+        "causal_dqn/safe_action_rate": 0.3,
+        "causal_dqn/risky_action_rate": 0.3,
+        "causal_dqn/explicit_safe_state_rate": -0.2,
+        "causal_dqn/std_return": 0.05,
+        "conf_dqn/mean_return": 0.0,
+        "conf_dqn/tail_return_10pct": 0.0,
+        "conf_dqn/safe_action_rate": 0.0,
+        "conf_dqn/risky_action_rate": 0.0,
+        "conf_dqn/explicit_safe_state_rate": 0.0,
+        "conf_dqn/std_return": 0.0
+      }
+    },
+    "missing_scored_values": []
+  }
+}

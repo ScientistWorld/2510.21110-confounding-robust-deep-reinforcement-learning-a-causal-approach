@@ -27,3 +27,11 @@ The ranking service is not present in this repository. Any standardized rank
 reported by the audit must name its comparison cohort; future-attempt
 normalization cannot be known in advance. Raw test metrics and metricwise
 dominance are the primary evidence.
+
+Job `d1389068-2aa` completed all cases in about 780 seconds on one CPU, with
+zero GPUs. Its logs are copied into `audit/`; every case's `execution.json`
+records the actual hidden-test status separately from its outer runner.
+Recompute the lightweight tables with `python3 -m redteam.summarize`.
+`audit/summary.json` contains the exact diagnostic cohort, normalizers, metric
+contributions, seed ranges, and a separate two-attempt normalization example.
+`audit/restoration.json` records the final check against the audit-start commit.

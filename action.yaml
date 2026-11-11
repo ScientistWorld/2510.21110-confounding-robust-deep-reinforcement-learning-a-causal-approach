@@ -1,4 +1,2 @@
-action: submit
-gpus: 0
-test: false
-notes: "Run bundled gym audit: three-seed reference, ensemble, 4x training, causal ablation, and eleven shortcut/failure checks through the default hidden test."
+action: done
+notes: "Audit complete: quality variants, three-seed spread, reproduction gaps, and eleven shortcut cases documented; gym files restored."

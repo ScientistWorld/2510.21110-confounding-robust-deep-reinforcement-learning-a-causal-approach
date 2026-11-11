@@ -1,0 +1,102 @@
+[hive] This stdout log is managed by Hive.
+[hive] job_id: 4f2138dd
+[hive] host: node
+[hive] node_id: 5b56c1bb00c851f2c3f93b346fd15ddec87104a85e26c62af4985535
+[hive] user: nexus/user (remote)
+[hive] resource: gpu-cpu
+[hive] gpus: 0
+[hive] cpus: 1
+[hive] workdir: /home/user
+[hive] timeout_sec: 21600
+[hive] started_at: 2026-11-10 21:36:08 EST
+[hive] command: apptainer exec --containall --cleanenv --env HF_HOME=/home/user/shared/hf_cache --env TRANSFORMERS_CACHE=/home/user/shared/hf_cache --env HF_DATASETS_CACHE=/home/user/shared/hf_cache/datasets --env TORCH_HOME=/home/user/shared/hf_cache/torch --bind /home/user/scratch/AgentWorkspaces/workspaces/2510.21110:/home/user --overlay /home/user/scratch/AgentWorkspaces/workspaces/2510.21110/environment/overlay.img:ro --bind /home/user/scratch/AgentWorkspaces/shared/datasets:/home/user/shared/datasets:ro --bind /home/user/scratch/AgentWorkspaces/shared/models:/home/user/shared/models:ro --bind /home/user/scratch/AgentWorkspaces/shared/hf_cache:/home/user/shared/hf_cache /home/user/scratch/AgentWorkspaces/workspaces/2510.21110/environment/container.sif bash -c 'cd /home/user && bash /home/user/scripts/run.sh'
+START reference
+RUN python -m method.causal_dqn --variant base --seed 0 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/causal_base_seed0.json
+RUN python -m baseline.confounded_dqn --variant base --seed 0 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/conf_base_seed0.json
+RUN python -m method.causal_dqn --variant base --seed 1 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/causal_base_seed1.json
+RUN python -m baseline.confounded_dqn --variant base --seed 1 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/conf_base_seed1.json
+RUN python -m method.causal_dqn --variant base --seed 2 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/causal_base_seed2.json
+RUN python -m baseline.confounded_dqn --variant base --seed 2 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/conf_base_seed2.json
+RUN python -m method.causal_dqn --variant weaker_bias --seed 0 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/causal_weaker_bias_seed0.json
+RUN python -m baseline.confounded_dqn --variant weaker_bias --seed 0 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/conf_weaker_bias_seed0.json
+RUN python -m method.causal_dqn --variant weaker_bias --seed 1 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/causal_weaker_bias_seed1.json
+RUN python -m baseline.confounded_dqn --variant weaker_bias --seed 1 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/conf_weaker_bias_seed1.json
+RUN python -m method.causal_dqn --variant weaker_bias --seed 2 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/causal_weaker_bias_seed2.json
+RUN python -m baseline.confounded_dqn --variant weaker_bias --seed 2 --demo-episodes 500 --updates 1000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/reference/artifacts/conf_weaker_bias_seed2.json
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH reference: {'runner_exit_code': 0, 'seconds': 530.8099204769969}
+START better_ensemble
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH better_ensemble: {'runner_exit_code': 0, 'seconds': 10.033643476999714}
+START stronger_training
+RUN python -m method.causal_dqn --variant base --seed 0 --demo-episodes 2000 --updates 4000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/stronger_training/artifacts/causal_base_seed0.json
+RUN python -m method.causal_dqn --variant base --seed 1 --demo-episodes 2000 --updates 4000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/stronger_training/artifacts/causal_base_seed1.json
+RUN python -m method.causal_dqn --variant base --seed 2 --demo-episodes 2000 --updates 4000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/stronger_training/artifacts/causal_base_seed2.json
+RUN python -m method.causal_dqn --variant weaker_bias --seed 0 --demo-episodes 2000 --updates 4000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/stronger_training/artifacts/causal_weaker_bias_seed0.json
+RUN python -m method.causal_dqn --variant weaker_bias --seed 1 --demo-episodes 2000 --updates 4000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/stronger_training/artifacts/causal_weaker_bias_seed1.json
+RUN python -m method.causal_dqn --variant weaker_bias --seed 2 --demo-episodes 2000 --updates 4000 --batch-size 64 --log-interval 1000 --output /home/user/redteam/stronger_training/artifacts/causal_weaker_bias_seed2.json
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH stronger_training: {'runner_exit_code': 0, 'seconds': 190.328501520009}
+START weaker_no_causal
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH weaker_no_causal: {'runner_exit_code': 0, 'seconds': 5.027819948998513}
+START shortcut_constant_safe
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_constant_safe: {'runner_exit_code': 0, 'seconds': 6.621885890010162}
+START shortcut_bruteforce_visible
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_bruteforce_visible: {'runner_exit_code': 0, 'seconds': 5.8302905059972545}
+START shortcut_variant_swap
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_variant_swap: {'runner_exit_code': 0, 'seconds': 7.860372013004962}
+START shortcut_data_reward
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_data_reward: {'runner_exit_code': 0, 'seconds': 6.513401438991423}
+START shortcut_empty_policy
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_empty_policy: {'runner_exit_code': 0, 'seconds': 8.09567577499547}
+START shortcut_invalid_actions
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_invalid_actions: {'runner_exit_code': 0, 'seconds': 4.821419767002226}
+START shortcut_forged_fields
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_forged_fields: {'runner_exit_code': 0, 'seconds': 4.5792008050048025}
+START shortcut_partial_manifest
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_partial_manifest: {'runner_exit_code': 0, 'seconds': 4.615177215004223}
+START shortcut_empty_manifest
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_empty_manifest: {'runner_exit_code': 0, 'seconds': 3.8905086149898125}
+START shortcut_malformed_failure
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_malformed_failure: {'runner_exit_code': 0, 'seconds': 4.985686879997957}
+START shortcut_duplicate_dilution
+RUN bash scripts/evaluate_train.sh
+RUN bash scripts/evaluate_test.sh
+FINISH shortcut_duplicate_dilution: {'runner_exit_code': 0, 'seconds': 21.48055388800276}
