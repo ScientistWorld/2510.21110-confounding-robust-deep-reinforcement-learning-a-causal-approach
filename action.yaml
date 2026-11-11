@@ -1,8 +1,6 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: submit
-gpus: 0
-test: false
+action: done
 milestone: core_claim_plus
-notes: "Reuse finished training runs (SKIP_EXISTING); score the train-selected finite-sample sharp-bound variant and rerun all hidden-test cases + summary + validate."
+notes: "Rebuilt gym as hidden-test confounded-MDP family with exact scoring; Causal-DQN 0.80/0.69 vs Conf-DQN 0.35/0.13; train-selected sharper bound beats reference by +0.18±0.04 (rank +1.05 vs noise 0.04); all red-team shortcuts closed (see HARDENING.md)."
