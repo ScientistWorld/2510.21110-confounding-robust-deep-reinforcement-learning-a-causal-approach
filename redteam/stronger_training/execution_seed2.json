@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "test_command": "bash scripts/evaluate_test.sh",
+  "test_arguments": [],
+  "episodes": 2000,
+  "score_file_bytes_changed": false,
+  "score_file_mtime_changed": true
+}

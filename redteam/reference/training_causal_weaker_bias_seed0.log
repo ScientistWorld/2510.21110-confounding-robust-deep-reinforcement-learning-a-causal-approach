@@ -1,0 +1,3 @@
+causal_dqn step=1/1000 loss=0.710426
+causal_dqn step=1000/1000 loss=1.110916
+wrote /home/user/redteam/reference/artifacts/causal_weaker_bias_seed0.json

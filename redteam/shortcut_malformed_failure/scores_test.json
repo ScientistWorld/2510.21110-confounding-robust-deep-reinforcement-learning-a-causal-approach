@@ -1,0 +1,18 @@
+{
+  "experiments": {
+    "scaled_confounded_cmdp": {
+      "results": {
+        "causal_dqn": {
+          "mean_return": 999
+        }
+      }
+    },
+    "weaker_bias_cmdp": {
+      "results": {
+        "causal_dqn": {
+          "mean_return": 999
+        }
+      }
+    }
+  }
+}

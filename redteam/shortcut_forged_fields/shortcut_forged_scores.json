@@ -1,0 +1,33 @@
+{
+  "_slice": "test",
+  "experiments": {
+    "scaled_confounded_cmdp": {
+      "results": {
+        "causal_dqn": {
+          "mean_return": 1e+100,
+          "tail_return_10pct": 1e+100,
+          "std_return": -1e+100,
+          "safe_action_rate": 1,
+          "risky_action_rate": 0,
+          "explicit_safe_state_rate": 1,
+          "covered_states": 1,
+          "valid_action_rate": 1
+        }
+      }
+    },
+    "weaker_bias_cmdp": {
+      "results": {
+        "causal_dqn": {
+          "mean_return": 1e+100,
+          "tail_return_10pct": 1e+100,
+          "std_return": -1e+100,
+          "safe_action_rate": 1,
+          "risky_action_rate": 0,
+          "explicit_safe_state_rate": 1,
+          "covered_states": 1,
+          "valid_action_rate": 1
+        }
+      }
+    }
+  }
+}

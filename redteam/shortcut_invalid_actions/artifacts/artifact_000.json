@@ -1,0 +1,13 @@
+{
+  "method": "causal_dqn",
+  "experiment": "scaled_confounded_cmdp",
+  "variant": "base",
+  "policy": {
+    "0": 999999,
+    "1": 999999,
+    "2": 999999,
+    "3": 999999,
+    "4": 999999,
+    "5": 999999
+  }
+}

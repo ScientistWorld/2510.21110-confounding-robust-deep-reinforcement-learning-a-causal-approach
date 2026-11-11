@@ -1,0 +1,6 @@
+causal_dqn step=1/4000 loss=0.681355
+causal_dqn step=1000/4000 loss=0.880454
+causal_dqn step=2000/4000 loss=0.776012
+causal_dqn step=3000/4000 loss=0.963077
+causal_dqn step=4000/4000 loss=0.806729
+wrote /home/user/redteam/stronger_training/artifacts/causal_base_seed0.json

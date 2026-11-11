@@ -1,0 +1,6 @@
+causal_dqn step=1/4000 loss=0.677252
+causal_dqn step=1000/4000 loss=1.085859
+causal_dqn step=2000/4000 loss=1.650073
+causal_dqn step=3000/4000 loss=2.080056
+causal_dqn step=4000/4000 loss=1.860241
+wrote /home/user/redteam/stronger_training/artifacts/causal_weaker_bias_seed1.json

@@ -1,0 +1,14 @@
+{
+  "method": "causal_dqn",
+  "experiment": "scaled_confounded_cmdp",
+  "variant": "base",
+  "policy": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0
+  },
+  "seed": "shortcut_copy_38"
+}

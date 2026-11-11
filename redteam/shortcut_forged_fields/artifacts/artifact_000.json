@@ -1,0 +1,24 @@
+{
+  "method": "causal_dqn",
+  "experiment": "scaled_confounded_cmdp",
+  "variant": "base",
+  "policy": {
+    "0": 1,
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "mean_return": 1e+100,
+  "std_return": -1e+100,
+  "tail_return_10pct": 1e+100,
+  "safe_action_rate": 1,
+  "risky_action_rate": 0,
+  "explicit_safe_state_rate": 1,
+  "covered_states": 1,
+  "valid_action_rate": 1,
+  "success": true,
+  "elapsed": 0,
+  "q_values": null
+}

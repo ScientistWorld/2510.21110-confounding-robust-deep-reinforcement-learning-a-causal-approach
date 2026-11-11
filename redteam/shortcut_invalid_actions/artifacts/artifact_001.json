@@ -1,0 +1,13 @@
+{
+  "method": "causal_dqn",
+  "experiment": "weaker_bias_cmdp",
+  "variant": "weaker_bias",
+  "policy": {
+    "0": 999999,
+    "1": 999999,
+    "2": 999999,
+    "3": 999999,
+    "4": 999999,
+    "5": 999999
+  }
+}

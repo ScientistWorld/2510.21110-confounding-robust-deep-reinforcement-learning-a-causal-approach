@@ -1,0 +1,3 @@
+causal_dqn step=1/1000 loss=0.687326
+causal_dqn step=1000/1000 loss=0.646978
+wrote /home/user/redteam/reference/artifacts/causal_base_seed1.json

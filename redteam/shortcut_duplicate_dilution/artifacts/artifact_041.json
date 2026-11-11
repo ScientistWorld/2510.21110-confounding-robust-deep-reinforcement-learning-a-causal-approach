@@ -1,0 +1,14 @@
+{
+  "method": "causal_dqn",
+  "experiment": "weaker_bias_cmdp",
+  "variant": "weaker_bias",
+  "policy": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0
+  },
+  "seed": "shortcut_copy_19"
+}

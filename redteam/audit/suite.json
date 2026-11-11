@@ -1,0 +1,62 @@
+{
+  "reference": {
+    "runner_exit_code": 0,
+    "seconds": 530.8099204769969
+  },
+  "better_ensemble": {
+    "runner_exit_code": 0,
+    "seconds": 10.033643476999714
+  },
+  "stronger_training": {
+    "runner_exit_code": 0,
+    "seconds": 190.328501520009
+  },
+  "weaker_no_causal": {
+    "runner_exit_code": 0,
+    "seconds": 5.027819948998513
+  },
+  "shortcut_constant_safe": {
+    "runner_exit_code": 0,
+    "seconds": 6.621885890010162
+  },
+  "shortcut_bruteforce_visible": {
+    "runner_exit_code": 0,
+    "seconds": 5.8302905059972545
+  },
+  "shortcut_variant_swap": {
+    "runner_exit_code": 0,
+    "seconds": 7.860372013004962
+  },
+  "shortcut_data_reward": {
+    "runner_exit_code": 0,
+    "seconds": 6.513401438991423
+  },
+  "shortcut_empty_policy": {
+    "runner_exit_code": 0,
+    "seconds": 8.09567577499547
+  },
+  "shortcut_invalid_actions": {
+    "runner_exit_code": 0,
+    "seconds": 4.821419767002226
+  },
+  "shortcut_forged_fields": {
+    "runner_exit_code": 0,
+    "seconds": 4.5792008050048025
+  },
+  "shortcut_partial_manifest": {
+    "runner_exit_code": 0,
+    "seconds": 4.615177215004223
+  },
+  "shortcut_empty_manifest": {
+    "runner_exit_code": 0,
+    "seconds": 3.8905086149898125
+  },
+  "shortcut_malformed_failure": {
+    "runner_exit_code": 0,
+    "seconds": 4.985686879997957
+  },
+  "shortcut_duplicate_dilution": {
+    "runner_exit_code": 0,
+    "seconds": 21.48055388800276
+  }
+}

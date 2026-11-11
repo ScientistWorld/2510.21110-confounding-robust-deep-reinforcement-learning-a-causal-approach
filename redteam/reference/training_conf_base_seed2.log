@@ -1,0 +1,3 @@
+conf_dqn step=1/1000 loss=0.369797
+conf_dqn step=1000/1000 loss=0.054906
+wrote /home/user/redteam/reference/artifacts/conf_base_seed2.json
