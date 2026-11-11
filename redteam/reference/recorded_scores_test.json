@@ -1,0 +1,53 @@
+{
+  "_slice": "test",
+  "experiments": {
+    "scaled_confounded_cmdp": {
+      "results": {
+        "causal_dqn": {
+          "mean_return": 1.5,
+          "std_return": 0.0,
+          "tail_return_10pct": 1.5,
+          "risky_action_rate": 0.0,
+          "safe_action_rate": 1.0,
+          "covered_states": 1.0,
+          "explicit_safe_state_rate": 1.0,
+          "valid_action_rate": 1.0
+        },
+        "conf_dqn": {
+          "mean_return": -2.690333333333333,
+          "std_return": 2.1822830815146426,
+          "tail_return_10pct": -6.0,
+          "risky_action_rate": 1.0,
+          "safe_action_rate": 0.0,
+          "covered_states": 1.0,
+          "explicit_safe_state_rate": 0.0,
+          "valid_action_rate": 1.0
+        }
+      }
+    },
+    "weaker_bias_cmdp": {
+      "results": {
+        "causal_dqn": {
+          "mean_return": 0.9404444444444446,
+          "std_return": 0.654573245411089,
+          "tail_return_10pct": 0.3999999999999986,
+          "risky_action_rate": 0.1111111111111111,
+          "safe_action_rate": 0.888888888888889,
+          "covered_states": 1.0,
+          "explicit_safe_state_rate": 0.888888888888889,
+          "valid_action_rate": 1.0
+        },
+        "conf_dqn": {
+          "mean_return": -1.505,
+          "std_return": 2.363880446043448,
+          "tail_return_10pct": -5.16,
+          "risky_action_rate": 1.0,
+          "safe_action_rate": 0.0,
+          "covered_states": 1.0,
+          "explicit_safe_state_rate": 0.0,
+          "valid_action_rate": 1.0
+        }
+      }
+    }
+  }
+}

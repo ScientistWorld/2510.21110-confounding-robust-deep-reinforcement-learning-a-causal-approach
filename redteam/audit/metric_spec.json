@@ -1,0 +1,148 @@
+{
+  "experiments": {
+    "scaled_confounded_cmdp": {
+      "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy learning setup.",
+      "notes": "The paper reports masked-Atari returns. This gym uses an explicitly documented scaled CMDP with analytic target values because the full Atari demonstrator pipeline was not released and exceeds the available reproduction budget.",
+      "weight": 0.5,
+      "primary_metric": "mean_return",
+      "metrics": {
+        "mean_return": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average interventional return of the saved policy in the confounded CMDP."
+        },
+        "tail_return_10pct": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Mean of the lowest-return decile, catching policies that improve the mean by accepting hidden-confounder downside."
+        },
+        "safe_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.3,
+          "description": "Fraction of executed actions choosing the safe intervention."
+        },
+        "risky_action_rate": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Fraction of executed actions choosing the confounded risky intervention."
+        },
+        "explicit_safe_state_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.2,
+          "description": "Fraction of CMDP states explicitly mapped to the safe action, preventing omitted states from looking safe by default."
+        },
+        "valid_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.0,
+          "description": "Fraction of explicit policy entries using a legal action ID."
+        },
+        "covered_states": {
+          "higher_is_better": true,
+          "coefficient": 0.0,
+          "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
+        },
+        "std_return": {
+          "higher_is_better": false,
+          "coefficient": -0.05,
+          "description": "Episode-return standard deviation, penalizing unnecessary stochastic downside."
+        }
+      },
+      "results": {
+        "conf_dqn": {
+          "type": "baseline",
+          "mean_return": -2.7,
+          "tail_return_10pct": -6.0,
+          "safe_action_rate": 0.0,
+          "risky_action_rate": 1.0,
+          "explicit_safe_state_rate": 0.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 2.18
+        },
+        "causal_dqn": {
+          "type": "proposed",
+          "mean_return": 1.5,
+          "tail_return_10pct": 1.5,
+          "safe_action_rate": 1.0,
+          "risky_action_rate": 0.0,
+          "explicit_safe_state_rate": 1.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 0.0
+        }
+      }
+    },
+    "weaker_bias_cmdp": {
+      "description": "Additional scaled CMDP setting with weaker but still harmful hidden confounding under the same off-policy demonstrator protocol.",
+      "notes": "The paper reports masked-Atari returns. This additional setting is a scaled robustness check for this gym and uses analytic target values rather than paper-reported Atari numbers.",
+      "weight": 0.5,
+      "primary_metric": "mean_return",
+      "metrics": {
+        "mean_return": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average interventional return under weaker but still harmful hidden confounding."
+        },
+        "tail_return_10pct": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Mean of the lowest-return decile, catching residual risky-action exposure under the weaker-bias setting."
+        },
+        "safe_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.3,
+          "description": "Fraction of executed actions choosing the safe intervention."
+        },
+        "risky_action_rate": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Fraction of executed actions choosing the confounded risky intervention."
+        },
+        "explicit_safe_state_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.2,
+          "description": "Fraction of CMDP states explicitly mapped to the safe action, preventing omitted states from looking safe by default."
+        },
+        "valid_action_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.0,
+          "description": "Fraction of explicit policy entries using a legal action ID."
+        },
+        "covered_states": {
+          "higher_is_better": true,
+          "coefficient": 0.0,
+          "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
+        },
+        "std_return": {
+          "higher_is_better": false,
+          "coefficient": -0.05,
+          "description": "Episode-return standard deviation, penalizing unnecessary stochastic downside."
+        }
+      },
+      "results": {
+        "conf_dqn": {
+          "type": "baseline",
+          "mean_return": -1.5,
+          "tail_return_10pct": -5.19,
+          "safe_action_rate": 0.0,
+          "risky_action_rate": 1.0,
+          "explicit_safe_state_rate": 0.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 2.39
+        },
+        "causal_dqn": {
+          "type": "proposed",
+          "mean_return": 1.2,
+          "tail_return_10pct": 1.2,
+          "safe_action_rate": 1.0,
+          "risky_action_rate": 0.0,
+          "explicit_safe_state_rate": 1.0,
+          "valid_action_rate": 1.0,
+          "covered_states": 1.0,
+          "std_return": 0.0
+        }
+      }
+    }
+  }
+}
