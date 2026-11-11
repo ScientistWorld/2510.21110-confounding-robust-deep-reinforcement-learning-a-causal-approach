@@ -1,0 +1,59 @@
+{
+  "_slice": "test",
+  "_status": {
+    "behavior_cloning": "ok",
+    "causal_dqn": "ok",
+    "conf_dqn": "ok",
+    "shortcut_forged_fields": "ok"
+  },
+  "experiments": {
+    "confounded_expert_demos": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.7167411771680313,
+          "normalized_iqm_return": 0.725544649803822,
+          "worst_decile_normalized_return": 0.43382275528478714
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.8044799998927061,
+          "normalized_iqm_return": 0.8200716977137481,
+          "worst_decile_normalized_return": 0.49118868237767277
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.35296355527452633,
+          "normalized_iqm_return": 0.37743575999827855,
+          "worst_decile_normalized_return": -0.21647552093402966
+        },
+        "shortcut_forged_fields": {
+          "normalized_mean_return": 0.04846907749340926,
+          "normalized_iqm_return": 0.05454380466134053,
+          "worst_decile_normalized_return": -0.3889714893691632
+        }
+      }
+    },
+    "pervasive_confounding": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.60749331736228,
+          "normalized_iqm_return": 0.5819896976816922,
+          "worst_decile_normalized_return": 0.3952298803563226
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.694876444955509,
+          "normalized_iqm_return": 0.6768255338308139,
+          "worst_decile_normalized_return": 0.48548445575282206
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.1326128534202606,
+          "normalized_iqm_return": 0.1427219029126425,
+          "worst_decile_normalized_return": -0.26587489940946124
+        },
+        "shortcut_forged_fields": {
+          "normalized_mean_return": -0.0306745497872374,
+          "normalized_iqm_return": -0.039551520569255066,
+          "worst_decile_normalized_return": -0.2832557643888603
+        }
+      }
+    }
+  }
+}

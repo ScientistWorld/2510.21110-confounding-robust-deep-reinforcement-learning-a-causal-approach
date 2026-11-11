@@ -1,8 +1,8 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: pending
-gpus: 0
+action: submit
+gpus: 1
 test: false
 milestone: core_claim_plus
-notes: ""
+notes: "Iteration 12 hardening: build train/test confounded-MDP splits, reproduce Causal-DQN + Conf-DQN + BC (3 runs each), then hardening suite (seed replicates, ensemble/sharp-bound/tabular/longer/shorter variants, 11 shortcuts) through scripts/evaluate_test.sh."

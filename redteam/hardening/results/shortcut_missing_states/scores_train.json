@@ -1,0 +1,59 @@
+{
+  "_slice": "train",
+  "_status": {
+    "behavior_cloning": "ok",
+    "causal_dqn": "ok",
+    "conf_dqn": "ok",
+    "shortcut_missing_states": "failed: run0.json: instance train_00 needs a list of 30 actions"
+  },
+  "experiments": {
+    "confounded_expert_demos": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.7032641110292674,
+          "normalized_iqm_return": 0.6737100254847314,
+          "worst_decile_normalized_return": 0.4473564670040783
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.7696709898287182,
+          "normalized_iqm_return": 0.7377639333997733,
+          "worst_decile_normalized_return": 0.5531790047707364
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.4007208173942502,
+          "normalized_iqm_return": 0.40035908957835975,
+          "worst_decile_normalized_return": -0.12363746698482936
+        },
+        "shortcut_missing_states": {
+          "normalized_mean_return": -1.09500994232188,
+          "normalized_iqm_return": -1.0570038083018443,
+          "worst_decile_normalized_return": -1.6486139589042605
+        }
+      }
+    },
+    "pervasive_confounding": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.5913531703938043,
+          "normalized_iqm_return": 0.5864571088530588,
+          "worst_decile_normalized_return": 0.42602745730659636
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.6617801693518689,
+          "normalized_iqm_return": 0.663234568321555,
+          "worst_decile_normalized_return": 0.44718199030254385
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.15848703268164263,
+          "normalized_iqm_return": 0.15707650284047847,
+          "worst_decile_normalized_return": -0.24953064162852864
+        },
+        "shortcut_missing_states": {
+          "normalized_mean_return": -0.9122505848044898,
+          "normalized_iqm_return": -0.8984813139942537,
+          "worst_decile_normalized_return": -1.1276603437375077
+        }
+      }
+    }
+  }
+}
