@@ -4,6 +4,7 @@
     "behavior_cloning": "ok",
     "better_ensemble": "ok",
     "better_sharp_bound": "ok",
+    "better_sharp_lcb": "ok",
     "causal_dqn": "ok",
     "causal_dqn_rep2": "ok",
     "conf_dqn": "ok",
@@ -35,6 +36,11 @@
           "normalized_mean_return": 0.755002233075731,
           "normalized_iqm_return": 0.8177717768624424,
           "worst_decile_normalized_return": -0.047870768989816834
+        },
+        "better_sharp_lcb": {
+          "normalized_mean_return": 0.9873919942491621,
+          "normalized_iqm_return": 0.9675917832509838,
+          "worst_decile_normalized_return": 0.6350663217596212
         },
         "causal_dqn": {
           "normalized_mean_return": 0.8044799998927061,
@@ -119,6 +125,11 @@
           "normalized_mean_return": 0.4901738707278657,
           "normalized_iqm_return": 0.48783029909556164,
           "worst_decile_normalized_return": 0.09068567947602123
+        },
+        "better_sharp_lcb": {
+          "normalized_mean_return": 0.7156076073150568,
+          "normalized_iqm_return": 0.7093395298604728,
+          "worst_decile_normalized_return": 0.39215413904298974
         },
         "causal_dqn": {
           "normalized_mean_return": 0.694876444955509,

@@ -4,6 +4,7 @@
       "behavior_cloning",
       "better_ensemble",
       "better_sharp_bound",
+      "better_sharp_lcb",
       "causal_dqn",
       "causal_dqn_rep2",
       "conf_dqn",
@@ -27,6 +28,7 @@
       "behavior_cloning",
       "better_ensemble",
       "better_sharp_bound",
+      "better_sharp_lcb",
       "causal_dqn",
       "causal_dqn_rep2",
       "conf_dqn",
@@ -37,23 +39,23 @@
     ]
   },
   "std": {
-    "all_attempts/confounded_expert_demos/normalized_mean_return": 0.7042554684086862,
-    "all_attempts/confounded_expert_demos/normalized_iqm_return": 0.705417360634595,
-    "all_attempts/confounded_expert_demos/worst_decile_normalized_return": 0.7213963752122359,
-    "all_attempts/pervasive_confounding/normalized_mean_return": 0.598505040354068,
-    "all_attempts/pervasive_confounding/normalized_iqm_return": 0.586554901847108,
-    "all_attempts/pervasive_confounding/worst_decile_normalized_return": 0.6384804738152442,
-    "honest_only/confounded_expert_demos/normalized_mean_return": 0.13293189500604852,
-    "honest_only/confounded_expert_demos/normalized_iqm_return": 0.13165179209446987,
-    "honest_only/confounded_expert_demos/worst_decile_normalized_return": 0.2481726408857512,
-    "honest_only/pervasive_confounding/normalized_mean_return": 0.16822489432490842,
-    "honest_only/pervasive_confounding/normalized_iqm_return": 0.15940493123789765,
-    "honest_only/pervasive_confounding/worst_decile_normalized_return": 0.23866304302801902
+    "all_attempts/confounded_expert_demos/normalized_mean_return": 0.7074433487133813,
+    "all_attempts/confounded_expert_demos/normalized_iqm_return": 0.7069855011026982,
+    "all_attempts/confounded_expert_demos/worst_decile_normalized_return": 0.725158226729483,
+    "all_attempts/pervasive_confounding/normalized_mean_return": 0.5971054122137871,
+    "all_attempts/pervasive_confounding/normalized_iqm_return": 0.5855976415702548,
+    "all_attempts/pervasive_confounding/worst_decile_normalized_return": 0.6336392563173774,
+    "honest_only/confounded_expert_demos/normalized_mean_return": 0.1453275745698182,
+    "honest_only/confounded_expert_demos/normalized_iqm_return": 0.1391700013124665,
+    "honest_only/confounded_expert_demos/worst_decile_normalized_return": 0.24977802100077026,
+    "honest_only/pervasive_confounding/normalized_mean_return": 0.163701402839641,
+    "honest_only/pervasive_confounding/normalized_iqm_return": 0.15597947400756582,
+    "honest_only/pervasive_confounding/worst_decile_normalized_return": 0.22778264765127493
   },
   "table": {
     "behavior_cloning": {
-      "rank_vs_reference": -0.2644339269696175,
-      "rank_vs_reference_honest_cohort": -1.0703016904658722,
+      "rank_vs_reference": -0.2644829876343311,
+      "rank_vs_reference_honest_cohort": -1.0470438246187974,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -69,8 +71,8 @@
       }
     },
     "better_ensemble": {
-      "rank_vs_reference": -0.007506026529419529,
-      "rank_vs_reference_honest_cohort": -0.02743830226466968,
+      "rank_vs_reference": -0.007544382838974349,
+      "rank_vs_reference_honest_cohort": -0.02641208464690016,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -86,8 +88,8 @@
       }
     },
     "better_sharp_bound": {
-      "rank_vs_reference": -0.6289038782663869,
-      "rank_vs_reference_honest_cohort": -2.051877372838515,
+      "rank_vs_reference": -0.6294882877488345,
+      "rank_vs_reference_honest_cohort": -2.0753533154810446,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -99,6 +101,23 @@
           "normalized_mean_return": 0.4901738707278657,
           "normalized_iqm_return": 0.48783029909556164,
           "worst_decile_normalized_return": 0.09068567947602123
+        }
+      }
+    },
+    "better_sharp_lcb": {
+      "rank_vs_reference": 0.22546138515056285,
+      "rank_vs_reference_honest_cohort": 1.051313763653165,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 0.9873919942491621,
+          "normalized_iqm_return": 0.9675917832509838,
+          "worst_decile_normalized_return": 0.6350663217596212
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.7156076073150568,
+          "normalized_iqm_return": 0.7093395298604728,
+          "worst_decile_normalized_return": 0.39215413904298974
         }
       }
     },
@@ -120,8 +139,8 @@
       }
     },
     "causal_dqn_rep2": {
-      "rank_vs_reference": 0.009537618287843939,
-      "rank_vs_reference_honest_cohort": 0.038442811418446896,
+      "rank_vs_reference": 0.009588931113546638,
+      "rank_vs_reference_honest_cohort": 0.03695687093853208,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -137,8 +156,8 @@
       }
     },
     "conf_dqn": {
-      "rank_vs_reference": -1.7142402658437748,
-      "rank_vs_reference_honest_cohort": -6.5475868561389365,
+      "rank_vs_reference": -1.7148965166330998,
+      "rank_vs_reference_honest_cohort": -6.454910332472981,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -154,8 +173,8 @@
       }
     },
     "seed_causal_0": {
-      "rank_vs_reference": 0.0037755572340408437,
-      "rank_vs_reference_honest_cohort": 0.036588563740787824,
+      "rank_vs_reference": 0.0036824091131626817,
+      "rank_vs_reference_honest_cohort": 0.03211415521447323,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -171,8 +190,8 @@
       }
     },
     "seed_causal_1": {
-      "rank_vs_reference": -0.010104973546388773,
-      "rank_vs_reference_honest_cohort": -0.05442594638374196,
+      "rank_vs_reference": -0.010063564746671293,
+      "rank_vs_reference_honest_cohort": -0.050479377204126034,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -188,8 +207,8 @@
       }
     },
     "seed_causal_2": {
-      "rank_vs_reference": 0.0064008501927241765,
-      "rank_vs_reference_honest_cohort": 0.016990603448152623,
+      "rank_vs_reference": 0.006450941623387824,
+      "rank_vs_reference_honest_cohort": 0.017633579283630144,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -205,8 +224,8 @@
       }
     },
     "seed_causal_3": {
-      "rank_vs_reference": -0.012677458079850082,
-      "rank_vs_reference_honest_cohort": -0.05166544639493713,
+      "rank_vs_reference": -0.012521049892945895,
+      "rank_vs_reference_honest_cohort": -0.04980392660223816,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -222,8 +241,8 @@
       }
     },
     "seed_causal_4": {
-      "rank_vs_reference": 0.04158370019715579,
-      "rank_vs_reference_honest_cohort": 0.14670745629505808,
+      "rank_vs_reference": 0.041655675803378485,
+      "rank_vs_reference_honest_cohort": 0.14542274365852237,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -239,8 +258,8 @@
       }
     },
     "seed_causal_5": {
-      "rank_vs_reference": 0.0034873147581894956,
-      "rank_vs_reference_honest_cohort": 0.02990504991413629,
+      "rank_vs_reference": 0.0034349503419971246,
+      "rank_vs_reference_honest_cohort": 0.02526094002116653,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -256,8 +275,8 @@
       }
     },
     "stronger_x3_updates": {
-      "rank_vs_reference": 0.0048754407951166045,
-      "rank_vs_reference_honest_cohort": 0.027494632387206785,
+      "rank_vs_reference": 0.004858429270416525,
+      "rank_vs_reference_honest_cohort": 0.02509032854680626,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -273,8 +292,8 @@
       }
     },
     "variant_causal_tabular": {
-      "rank_vs_reference": -0.17793903506583067,
-      "rank_vs_reference_honest_cohort": -0.7344569036238484,
+      "rank_vs_reference": -0.17802196702189688,
+      "rank_vs_reference_honest_cohort": -0.7172509595787913,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -290,8 +309,8 @@
       }
     },
     "weaker_paper_replay_ratio": {
-      "rank_vs_reference": -0.05920670427612893,
-      "rank_vs_reference_honest_cohort": -0.22533006267649175,
+      "rank_vs_reference": -0.05918305280050371,
+      "rank_vs_reference_honest_cohort": -0.22211572819553108,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -307,8 +326,8 @@
       }
     },
     "weaker_third_updates": {
-      "rank_vs_reference": 0.03376481262159736,
-      "rank_vs_reference_honest_cohort": 0.12759404694462678,
+      "rank_vs_reference": 0.03378280837655099,
+      "rank_vs_reference_honest_cohort": 0.12441475203982269,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -324,8 +343,8 @@
       }
     },
     "shortcut_constant_action": {
-      "rank_vs_reference": -2.217893106562017,
-      "rank_vs_reference_honest_cohort": -8.846307281896836,
+      "rank_vs_reference": -2.2180217965727067,
+      "rank_vs_reference_honest_cohort": -8.651557330877154,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -341,8 +360,8 @@
       }
     },
     "shortcut_data_edit": {
-      "rank_vs_reference": -2.217893106562017,
-      "rank_vs_reference_honest_cohort": -8.846307281896836,
+      "rank_vs_reference": -2.2180217965727067,
+      "rank_vs_reference_honest_cohort": -8.651557330877154,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -358,8 +377,8 @@
       }
     },
     "shortcut_extra_runs": {
-      "rank_vs_reference": -2.325539961967842,
-      "rank_vs_reference_honest_cohort": -9.269207401146646,
+      "rank_vs_reference": -2.325156871790991,
+      "rank_vs_reference_honest_cohort": -9.065160324746842,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -375,8 +394,8 @@
       }
     },
     "shortcut_forged_fields": {
-      "rank_vs_reference": -2.325539961967842,
-      "rank_vs_reference_honest_cohort": -9.269207401146646,
+      "rank_vs_reference": -2.325156871790991,
+      "rank_vs_reference_honest_cohort": -9.065160324746842,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -392,8 +411,8 @@
       }
     },
     "shortcut_invalid_action": {
-      "rank_vs_reference": -5.481667902267715,
-      "rank_vs_reference_honest_cohort": -22.1349777415326,
+      "rank_vs_reference": -5.480017530388796,
+      "rank_vs_reference_honest_cohort": -21.586850377759077,
       "status": "failed: run0.json: instance test_00 has illegal action 7",
       "metrics": {
         "confounded_expert_demos": {
@@ -409,8 +428,8 @@
       }
     },
     "shortcut_label_swap": {
-      "rank_vs_reference": -2.3837015342764216,
-      "rank_vs_reference_honest_cohort": -9.507279472706202,
+      "rank_vs_reference": -2.383366412874368,
+      "rank_vs_reference_honest_cohort": -9.290735296534082,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -426,8 +445,8 @@
       }
     },
     "shortcut_missing_experiment": {
-      "rank_vs_reference": -5.481667902267715,
-      "rank_vs_reference_honest_cohort": -22.1349777415326,
+      "rank_vs_reference": -5.480017530388796,
+      "rank_vs_reference_honest_cohort": -21.586850377759077,
       "status": "failed: missing checkpoints/shortcut_missing_experiment/pervasive_confounding/run0.json",
       "metrics": {
         "confounded_expert_demos": {
@@ -443,8 +462,8 @@
       }
     },
     "shortcut_missing_states": {
-      "rank_vs_reference": -5.481667902267715,
-      "rank_vs_reference_honest_cohort": -22.1349777415326,
+      "rank_vs_reference": -5.480017530388796,
+      "rank_vs_reference_honest_cohort": -21.586850377759077,
       "status": "failed: run0.json: instance test_00 needs a list of 30 actions",
       "metrics": {
         "confounded_expert_demos": {
@@ -460,8 +479,8 @@
       }
     },
     "shortcut_nominal_planning": {
-      "rank_vs_reference": -1.8837559409277937,
-      "rank_vs_reference_honest_cohort": -7.370075607714976,
+      "rank_vs_reference": -1.8839316367747194,
+      "rank_vs_reference_honest_cohort": -7.235289714493574,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -477,8 +496,8 @@
       }
     },
     "shortcut_null_action": {
-      "rank_vs_reference": -5.481667902267715,
-      "rank_vs_reference_honest_cohort": -22.1349777415326,
+      "rank_vs_reference": -5.480017530388796,
+      "rank_vs_reference_honest_cohort": -21.586850377759077,
       "status": "failed: run0.json: instance test_00 has illegal action None",
       "metrics": {
         "confounded_expert_demos": {
@@ -494,8 +513,8 @@
       }
     },
     "shortcut_train_oracle": {
-      "rank_vs_reference": -0.2644339269696175,
-      "rank_vs_reference_honest_cohort": -1.0703016904658722,
+      "rank_vs_reference": -0.2644829876343311,
+      "rank_vs_reference_honest_cohort": -1.0470438246187974,
       "status": "ok",
       "metrics": {
         "confounded_expert_demos": {
@@ -552,6 +571,20 @@
         "se": 0.04544281595749766,
         "wins": 5,
         "losses": 27
+      }
+    },
+    "better_sharp_lcb": {
+      "confounded_expert_demos": {
+        "mean_diff": 0.18291199435645594,
+        "se": 0.04238901597834831,
+        "wins": 22,
+        "losses": 10
+      },
+      "pervasive_confounding": {
+        "mean_diff": 0.020731162359547625,
+        "se": 0.03843764208585589,
+        "wins": 17,
+        "losses": 15
       }
     },
     "causal_dqn": {
