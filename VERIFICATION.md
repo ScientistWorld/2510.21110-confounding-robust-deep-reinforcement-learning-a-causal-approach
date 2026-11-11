@@ -1,3 +1,5 @@
+> **Superseded (iteration 12).** This file describes the earlier 6-state gym, which was replaced. See `HARDENING.md` for the current problem, evaluator and checks.
+
 # Verification Report
 
 ## Initial Assessment

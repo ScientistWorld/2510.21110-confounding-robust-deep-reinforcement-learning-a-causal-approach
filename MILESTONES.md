@@ -46,3 +46,9 @@
 - Final verifier confirmed method/problem separation, scoring structure, train/test split wiring, and absence of committed `shared/` references.
 - Improved `scripts/evaluate.sh` artifact discovery and clarified scaled-reference notes in `scoring/reference.json`.
 - `bash -n` checks and `python validate.py --compare` passed.
+
+### [2026-11-11] - core_claim_plus
+- Hardening iteration: rebuilt the gym as a hidden-test family of confounded MDPs. 32 hidden test instances per experiment, scored by exact interventional return with the paper's demonstrator normalisation.
+- Restored the paper's Causal-DQN settings: streamed replay, batch 512, learning rate 5e-4, γ 0.99, Double DQN, worst next state sampled from replay.
+- Hidden-test reference (job `cf004967-974`), normalised mean: Causal-DQN 0.804 / 0.695, Conf. DQN 0.353 / 0.133, behaviour cloning 0.717 / 0.608. Both experiments are in the paper's direction, with seed noise of about 0.02.
+- Job `2112f426-6f6`: a train-selected sharper causal bound beats the reference on the hidden test (+0.18 ± 0.04 paired in the main experiment). Every shortcut is below the reference or scored as failed. See `HARDENING.md`.

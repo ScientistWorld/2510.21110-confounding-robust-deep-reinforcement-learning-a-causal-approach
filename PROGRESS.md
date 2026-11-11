@@ -1,47 +1,44 @@
 # Progress
 
-## What Works
+## What works
 
-- Paper analysis is complete for the core claim: Causal-DQN learns from confounded off-policy demonstrator data using a pessimistic causal Bellman lower-bound target.
-- Implemented a small tracked CMDP where the demonstrator sees a hidden confounder that the learner cannot observe.
-- Added a second tracked CMDP variant, `weaker_bias`, with weaker but still harmful hidden confounding for a `core_claim_plus` check.
-- Implemented `method/causal_dqn.py` with the paper's all-action target: standard backup for the logged action and reward-floor plus worst-next-state backup for non-logged actions.
-- Implemented `baseline/confounded_dqn.py` as the causally unaware off-policy DQN baseline.
-- Implemented `eval/evaluate_cmdp.py`; it reads saved policy artifacts and does not import from `method/`.
-- `scripts/run.sh` now regenerates method and baseline artifacts through `scripts/reproduce.sh` before scoring, so compute submissions do not depend on ignored checkpoints.
+- **Problem.** `data/cmdp_family.py` generates confounded MDPs following the paper's Definition 2.1: a hidden context drawn fresh at every step, and a demonstrator that sees it.
+  - Public train split: `data/train/`, with true dynamics in `eval/train/envs/`.
+  - Hidden test split: logs in `data/test/`; true dynamics only in `eval/test/envs/`, built from a secret seed by `eval/test/build_test_split.py`.
+- **Method.** `method/causal_dqn.py` implements Causal-DQN as in Algorithm 2:
+  - streamed replay;
+  - the all-action causal target;
+  - the worst next state sampled from replay;
+  - Double DQN with a target network;
+  - batch 512, learning rate 5e-4, γ 0.99.
+- **Baselines.**
+  - `baseline/confounded_dqn.py`: the paper's Conf. DQN.
+  - `baseline/behavior_cloning.py`: a reward-free sanity floor.
+- **Evaluators.** `eval/train/evaluate_policies.py` and `eval/test/evaluate_policies.py` are independent copies. Both:
+  - evaluate every `checkpoints/<method>/` exactly;
+  - normalise per instance (random = 0, demonstrator = 1);
+  - require runs 0–2 for both experiments;
+  - give failed methods the worst value of every metric.
 
-## Results
+## Results (hidden test, 3 runs; normalised mean / IQM / worst decile)
 
-- CPU test job `f4b7194a-87e` completed the confounded DQN baseline once, then was preempted and restarted before producing the Causal-DQN artifact. I cancelled it after 40 minutes because the default smoke workload was too slow for a one-CPU test node.
-- CPU test job `9afc19ef-8d1` completed end-to-end. Confounded DQN learned the all-risky policy with mean return `-1.174`; Causal-DQN improved to `-0.062`, but still chose risky actions at rate `0.667`. This earns `method_runs` only, not `core_claim`.
-- CPU test job `76913160-30f` reproduced the core claim on the tightened scaled CMDP. Confounded DQN learned the all-risky policy with mean return `-2.714`; Causal-DQN learned the all-safe policy with mean return `1.500`, safe action rate `1.000`, and risky action rate `0.000`.
-- CPU test job `e1d5cddb-bd5` repeated the tightened run across seeds `0 1 2`. The aggregated result remained unchanged: Confounded DQN mean return `-2.714`; Causal-DQN mean return `1.500`, safe action rate `1.000`, risky action rate `0.000`.
-- CPU test job `3ffe5bba-0a3` completed both `base` and `weaker_bias` variants over seeds `0 1 2` and passed `python validate.py --compare`.
-- On `weaker_bias_cmdp`, Confounded DQN mean return was `-1.504` with risky action rate `1.000`; Causal-DQN mean return was `0.923` with safe action rate `0.889`.
-- CPU test job `e6f5da67-7e9` reran both variants over seeds `0 1 2` on the current Double-DQN bootstrap revision and passed `python validate.py --compare`.
-- Current milestone is `core_claim_plus`: the causal backup has been validated beyond the minimum setting, but not on the full Atari benchmark.
-- Continuing-agent audit found and fixed a fresh-clone robustness issue in `scripts/run.sh`; a CPU test submission is queued to validate the corrected end-to-end entry point.
+| Method | confounded_expert_demos | pervasive_confounding |
+|---|---|---|
+| causal_dqn (reference) | 0.804 / 0.820 / 0.491 | 0.695 / 0.677 / 0.485 |
+| behavior_cloning | 0.717 / 0.726 / 0.434 | 0.607 / 0.582 / 0.395 |
+| conf_dqn | 0.353 / 0.377 / −0.216 | 0.133 / 0.143 / −0.266 |
+| best possible policy (mean) | 1.181 | 1.049 |
+
+Seed noise of the reference is about ±0.01 in the mean. See `HARDENING.md` for the variants, the noise analysis and the shortcuts.
+
+## Deviations from the paper
+
+- Small procedurally generated MDPs with an MLP Q-network, instead of 12 masked Atari games with CNNs and the DIAMOND/sebulba demonstrators.
+- 10k logged transitions per instance instead of 1M steps.
+- 3 runs instead of 5 seeds.
+- 3 updates per logged transition instead of 1 per 20. With the paper's ratio the method scores slightly lower.
+- Interv. DQN and LSTM-DQN are not reproduced.
 
 ## Remaining
 
-- Full masked-Atari reproduction remains as future work: integrate the diamond/sebulba demonstrator data, Atari preprocessing, and Nature DQN CNN training at the paper's scale.
-- To go beyond `core_claim_plus`, implement a larger Atari-like visual environment or integrate the diamond/sebulba demonstrator and masked Atari preprocessing.
-
-## Issues
-
-- The paper does not provide an author Causal-DQN code release. It cites open demonstrator resources for Atari, but reproducing the full 12-game benchmark is too large for a first-pass core-claim job.
-- Job `ddbc01d9-67a` installed dependencies successfully, then failed before training because direct script execution from `baseline/` did not include the workspace root on Python's import path. Fixed by exporting `PYTHONPATH=/home/user` in run/evaluate/method/baseline scripts.
-- Job `f4b7194a-87e` showed the pipeline could start training but the CPU smoke defaults were too expensive. The next submissions use a smaller MLP, one PyTorch thread, shorter defaults, and periodic progress logging.
-- Job `9afc19ef-8d1` showed the original scaled CMDP was not separating the conservative target strongly enough: the method's value estimates improved return but still preferred risky actions in most states. The next run keeps the hidden-confounding structure but lowers favorable hidden-context probabilities below the marginal break-even point in every state.
-- Job `76913160-30f` validated the tightened setup and passed `python validate.py --compare`.
-- Job `e1d5cddb-bd5` validated the multi-seed aggregation path and passed `python validate.py --compare`.
-- Follow-up fidelity cleanup: updated both scaled learners to use Double DQN action selection/evaluation for bootstrap targets, matching the appendix. Job `e6f5da67-7e9` validated this exact code revision.
-- Continuing-agent audit found `scripts/run.sh` evaluated ignored checkpoint artifacts directly. Fixed by routing the compute entry point through `scripts/reproduce.sh`; local `bash -n` and `python validate.py --compare` passed before submission.
-
-## Deviations from Paper
-
-- Paper setup: 12 masked Atari games, diamond/sebulba demonstrators, Nature DQN CNNs, 1M steps, 5 seeds.
-- Reproduction setup: a small finite-horizon hidden-confounder CMDP with an MLP Q-network, generated demonstrator replay, and interventional evaluation.
-- Additional setting: `weaker_bias_cmdp` changes only the environment's hidden favorable-context probability and safe reward while preserving the same procedure, artifact format, method implementation, and evaluator.
-- Reason: the author code is not released and the full Atari setup would require substantial demonstrator integration and many GPU-hours. The algorithmic computation is preserved: replay data from a hidden-confounder demonstrator and the causal all-action Bellman lower-bound update from Algorithm 2 / Eq. 26.
-- Scoring note: `reference.json` includes the paper's Atari aggregate as context plus analytic target rows for the two scaled CMDP experiments so the reusable evaluator can compare scored artifacts against fixed nontrivial targets. The reproduced scores are only claimed for experiments present in `scores.json`.
+- `pervasive_confounding` has open headroom: no tried method is clearly better than the reference on all three metrics there.

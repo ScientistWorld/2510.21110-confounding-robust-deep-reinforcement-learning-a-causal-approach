@@ -1,3 +1,5 @@
+> **Note (iteration 12).** This audit targeted the earlier 6-state gym (`data/confounded_cmdp.py`, removed). Its harness no longer runs against the rebuilt gym; the post-hardening checks are in `redteam/hardening/` and are summarised in `HARDENING.md`.
+
 This audit runs only on a compute node. Run `python -m redteam.run_suite` from
 the repository root, or invoke a case's `run.sh`. Each case installs ordinary
 policy artifacts, invokes the visible train evaluator, invokes the restored
