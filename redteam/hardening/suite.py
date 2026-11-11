@@ -82,7 +82,8 @@ def all_datasets(exp: str) -> list[tuple[dict, dict]]:
 # ---------------------------------------------------------------------------
 
 
-def tabular_q(payload: dict, inst: dict, kind: str, iters: int = 3000) -> np.ndarray:
+def tabular_q(payload: dict, inst: dict, kind: str, iters: int = 3000, conf_z: float = 2.0,
+              kappa: float = 2.0) -> np.ndarray:
     """Fixed point of a Bellman operator estimated from one logged dataset.
 
     kind = "nominal": observational Bellman optimality (treats the log as causal).
@@ -92,6 +93,10 @@ def tabular_q(payload: dict, inst: dict, kind: str, iters: int = 3000) -> np.nda
                       epsilon: under do(x) the outcome density is at most
                       |A| P(x|s) / eps times the logged density, so the bound is
                       a lower-tail (CVaR) mean of the logged outcomes.
+    kind = "sharp_lcb": finite-sample version of "sharp": the tail level uses
+                      an upper confidence bound on P(x|s) (z = conf_z), the tail
+                      mean is lowered by kappa standard errors, and the result is
+                      never below the paper's (Manski) bound, which is also valid.
     """
     S, A = payload["n_states"], payload["n_actions"]
     eps = payload["logging_epsilon"]
@@ -103,11 +108,15 @@ def tabular_q(payload: dict, inst: dict, kind: str, iters: int = 3000) -> np.nda
     seen_next = np.unique(s2)
     cont_sa = np.bincount(key, weights=1.0 - d, minlength=S * A) / np.maximum(n_sa, 1.0)
     alpha = np.clip(eps / (A * np.maximum(p_sa, 1e-12)), 0.0, 1.0)
+    if kind == "sharp_lcb":
+        n_s_sa = np.maximum(np.repeat(n_s, A), 1.0)
+        p_ucb = np.minimum(1.0, p_sa + conf_z * np.sqrt(np.maximum(p_sa * (1 - p_sa), 1e-12) / n_s_sa) + 1.0 / n_s_sa)
+        alpha = np.clip(eps / (A * np.maximum(p_ucb, 1e-12)), 0.0, 1.0)
     V = np.zeros(S)
     Q = np.zeros(S * A)
     cont = 1.0 - payload["termination_prob"]  # documented, independent of everything else
     for _ in range(iters):
-        if kind == "sharp":
+        if kind in ("sharp", "sharp_lcb"):
             # Termination is an exogenous coin, so only (reward, next state)
             # can be confounded; bound E_do[y + gamma * cont * V(s')].
             vals = y + GAMMA * cont * V[s2]
@@ -121,7 +130,7 @@ def tabular_q(payload: dict, inst: dict, kind: str, iters: int = 3000) -> np.nda
         elif kind == "causal":
             Q = p_sa * mean + (1.0 - p_sa) * (REWARD_FLOOR + GAMMA * cont_sa * vmin)
             Q = np.where(n_sa > 0, Q, fallback)
-        elif kind == "sharp":
+        elif kind in ("sharp", "sharp_lcb"):
             order = np.lexsort((vals, key))
             sk, sv = key[order], vals[order]
             starts = np.concatenate([[0], np.cumsum(n_sa)[:-1]])
@@ -131,6 +140,13 @@ def tabular_q(payload: dict, inst: dict, kind: str, iters: int = 3000) -> np.nda
             num = np.bincount(sk, weights=w * sv, minlength=S * A)
             den = np.bincount(sk, weights=w, minlength=S * A)
             Q = np.where(den > 0, num / np.maximum(den, 1e-12), fallback)
+            if kind == "sharp_lcb":
+                sq = np.bincount(key, weights=vals ** 2, minlength=S * A)
+                var = (sq - n_sa * mean ** 2) / np.maximum(n_sa - 1.0, 1.0)
+                sd = np.where(n_sa > 1, np.sqrt(np.maximum(var, 0.0)), 2.0)
+                lcb = Q - kappa * sd / np.sqrt(np.maximum(n_sa, 1.0))
+                manski = p_sa * mean + (1.0 - p_sa) * (REWARD_FLOOR + GAMMA * cont * vmin)
+                Q = np.where(n_sa > 0, np.maximum(lcb, manski), fallback)
         else:
             raise ValueError(kind)
         V_new = Q.reshape(S, A).max(1)
@@ -212,7 +228,8 @@ def stage_train():
         ens[exp] = {iid: [int(a) for a in np.mean([np.asarray(r["q_values"][iid]) for r in runs], 0).argmax(1)]
                     for iid in ids}
     write_runs(RUNS / "better_ensemble", {e: [p] * 3 for e, p in ens.items()})
-    for name, kind in (("better_sharp_bound", "sharp"), ("variant_causal_tabular", "causal"),
+    for name, kind in (("better_sharp_bound", "sharp"), ("better_sharp_lcb", "sharp_lcb"),
+                       ("variant_causal_tabular", "causal"),
                        ("shortcut_nominal_planning", "nominal")):
         if not (RUNS / name).exists():
             pols = tabular_policies(kind)
@@ -336,7 +353,7 @@ def build_shortcut(name: str, folder: Path) -> tuple[dict[str, Path], callable, 
     return {name: target}, before, after
 
 
-HONEST = ["causal_dqn_rep2", "better_ensemble", "better_sharp_bound", "variant_causal_tabular",
+HONEST = ["causal_dqn_rep2", "better_ensemble", "better_sharp_bound", "better_sharp_lcb", "variant_causal_tabular",
           "stronger_x3_updates", "weaker_third_updates", "weaker_paper_replay_ratio",
           *[f"seed_causal_{k}" for k in range(6)]]
 SHORTCUTS = ["shortcut_constant_action", "shortcut_invalid_action", "shortcut_null_action",

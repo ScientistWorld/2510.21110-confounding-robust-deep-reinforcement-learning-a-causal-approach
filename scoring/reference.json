@@ -23,10 +23,44 @@
         }
       },
       "results": {
-        "_paper_causal_dqn_diamond": {"type": "proposed", "normalized_mean_return": 1.04, "normalized_iqm_return": 1.02},
-        "_paper_conf_dqn_diamond": {"type": "baseline", "normalized_mean_return": 0.10, "normalized_iqm_return": 0.13},
-        "_paper_conf_lstm_dqn_diamond": {"type": "baseline", "normalized_mean_return": 0.09, "normalized_iqm_return": 0.11},
-        "_paper_interv_dqn_diamond": {"type": "baseline", "normalized_mean_return": 0.13, "normalized_iqm_return": 0.13}
+        "causal_dqn": {
+          "type": "proposed",
+          "normalized_mean_return": 0.80448,
+          "normalized_iqm_return": 0.820072,
+          "worst_decile_normalized_return": 0.491189
+        },
+        "conf_dqn": {
+          "type": "baseline",
+          "normalized_mean_return": 0.352964,
+          "normalized_iqm_return": 0.377436,
+          "worst_decile_normalized_return": -0.216476
+        },
+        "behavior_cloning": {
+          "type": "baseline",
+          "normalized_mean_return": 0.716741,
+          "normalized_iqm_return": 0.725545,
+          "worst_decile_normalized_return": 0.433823
+        },
+        "_paper_causal_dqn_diamond": {
+          "type": "proposed",
+          "normalized_mean_return": 1.04,
+          "normalized_iqm_return": 1.02
+        },
+        "_paper_conf_dqn_diamond": {
+          "type": "baseline",
+          "normalized_mean_return": 0.1,
+          "normalized_iqm_return": 0.13
+        },
+        "_paper_conf_lstm_dqn_diamond": {
+          "type": "baseline",
+          "normalized_mean_return": 0.09,
+          "normalized_iqm_return": 0.11
+        },
+        "_paper_interv_dqn_diamond": {
+          "type": "baseline",
+          "normalized_mean_return": 0.13,
+          "normalized_iqm_return": 0.13
+        }
       }
     },
     "pervasive_confounding": {
@@ -52,10 +86,44 @@
         }
       },
       "results": {
-        "_paper_causal_dqn_sebulba": {"type": "proposed", "normalized_mean_return": 0.55, "normalized_iqm_return": 0.59},
-        "_paper_conf_dqn_sebulba": {"type": "baseline", "normalized_mean_return": 0.00, "normalized_iqm_return": 0.02},
-        "_paper_conf_lstm_dqn_sebulba": {"type": "baseline", "normalized_mean_return": 0.00, "normalized_iqm_return": 0.02},
-        "_paper_interv_dqn_sebulba": {"type": "baseline", "normalized_mean_return": 0.00, "normalized_iqm_return": 0.02}
+        "causal_dqn": {
+          "type": "proposed",
+          "normalized_mean_return": 0.694876,
+          "normalized_iqm_return": 0.676826,
+          "worst_decile_normalized_return": 0.485484
+        },
+        "conf_dqn": {
+          "type": "baseline",
+          "normalized_mean_return": 0.132613,
+          "normalized_iqm_return": 0.142722,
+          "worst_decile_normalized_return": -0.265875
+        },
+        "behavior_cloning": {
+          "type": "baseline",
+          "normalized_mean_return": 0.607493,
+          "normalized_iqm_return": 0.58199,
+          "worst_decile_normalized_return": 0.39523
+        },
+        "_paper_causal_dqn_sebulba": {
+          "type": "proposed",
+          "normalized_mean_return": 0.55,
+          "normalized_iqm_return": 0.59
+        },
+        "_paper_conf_dqn_sebulba": {
+          "type": "baseline",
+          "normalized_mean_return": 0.0,
+          "normalized_iqm_return": 0.02
+        },
+        "_paper_conf_lstm_dqn_sebulba": {
+          "type": "baseline",
+          "normalized_mean_return": 0.0,
+          "normalized_iqm_return": 0.02
+        },
+        "_paper_interv_dqn_sebulba": {
+          "type": "baseline",
+          "normalized_mean_return": 0.0,
+          "normalized_iqm_return": 0.02
+        }
       }
     }
   }

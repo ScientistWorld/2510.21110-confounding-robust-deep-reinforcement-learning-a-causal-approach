@@ -1,9 +1,14 @@
 # Experiments
 
-## scaled_confounded_cmdp
+Both experiments ask the same question. Can a learner that only has a demonstrator's logged transitions find a policy that does well when it acts itself, even though the demonstrator's choices were driven by information the learner never sees? Scores are exact interventional returns on 32 held-out instances per experiment. Each instance is normalised so the uniform-random policy is 0 and the demonstrator is 1, averaged over 3 independent runs.
 
-This experiment checks whether a learner trained from biased demonstrator trajectories chooses a policy that performs well when actually intervened in the environment. It compares submitted policy artifacts on average return, lower-tail return, state coverage, action validity, and whether the learned policy avoids the confounded risky action. When several policy artifacts for the same method are supplied, the evaluator reports the mean metric across those runs.
+## confounded_expert_demos
 
-## weaker_bias_cmdp
+This is the main setting. The demonstrator is capable and uses the hidden context for part of its decisions; 10% of logged actions are uniformly random. The experiment shows whether a method avoids being misled by actions that only look good in the log. It also shows whether a method can recover, or exceed, the demonstrator's level from the log alone.
 
-This repeats the same evaluation under a second hidden-confounder setting where the logged risky action is less selectively biased but still harmful under intervention. It checks that the robust policy advantage is not specific to one confounding strength.
+- Benefit: normalised mean and interquartile mean.
+- Constraint: the worst-decile normalised return. A method must not buy a higher mean by failing badly on some instances.
+
+## pervasive_confounding
+
+This is the same measurement in a harder regime. The demonstrator relies on the hidden context more often, and only 5% of logged actions are random, so the log is more biased and covers the action space more thinly. Current methods recover a clearly smaller fraction of the achievable return here, so this experiment separates methods that use the log more efficiently and safely.
