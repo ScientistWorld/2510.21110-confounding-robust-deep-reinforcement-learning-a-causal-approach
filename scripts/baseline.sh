@@ -1,42 +1,40 @@
 #!/bin/bash
-# Run a baseline method from the paper.
+# Run a baseline on every experiment (runs k = 0 1 2).
 #
-# Baselines are simple reference methods the paper compares against. 
-# Implement this only if applicable, i.e. the paper has baselines.
-# You do not need to implement all baselines to begin — 
-# just enough to validate that the evaluation pipeline works 
-# and provide a reference point. You can decide to expand more baselines later.
-# Each baseline must be actually run and scored through evaluate.sh
-# so the numbers are verified, not self-reported.
-# You can decide what this baseline script should do yourself.
+#   conf_dqn          the paper's confounded DQN baseline (standard DQN loss on
+#                     the logged action, same data/scale as the reference)
+#   behavior_cloning  most frequent logged action per state (not in the paper;
+#                     simplest reward-free learner, kept as a sanity floor)
 #
 # Usage:
-#   bash scripts/baseline.sh <name>
+#   bash scripts/baseline.sh <conf_dqn|behavior_cloning|all>
 
-set -e
+set -euo pipefail
 
 cd /home/user
 export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+export CUBLAS_WORKSPACE_CONFIG="${CUBLAS_WORKSPACE_CONFIG:-:4096:8}"
 
-NAME="${1:-conf_dqn}"
+NAME="${1:-all}"
+EXPS="${EXPERIMENTS:-confounded_expert_demos pervasive_confounding}"
+
+run_conf() {
+  for EXP in $EXPS; do
+    for RUN in ${RUNS:-0 1 2}; do
+      if [ "${SKIP_EXISTING:-0}" = "1" ] && [ -f "checkpoints/conf_dqn/$EXP/run$RUN.json" ]; then continue; fi
+      python baseline/confounded_dqn.py --experiment "$EXP" --run "$RUN"
+    done
+  done
+}
+run_bc() {
+  for EXP in $EXPS; do
+    python baseline/behavior_cloning.py --experiment "$EXP" --runs 3
+  done
+}
 
 case "$NAME" in
-  conf_dqn)
-    python baseline/confounded_dqn.py \
-      --output "${OUTPUT:-checkpoints/conf_dqn_policy.json}" \
-      --seed "${SEED:-0}" \
-      --demo-episodes "${DEMO_EPISODES:-500}" \
-      --updates "${UPDATES:-1000}" \
-      --batch-size "${BATCH_SIZE:-64}" \
-      --log-interval "${LOG_INTERVAL:-100}" \
-      --variant "${VARIANT:-base}"
-    ;;
-  *)
-    echo "Unknown baseline: $NAME" >&2
-    exit 2
-    ;;
+  conf_dqn) run_conf ;;
+  behavior_cloning) run_bc ;;
+  all) run_conf; run_bc ;;
+  *) echo "Unknown baseline: $NAME" >&2; exit 2 ;;
 esac
-
-if [ "${EVALUATE_AFTER:-1}" = "1" ]; then
-  bash scripts/evaluate.sh "${OUTPUT:-checkpoints/conf_dqn_policy.json}"
-fi

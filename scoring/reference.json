@@ -1,147 +1,61 @@
 {
   "experiments": {
-    "scaled_confounded_cmdp": {
-      "description": "Tracked scaled CMDP reproduction target preserving the paper's hidden-confounder off-policy learning setup.",
-      "notes": "The paper reports masked-Atari returns. This gym uses an explicitly documented scaled CMDP with analytic target values because the full Atari demonstrator pipeline was not released and exceeds the available reproduction budget.",
+    "confounded_expert_demos": {
+      "description": "Offline control from confounded demonstrations: 32 held-out confounded MDP instances, each with 10,000 logged transitions from a capable demonstrator that sees a hidden context the learner cannot observe (10% uniformly random logged actions). Policies are scored by exact interventional return, normalised per instance so that the uniform-random policy is 0 and the demonstrator is 1 (the paper's Table 1 normalisation).",
+      "notes": "Scaled analogue of the paper's 12 masked-Atari games with the diamond demonstrator (Table 1). The paper's Atari numbers are kept under keys starting with '_' for context only; they are not on this gym's scale. Unprefixed results are this gym's measured hidden-test values (3 runs each).",
       "weight": 0.5,
-      "primary_metric": "mean_return",
+      "primary_metric": "normalized_mean_return",
       "metrics": {
-        "mean_return": {
+        "normalized_mean_return": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Average interventional return of the saved policy in the confounded CMDP."
+          "description": "Mean over instances and runs of (policy return - random return) / (demonstrator return - random return); returns are exact expected interventional returns. Paper: Normalized Mean."
         },
-        "tail_return_10pct": {
+        "normalized_iqm_return": {
           "higher_is_better": true,
-          "coefficient": 0.4,
-          "description": "Mean of the lowest-return decile, catching policies that improve the mean by accepting hidden-confounder downside."
+          "coefficient": 0.5,
+          "description": "Interquartile mean of the same instance-run normalised returns (paper: Normalized IQM)."
         },
-        "safe_action_rate": {
+        "worst_decile_normalized_return": {
           "higher_is_better": true,
-          "coefficient": 0.3,
-          "description": "Fraction of executed actions choosing the safe intervention."
-        },
-        "risky_action_rate": {
-          "higher_is_better": false,
-          "coefficient": -0.3,
-          "description": "Fraction of executed actions choosing the confounded risky intervention."
-        },
-        "explicit_safe_state_rate": {
-          "higher_is_better": true,
-          "coefficient": 0.2,
-          "description": "Fraction of CMDP states explicitly mapped to the safe action, preventing omitted states from looking safe by default."
-        },
-        "valid_action_rate": {
-          "higher_is_better": true,
-          "coefficient": 0.0,
-          "description": "Fraction of explicit policy entries using a legal action ID."
-        },
-        "covered_states": {
-          "higher_is_better": true,
-          "coefficient": 0.0,
-          "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
-        },
-        "std_return": {
-          "higher_is_better": false,
-          "coefficient": -0.05,
-          "description": "Episode-return standard deviation, penalizing unnecessary stochastic downside."
+          "coefficient": 0.5,
+          "description": "Mean of the lowest 10% of instance-run normalised returns. Constraint metric: the paper's claim is a policy that is safe in the worst case compatible with the data, so gains in the mean must not come from failing badly on some instances."
         }
       },
       "results": {
-        "conf_dqn": {
-          "type": "baseline",
-          "mean_return": -2.7,
-          "tail_return_10pct": -6.0,
-          "safe_action_rate": 0.0,
-          "risky_action_rate": 1.0,
-          "explicit_safe_state_rate": 0.0,
-          "valid_action_rate": 1.0,
-          "covered_states": 1.0,
-          "std_return": 2.18
-        },
-        "causal_dqn": {
-          "type": "proposed",
-          "mean_return": 1.5,
-          "tail_return_10pct": 1.5,
-          "safe_action_rate": 1.0,
-          "risky_action_rate": 0.0,
-          "explicit_safe_state_rate": 1.0,
-          "valid_action_rate": 1.0,
-          "covered_states": 1.0,
-          "std_return": 0.0
-        }
+        "_paper_causal_dqn_diamond": {"type": "proposed", "normalized_mean_return": 1.04, "normalized_iqm_return": 1.02},
+        "_paper_conf_dqn_diamond": {"type": "baseline", "normalized_mean_return": 0.10, "normalized_iqm_return": 0.13},
+        "_paper_conf_lstm_dqn_diamond": {"type": "baseline", "normalized_mean_return": 0.09, "normalized_iqm_return": 0.11},
+        "_paper_interv_dqn_diamond": {"type": "baseline", "normalized_mean_return": 0.13, "normalized_iqm_return": 0.13}
       }
     },
-    "weaker_bias_cmdp": {
-      "description": "Additional scaled CMDP setting with weaker but still harmful hidden confounding under the same off-policy demonstrator protocol.",
-      "notes": "The paper reports masked-Atari returns. This additional setting is a scaled robustness check for this gym and uses analytic target values rather than paper-reported Atari numbers.",
+    "pervasive_confounding": {
+      "description": "Same task and scoring on 32 held-out instances where the demonstrator relies on the hidden context for more of its choices and only 5% of logged actions are uniformly random, so the logged action-outcome association is more biased and less of the action space is explored.",
+      "notes": "Scaled analogue of the setting where the paper's method recovers less of the demonstrator's performance (Appendix E / Table 2, sebulba demonstrator: normalised mean 0.55) and of the limitations in Appendix G. The paper's Table 2 numbers are kept under '_' keys for context only.",
       "weight": 0.5,
-      "primary_metric": "mean_return",
+      "primary_metric": "normalized_mean_return",
       "metrics": {
-        "mean_return": {
+        "normalized_mean_return": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Average interventional return under weaker but still harmful hidden confounding."
+          "description": "Mean over instances and runs of (policy return - random return) / (demonstrator return - random return); exact expected interventional returns."
         },
-        "tail_return_10pct": {
+        "normalized_iqm_return": {
           "higher_is_better": true,
-          "coefficient": 0.4,
-          "description": "Mean of the lowest-return decile, catching residual risky-action exposure under the weaker-bias setting."
+          "coefficient": 0.5,
+          "description": "Interquartile mean of the instance-run normalised returns."
         },
-        "safe_action_rate": {
+        "worst_decile_normalized_return": {
           "higher_is_better": true,
-          "coefficient": 0.3,
-          "description": "Fraction of executed actions choosing the safe intervention."
-        },
-        "risky_action_rate": {
-          "higher_is_better": false,
-          "coefficient": -0.3,
-          "description": "Fraction of executed actions choosing the confounded risky intervention."
-        },
-        "explicit_safe_state_rate": {
-          "higher_is_better": true,
-          "coefficient": 0.2,
-          "description": "Fraction of CMDP states explicitly mapped to the safe action, preventing omitted states from looking safe by default."
-        },
-        "valid_action_rate": {
-          "higher_is_better": true,
-          "coefficient": 0.0,
-          "description": "Fraction of explicit policy entries using a legal action ID."
-        },
-        "covered_states": {
-          "higher_is_better": true,
-          "coefficient": 0.0,
-          "description": "Fraction of CMDP states explicitly covered by the saved policy artifact."
-        },
-        "std_return": {
-          "higher_is_better": false,
-          "coefficient": -0.05,
-          "description": "Episode-return standard deviation, penalizing unnecessary stochastic downside."
+          "coefficient": 0.5,
+          "description": "Mean of the lowest 10% of instance-run normalised returns (worst-case robustness constraint)."
         }
       },
       "results": {
-        "conf_dqn": {
-          "type": "baseline",
-          "mean_return": -1.5,
-          "tail_return_10pct": -5.19,
-          "safe_action_rate": 0.0,
-          "risky_action_rate": 1.0,
-          "explicit_safe_state_rate": 0.0,
-          "valid_action_rate": 1.0,
-          "covered_states": 1.0,
-          "std_return": 2.39
-        },
-        "causal_dqn": {
-          "type": "proposed",
-          "mean_return": 1.2,
-          "tail_return_10pct": 1.2,
-          "safe_action_rate": 1.0,
-          "risky_action_rate": 0.0,
-          "explicit_safe_state_rate": 1.0,
-          "valid_action_rate": 1.0,
-          "covered_states": 1.0,
-          "std_return": 0.0
-        }
+        "_paper_causal_dqn_sebulba": {"type": "proposed", "normalized_mean_return": 0.55, "normalized_iqm_return": 0.59},
+        "_paper_conf_dqn_sebulba": {"type": "baseline", "normalized_mean_return": 0.00, "normalized_iqm_return": 0.02},
+        "_paper_conf_lstm_dqn_sebulba": {"type": "baseline", "normalized_mean_return": 0.00, "normalized_iqm_return": 0.02},
+        "_paper_interv_dqn_sebulba": {"type": "baseline", "normalized_mean_return": 0.00, "normalized_iqm_return": 0.02}
       }
     }
   }

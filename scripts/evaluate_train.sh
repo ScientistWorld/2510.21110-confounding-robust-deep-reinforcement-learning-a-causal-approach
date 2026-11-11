@@ -1,26 +1,10 @@
 #!/bin/bash
-# Visible train-slice evaluation entry point.
-#
-# Mirrors scripts/evaluate.sh: pass policy JSON artifacts explicitly, or omit
-# arguments to score every JSON policy artifact found under checkpoints/.
+# Visible train-slice evaluation: scores every method directory under
+# checkpoints/ on the public training instances -> scoring/scores_train.json.
 
-set -e
+set -euo pipefail
 
 cd /home/user
 export PYTHONPATH="/home/user:${PYTHONPATH:-}"
-
 mkdir -p scoring
-
-if [ "$#" -eq 0 ]; then
-  mapfile -t ARTIFACTS < <(find checkpoints -maxdepth 1 -type f -name '*.json' | sort)
-  if [ "${#ARTIFACTS[@]}" -eq 0 ]; then
-    echo "No policy JSON artifacts found under checkpoints/." >&2
-    exit 1
-  fi
-  set -- "${ARTIFACTS[@]}"
-fi
-
-python eval/train/evaluate_cmdp.py "$@" \
-  --episodes "${EVAL_EPISODES:-2000}" \
-  --seeds ${EVAL_TRAIN_SEEDS:-137 409 811} \
-  --output scoring/scores_train.json
+python eval/train/evaluate_policies.py --output scoring/scores_train.json

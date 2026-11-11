@@ -1,30 +1,15 @@
 #!/bin/bash
-# Held-out test-slice evaluation entry point.
+# Held-out test-slice evaluation. Takes no arguments (any are ignored).
 #
-# Mirrors scripts/evaluate.sh: pass policy JSON artifacts explicitly, or omit
-# arguments to score every JSON policy artifact found under checkpoints/.
-# When scoring/scores_train.json exists, eval/test filters to the same
-# experiment/method entries and fails if any train-scored entry lacks an
-# artifact on disk.
+# Scores every method directory under checkpoints/ on the hidden test
+# instances (true dynamics in eval/test/envs/) -> scoring/scores_test.json.
+# Test size, instances, runs and normalisation are fixed by eval/test/.
+# A method with missing or invalid policies receives the worst attainable
+# value of every metric.
 
-set -e
+set -euo pipefail
 
 cd /home/user
-export PYTHONPATH="/home/user:${PYTHONPATH:-}"
-
+rm -f scoring/scores_test.json
 mkdir -p scoring
-
-if [ "$#" -eq 0 ]; then
-  mapfile -t ARTIFACTS < <(find checkpoints -maxdepth 1 -type f -name '*.json' | sort)
-  if [ "${#ARTIFACTS[@]}" -eq 0 ]; then
-    echo "No policy JSON artifacts found under checkpoints/." >&2
-    exit 1
-  fi
-  set -- "${ARTIFACTS[@]}"
-fi
-
-python eval/test/evaluate_cmdp.py "$@" \
-  --episodes "${EVAL_EPISODES:-2000}" \
-  --seeds ${EVAL_TEST_SEEDS:-1499 2137 3779} \
-  --output scoring/scores_test.json \
-  --require-methods-from scoring/scores_train.json
+python eval/test/evaluate_policies.py --checkpoints checkpoints --output scoring/scores_test.json
