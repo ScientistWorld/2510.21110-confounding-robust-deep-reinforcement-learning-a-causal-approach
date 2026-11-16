@@ -1,0 +1,92 @@
+{
+  "_slice": "train",
+  "_status": {
+    "behavior_cloning": "ok",
+    "better_sharp_lcb": "ok",
+    "causal_dqn": "ok",
+    "conf_dqn": "ok",
+    "shortcut_hand_decode": "ok",
+    "shortcut_prior_fit": "ok",
+    "shortcut_prior_fit_model": "ok"
+  },
+  "experiments": {
+    "confounded_expert_demos": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.7032641110292673,
+          "normalized_iqm_return": 0.6737100254847311,
+          "worst_decile_normalized_return": 0.44735646700407833
+        },
+        "better_sharp_lcb": {
+          "normalized_mean_return": 0.9867433774234519,
+          "normalized_iqm_return": 0.9533895449465666,
+          "worst_decile_normalized_return": 0.619205125801108
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.7696709898287182,
+          "normalized_iqm_return": 0.7377639333997733,
+          "worst_decile_normalized_return": 0.5531790047707364
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.4007208173942501,
+          "normalized_iqm_return": 0.4003590895783597,
+          "worst_decile_normalized_return": -0.12363746698482929
+        },
+        "shortcut_hand_decode": {
+          "normalized_mean_return": 0.9322322558242732,
+          "normalized_iqm_return": 0.9131723201603741,
+          "worst_decile_normalized_return": 0.4516472661700767
+        },
+        "shortcut_prior_fit": {
+          "normalized_mean_return": 0.9031867378937856,
+          "normalized_iqm_return": 0.901217992238184,
+          "worst_decile_normalized_return": 0.4674829234262436
+        },
+        "shortcut_prior_fit_model": {
+          "normalized_mean_return": 1.053688111316407,
+          "normalized_iqm_return": 1.0298680265906894,
+          "worst_decile_normalized_return": 0.7558309102883507
+        }
+      }
+    },
+    "pervasive_confounding": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.5913531703938043,
+          "normalized_iqm_return": 0.5864571088530588,
+          "worst_decile_normalized_return": 0.4260274573065964
+        },
+        "better_sharp_lcb": {
+          "normalized_mean_return": 0.7151862184057199,
+          "normalized_iqm_return": 0.7275515013432923,
+          "worst_decile_normalized_return": 0.4553545503030474
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.6617801693518689,
+          "normalized_iqm_return": 0.6632345683215551,
+          "worst_decile_normalized_return": 0.44718199030254385
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.15848703268164263,
+          "normalized_iqm_return": 0.1570765028404785,
+          "worst_decile_normalized_return": -0.24953064162852856
+        },
+        "shortcut_hand_decode": {
+          "normalized_mean_return": 0.6038864385537189,
+          "normalized_iqm_return": 0.6223928187771715,
+          "worst_decile_normalized_return": 0.2454302555383673
+        },
+        "shortcut_prior_fit": {
+          "normalized_mean_return": 0.6365072167019037,
+          "normalized_iqm_return": 0.6450082607792337,
+          "worst_decile_normalized_return": 0.3342618819628979
+        },
+        "shortcut_prior_fit_model": {
+          "normalized_mean_return": 0.8181775763248913,
+          "normalized_iqm_return": 0.8056845227469722,
+          "worst_decile_normalized_return": 0.6377540060195868
+        }
+      }
+    }
+  }
+}
