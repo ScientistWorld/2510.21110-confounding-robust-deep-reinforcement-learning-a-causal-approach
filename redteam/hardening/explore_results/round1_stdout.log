@@ -1,15 +1,3 @@
-[hive] This stdout log is managed by Hive.
-[hive] job_id: a4be5731
-[hive] host: node
-[hive] node_id: 9d627e97a8895f644e8837c5271ca3b02f47d73d95a05bcb484abde8
-[hive] user: nexus/user (remote)
-[hive] resource: gpu-test
-[hive] gpus: 1
-[hive] cpus: 1
-[hive] workdir: /home/user
-[hive] timeout_sec: 21600
-[hive] started_at: 2026-11-16 09:40:54 EST
-[hive] command: apptainer exec --nv --containall --cleanenv --env HF_HOME=/home/user/shared/hf_cache --env TRANSFORMERS_CACHE=/home/user/shared/hf_cache --env HF_DATASETS_CACHE=/home/user/shared/hf_cache/datasets --env TORCH_HOME=/home/user/shared/hf_cache/torch --bind /home/user/scratch/AgentWorkspaces/workspaces/2510.21110:/home/user --overlay /home/user/scratch/AgentWorkspaces/workspaces/2510.21110/environment/overlay.img:ro --bind /home/user/scratch/AgentWorkspaces/shared/datasets:/home/user/shared/datasets:ro --bind /home/user/scratch/AgentWorkspaces/shared/models:/home/user/shared/models:ro --bind /home/user/scratch/AgentWorkspaces/shared/hf_cache:/home/user/shared/hf_cache /home/user/scratch/AgentWorkspaces/workspaces/2510.21110/environment/container.sif bash -c 'cd /home/user && bash /home/user/scripts/run.sh'
 torch 2.12.0+cu130 cuda True numpy 2.4.6
 torch 2.12.0+cu130 cuda True n_sim 256
 [v1_current/confounded_expert_demos] simulated eval set in 1s

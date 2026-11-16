@@ -1,0 +1,454 @@
+torch 2.12.0+cu130 cuda True numpy 2.4.6
+torch 2.12.0+cu130 cuda True n_sim 512
+[v1_current/confounded_expert_demos] simulated eval set in 1s
+  oracle                       mean +1.145 iqm +1.133 worst10 +0.942
+  behavior_cloning             mean +0.685 iqm +0.698 worst10 +0.410
+  tab_nominal                  mean +0.248 iqm +0.243 worst10 -0.157
+  tab_manski                   mean +0.715 iqm +0.742 worst10 +0.342
+  tab_sharp                    mean +0.828 iqm +0.837 worst10 +0.432
+  tab_sharp_lcb                mean +0.950 iqm +0.945 worst10 +0.654
+  tab_partition                mean +0.971 iqm +0.969 worst10 +0.654
+  tab_partition_lcb            mean +0.981 iqm +0.975 worst10 +0.720
+  tab_partition_lcb_k1         mean +0.997 iqm +0.993 worst10 +0.722
+  tab_hurwicz25                mean +0.862 iqm +0.856 worst10 +0.487
+  tab_hurwicz_partition25      mean +0.944 iqm +0.933 worst10 +0.634
+  tab_hurwicz_partition50      mean +0.829 iqm +0.835 worst10 +0.490
+  hand_decode                  mean +0.926 iqm +0.913 worst10 +0.595
+  prior_fit_policy             mean +0.992 iqm +0.999 worst10 +0.662
+  prior_fit_model              mean +1.046 iqm +1.049 worst10 +0.761
+  prior fit took 43s
+[v1_current/pervasive_confounding] simulated eval set in 1s
+  oracle                       mean +1.026 iqm +0.978 worst10 +0.761
+  behavior_cloning             mean +0.558 iqm +0.560 worst10 +0.303
+  tab_nominal                  mean +0.102 iqm +0.090 worst10 -0.391
+  tab_manski                   mean +0.595 iqm +0.589 worst10 +0.358
+  tab_sharp                    mean +0.542 iqm +0.546 worst10 -0.054
+  tab_sharp_lcb                mean +0.769 iqm +0.770 worst10 +0.440
+  tab_partition                mean +0.728 iqm +0.699 worst10 +0.380
+  tab_partition_lcb            mean +0.822 iqm +0.794 worst10 +0.540
+  tab_partition_lcb_k1         mean +0.799 iqm +0.785 worst10 +0.522
+  tab_hurwicz25                mean +0.594 iqm +0.552 worst10 +0.269
+  tab_hurwicz_partition25      mean +0.701 iqm +0.669 worst10 +0.402
+  tab_hurwicz_partition50      mean +0.602 iqm +0.573 worst10 +0.292
+  hand_decode                  mean +0.657 iqm +0.654 worst10 +0.227
+  prior_fit_policy             mean +0.839 iqm +0.810 worst10 +0.572
+  prior_fit_model              mean +0.900 iqm +0.880 worst10 +0.616
+  prior fit took 49s
+[v3a/confounded_expert_demos] simulated eval set in 2s
+  oracle                       mean +1.695 iqm +1.686 worst10 +1.177
+  behavior_cloning             mean +1.312 iqm +1.285 worst10 +0.913
+  tab_nominal                  mean +1.299 iqm +1.324 worst10 +0.476
+  tab_manski                   mean +1.321 iqm +1.316 worst10 +0.779
+  tab_sharp                    mean +1.466 iqm +1.445 worst10 +0.893
+  tab_sharp_lcb                mean +1.502 iqm +1.480 worst10 +1.014
+  tab_partition                mean +1.647 iqm +1.638 worst10 +1.155
+  tab_partition_lcb            mean +1.641 iqm +1.631 worst10 +1.155
+  tab_partition_lcb_k1         mean +1.645 iqm +1.635 worst10 +1.155
+  tab_hurwicz25                mean +1.586 iqm +1.563 worst10 +1.072
+  tab_hurwicz_partition25      mean +1.639 iqm +1.639 worst10 +1.148
+  tab_hurwicz_partition50      mean +1.556 iqm +1.572 worst10 +0.872
+  hand_decode                  mean +1.378 iqm +1.374 worst10 +0.550
+  prior_fit_policy             mean +1.635 iqm +1.613 worst10 +1.150
+  prior_fit_model              mean +1.665 iqm +1.654 worst10 +1.144
+  prior fit took 78s
+  causal_dqn                   mean +1.450 iqm +1.450 worst10 +1.001
+  causal_dqn took 97s
+  conf_dqn                     mean +1.292 iqm +1.272 worst10 +0.692
+  conf_dqn took 79s
+[v3a/pervasive_confounding] simulated eval set in 3s
+  oracle                       mean +1.388 iqm +1.361 worst10 +0.944
+  behavior_cloning             mean +1.107 iqm +1.095 worst10 +0.647
+  tab_nominal                  mean +0.938 iqm +0.910 worst10 +0.275
+  tab_manski                   mean +1.051 iqm +1.014 worst10 +0.580
+  tab_sharp                    mean +1.144 iqm +1.128 worst10 +0.497
+  tab_sharp_lcb                mean +1.200 iqm +1.176 worst10 +0.609
+  tab_partition                mean +1.308 iqm +1.291 worst10 +0.839
+  tab_partition_lcb            mean +1.294 iqm +1.270 worst10 +0.844
+  tab_partition_lcb_k1         mean +1.305 iqm +1.287 worst10 +0.839
+  tab_hurwicz25                mean +1.245 iqm +1.237 worst10 +0.671
+  tab_hurwicz_partition25      mean +1.308 iqm +1.282 worst10 +0.743
+  tab_hurwicz_partition50      mean +1.203 iqm +1.185 worst10 +0.531
+  hand_decode                  mean +1.052 iqm +1.026 worst10 +0.368
+  prior_fit_policy             mean +1.281 iqm +1.253 worst10 +0.832
+  prior_fit_model              mean +1.342 iqm +1.305 worst10 +0.899
+  prior fit took 77s
+  causal_dqn                   mean +1.191 iqm +1.169 worst10 +0.734
+  causal_dqn took 97s
+torch 2.12.0+cu130 cuda True numpy 2.4.6
+torch 2.12.0+cu130 cuda True n_sim 512
+[v1_current/confounded_expert_demos] simulated eval set in 1s
+  oracle                       mean +1.145 iqm +1.133 worst10 +0.942
+  behavior_cloning             mean +0.685 iqm +0.698 worst10 +0.410
+  tab_nominal                  mean +0.248 iqm +0.243 worst10 -0.157
+  tab_manski                   mean +0.715 iqm +0.742 worst10 +0.342
+  tab_sharp                    mean +0.828 iqm +0.837 worst10 +0.432
+  tab_sharp_lcb                mean +0.950 iqm +0.945 worst10 +0.654
+  tab_partition                mean +0.971 iqm +0.969 worst10 +0.654
+  tab_partition_lcb            mean +0.981 iqm +0.975 worst10 +0.720
+  tab_partition_lcb_k1         mean +0.997 iqm +0.993 worst10 +0.722
+  tab_hurwicz25                mean +0.862 iqm +0.856 worst10 +0.487
+  tab_hurwicz_partition25      mean +0.944 iqm +0.933 worst10 +0.634
+  tab_hurwicz_partition50      mean +0.829 iqm +0.835 worst10 +0.490
+  hand_decode                  mean +0.926 iqm +0.913 worst10 +0.595
+  prior_fit_policy             mean +0.992 iqm +0.999 worst10 +0.662
+  prior_fit_model              mean +1.046 iqm +1.049 worst10 +0.761
+  prior fit took 57s
+[v1_current/pervasive_confounding] simulated eval set in 1s
+  oracle                       mean +1.026 iqm +0.978 worst10 +0.761
+  behavior_cloning             mean +0.558 iqm +0.560 worst10 +0.303
+  tab_nominal                  mean +0.102 iqm +0.090 worst10 -0.391
+  tab_manski                   mean +0.595 iqm +0.589 worst10 +0.358
+  tab_sharp                    mean +0.542 iqm +0.546 worst10 -0.054
+  tab_sharp_lcb                mean +0.769 iqm +0.770 worst10 +0.440
+  tab_partition                mean +0.728 iqm +0.699 worst10 +0.380
+  tab_partition_lcb            mean +0.822 iqm +0.794 worst10 +0.540
+  tab_partition_lcb_k1         mean +0.799 iqm +0.785 worst10 +0.522
+  tab_hurwicz25                mean +0.594 iqm +0.552 worst10 +0.269
+  tab_hurwicz_partition25      mean +0.701 iqm +0.669 worst10 +0.402
+  tab_hurwicz_partition50      mean +0.602 iqm +0.573 worst10 +0.292
+  hand_decode                  mean +0.657 iqm +0.654 worst10 +0.227
+  prior_fit_policy             mean +0.839 iqm +0.810 worst10 +0.572
+  prior_fit_model              mean +0.900 iqm +0.880 worst10 +0.616
+  prior fit took 49s
+[v3a/confounded_expert_demos] simulated eval set in 2s
+  oracle                       mean +1.695 iqm +1.686 worst10 +1.177
+  behavior_cloning             mean +1.312 iqm +1.285 worst10 +0.913
+  tab_nominal                  mean +1.299 iqm +1.324 worst10 +0.476
+  tab_manski                   mean +1.321 iqm +1.316 worst10 +0.779
+  tab_sharp                    mean +1.466 iqm +1.445 worst10 +0.893
+  tab_sharp_lcb                mean +1.502 iqm +1.480 worst10 +1.014
+  tab_partition                mean +1.647 iqm +1.638 worst10 +1.155
+  tab_partition_lcb            mean +1.641 iqm +1.631 worst10 +1.155
+  tab_partition_lcb_k1         mean +1.645 iqm +1.635 worst10 +1.155
+  tab_hurwicz25                mean +1.586 iqm +1.563 worst10 +1.072
+  tab_hurwicz_partition25      mean +1.639 iqm +1.639 worst10 +1.148
+  tab_hurwicz_partition50      mean +1.556 iqm +1.572 worst10 +0.872
+  hand_decode                  mean +1.378 iqm +1.374 worst10 +0.550
+  prior_fit_policy             mean +1.635 iqm +1.613 worst10 +1.150
+  prior_fit_model              mean +1.665 iqm +1.654 worst10 +1.144
+  prior fit took 77s
+  causal_dqn                   mean +1.450 iqm +1.450 worst10 +1.001
+  causal_dqn took 97s
+  conf_dqn                     mean +1.292 iqm +1.272 worst10 +0.692
+  conf_dqn took 79s
+[v3a/pervasive_confounding] simulated eval set in 3s
+  oracle                       mean +1.388 iqm +1.361 worst10 +0.944
+  behavior_cloning             mean +1.107 iqm +1.095 worst10 +0.647
+  tab_nominal                  mean +0.938 iqm +0.910 worst10 +0.275
+  tab_manski                   mean +1.051 iqm +1.014 worst10 +0.580
+  tab_sharp                    mean +1.144 iqm +1.128 worst10 +0.497
+  tab_sharp_lcb                mean +1.200 iqm +1.176 worst10 +0.609
+  tab_partition                mean +1.308 iqm +1.291 worst10 +0.839
+  tab_partition_lcb            mean +1.294 iqm +1.270 worst10 +0.844
+  tab_partition_lcb_k1         mean +1.305 iqm +1.287 worst10 +0.839
+  tab_hurwicz25                mean +1.245 iqm +1.237 worst10 +0.671
+  tab_hurwicz_partition25      mean +1.308 iqm +1.282 worst10 +0.743
+  tab_hurwicz_partition50      mean +1.203 iqm +1.185 worst10 +0.531
+  hand_decode                  mean +1.052 iqm +1.026 worst10 +0.368
+  prior_fit_policy             mean +1.281 iqm +1.253 worst10 +0.832
+  prior_fit_model              mean +1.342 iqm +1.305 worst10 +0.899
+  prior fit took 77s
+torch 2.12.0+cu130 cuda True numpy 2.4.6
+torch 2.12.0+cu130 cuda True n_sim 512
+[v1_current/confounded_expert_demos] simulated eval set in 1s
+  oracle                       mean +1.145 iqm +1.133 worst10 +0.942
+  behavior_cloning             mean +0.685 iqm +0.698 worst10 +0.410
+  tab_nominal                  mean +0.248 iqm +0.243 worst10 -0.157
+  tab_manski                   mean +0.715 iqm +0.742 worst10 +0.342
+  tab_sharp                    mean +0.828 iqm +0.837 worst10 +0.432
+  tab_sharp_lcb                mean +0.950 iqm +0.945 worst10 +0.654
+  tab_partition                mean +0.971 iqm +0.969 worst10 +0.654
+  tab_partition_lcb            mean +0.981 iqm +0.975 worst10 +0.720
+  tab_partition_lcb_k1         mean +0.997 iqm +0.993 worst10 +0.722
+  tab_hurwicz25                mean +0.862 iqm +0.856 worst10 +0.487
+  tab_hurwicz_partition25      mean +0.944 iqm +0.933 worst10 +0.634
+  tab_hurwicz_partition50      mean +0.829 iqm +0.835 worst10 +0.490
+  hand_decode                  mean +0.926 iqm +0.913 worst10 +0.595
+  prior_fit_policy             mean +0.992 iqm +0.999 worst10 +0.662
+  prior_fit_model              mean +1.046 iqm +1.049 worst10 +0.761
+  prior fit took 44s
+[v1_current/pervasive_confounding] simulated eval set in 1s
+  oracle                       mean +1.026 iqm +0.978 worst10 +0.761
+  behavior_cloning             mean +0.558 iqm +0.560 worst10 +0.303
+  tab_nominal                  mean +0.102 iqm +0.090 worst10 -0.391
+  tab_manski                   mean +0.595 iqm +0.589 worst10 +0.358
+  tab_sharp                    mean +0.542 iqm +0.546 worst10 -0.054
+  tab_sharp_lcb                mean +0.769 iqm +0.770 worst10 +0.440
+  tab_partition                mean +0.728 iqm +0.699 worst10 +0.380
+  tab_partition_lcb            mean +0.822 iqm +0.794 worst10 +0.540
+  tab_partition_lcb_k1         mean +0.799 iqm +0.785 worst10 +0.522
+  tab_hurwicz25                mean +0.594 iqm +0.552 worst10 +0.269
+  tab_hurwicz_partition25      mean +0.701 iqm +0.669 worst10 +0.402
+  tab_hurwicz_partition50      mean +0.602 iqm +0.573 worst10 +0.292
+  hand_decode                  mean +0.657 iqm +0.654 worst10 +0.227
+  prior_fit_policy             mean +0.839 iqm +0.810 worst10 +0.572
+  prior_fit_model              mean +0.900 iqm +0.880 worst10 +0.616
+  prior fit took 49s
+[v3a/confounded_expert_demos] simulated eval set in 2s
+  oracle                       mean +1.695 iqm +1.686 worst10 +1.177
+  behavior_cloning             mean +1.312 iqm +1.285 worst10 +0.913
+  tab_nominal                  mean +1.299 iqm +1.324 worst10 +0.476
+  tab_manski                   mean +1.321 iqm +1.316 worst10 +0.779
+  tab_sharp                    mean +1.466 iqm +1.445 worst10 +0.893
+  tab_sharp_lcb                mean +1.502 iqm +1.480 worst10 +1.014
+  tab_partition                mean +1.647 iqm +1.638 worst10 +1.155
+  tab_partition_lcb            mean +1.641 iqm +1.631 worst10 +1.155
+  tab_partition_lcb_k1         mean +1.645 iqm +1.635 worst10 +1.155
+  tab_hurwicz25                mean +1.586 iqm +1.563 worst10 +1.072
+  tab_hurwicz_partition25      mean +1.639 iqm +1.639 worst10 +1.148
+  tab_hurwicz_partition50      mean +1.556 iqm +1.572 worst10 +0.872
+  hand_decode                  mean +1.378 iqm +1.374 worst10 +0.550
+  prior_fit_policy             mean +1.635 iqm +1.613 worst10 +1.150
+  prior_fit_model              mean +1.665 iqm +1.654 worst10 +1.144
+  prior fit took 77s
+  causal_dqn                   mean +1.450 iqm +1.450 worst10 +1.001
+  causal_dqn took 97s
+  conf_dqn                     mean +1.292 iqm +1.272 worst10 +0.692
+  conf_dqn took 74s
+[v3a/pervasive_confounding] simulated eval set in 3s
+  oracle                       mean +1.388 iqm +1.361 worst10 +0.944
+  behavior_cloning             mean +1.107 iqm +1.095 worst10 +0.647
+  tab_nominal                  mean +0.938 iqm +0.910 worst10 +0.275
+  tab_manski                   mean +1.051 iqm +1.014 worst10 +0.580
+  tab_sharp                    mean +1.144 iqm +1.128 worst10 +0.497
+  tab_sharp_lcb                mean +1.200 iqm +1.176 worst10 +0.609
+  tab_partition                mean +1.308 iqm +1.291 worst10 +0.839
+  tab_partition_lcb            mean +1.294 iqm +1.270 worst10 +0.844
+  tab_partition_lcb_k1         mean +1.305 iqm +1.287 worst10 +0.839
+  tab_hurwicz25                mean +1.245 iqm +1.237 worst10 +0.671
+  tab_hurwicz_partition25      mean +1.308 iqm +1.282 worst10 +0.743
+  tab_hurwicz_partition50      mean +1.203 iqm +1.185 worst10 +0.531
+  hand_decode                  mean +1.052 iqm +1.026 worst10 +0.368
+  prior_fit_policy             mean +1.281 iqm +1.253 worst10 +0.832
+  prior_fit_model              mean +1.342 iqm +1.305 worst10 +0.899
+  prior fit took 78s
+  causal_dqn                   mean +1.191 iqm +1.169 worst10 +0.734
+  causal_dqn took 97s
+  conf_dqn                     mean +0.956 iqm +0.939 worst10 +0.311
+  conf_dqn took 79s
+[v3b_weak_transitions/confounded_expert_demos] simulated eval set in 3s
+  oracle                       mean +1.687 iqm +1.605 worst10 +1.286
+  behavior_cloning             mean +1.330 iqm +1.280 worst10 +0.818
+  tab_nominal                  mean +1.298 iqm +1.241 worst10 +0.511
+  tab_manski                   mean +1.352 iqm +1.296 worst10 +0.991
+  tab_sharp                    mean +1.463 iqm +1.399 worst10 +0.998
+  tab_sharp_lcb                mean +1.486 iqm +1.396 worst10 +1.057
+  tab_partition                mean +1.611 iqm +1.526 worst10 +1.220
+  tab_partition_lcb            mean +1.594 iqm +1.515 worst10 +1.224
+  tab_partition_lcb_k1         mean +1.609 iqm +1.522 worst10 +1.223
+  tab_hurwicz25                mean +1.571 iqm +1.486 worst10 +1.194
+  tab_hurwicz_partition25      mean +1.621 iqm +1.530 worst10 +1.206
+  tab_hurwicz_partition50      mean +1.536 iqm +1.461 worst10 +1.113
+  hand_decode                  mean +1.419 iqm +1.334 worst10 +0.867
+  prior_fit_policy             mean +1.608 iqm +1.528 worst10 +1.219
+  prior_fit_model              mean +1.645 iqm +1.556 worst10 +1.230
+  prior fit took 78s
+  causal_dqn                   mean +1.453 iqm +1.372 worst10 +1.126
+  causal_dqn took 97s
+  conf_dqn                     mean +1.303 iqm +1.246 worst10 +0.560
+  conf_dqn took 78s
+[v3b_weak_transitions/pervasive_confounding] simulated eval set in 2s
+  oracle                       mean +1.445 iqm +1.375 worst10 +1.096
+  behavior_cloning             mean +1.070 iqm +1.059 worst10 +0.804
+  tab_nominal                  mean +1.002 iqm +0.969 worst10 +0.467
+  tab_manski                   mean +1.069 iqm +1.079 worst10 +0.584
+  tab_sharp                    mean +1.136 iqm +1.113 worst10 +0.711
+  tab_sharp_lcb                mean +1.222 iqm +1.202 worst10 +0.889
+  tab_partition                mean +1.348 iqm +1.302 worst10 +1.045
+  tab_partition_lcb            mean +1.344 iqm +1.294 worst10 +1.034
+  tab_partition_lcb_k1         mean +1.348 iqm +1.301 worst10 +1.035
+  tab_hurwicz25                mean +1.259 iqm +1.223 worst10 +0.921
+  tab_hurwicz_partition25      mean +1.368 iqm +1.304 worst10 +1.039
+  tab_hurwicz_partition50      mean +1.267 iqm +1.208 worst10 +0.907
+  hand_decode                  mean +1.094 iqm +1.080 worst10 +0.502
+  prior_fit_policy             mean +1.335 iqm +1.282 worst10 +1.039
+  prior_fit_model              mean +1.387 iqm +1.325 worst10 +1.035
+  prior fit took 77s
+  causal_dqn                   mean +1.172 iqm +1.138 worst10 +0.972
+  causal_dqn took 97s
+  conf_dqn                     mean +1.003 iqm +1.011 worst10 +0.439
+  conf_dqn took 78s
+[v3c_wide_favourable/confounded_expert_demos] simulated eval set in 3s
+  oracle                       mean +1.447 iqm +1.400 worst10 +1.050
+  behavior_cloning             mean +1.114 iqm +1.135 worst10 +0.695
+  tab_nominal                  mean +1.051 iqm +0.985 worst10 +0.385
+  tab_manski                   mean +1.130 iqm +1.126 worst10 +0.749
+  tab_sharp                    mean +1.153 iqm +1.085 worst10 +0.811
+  tab_sharp_lcb                mean +1.186 iqm +1.127 worst10 +0.770
+  tab_partition                mean +1.364 iqm +1.321 worst10 +0.975
+  tab_partition_lcb            mean +1.362 iqm +1.317 worst10 +0.974
+  tab_partition_lcb_k1         mean +1.365 iqm +1.324 worst10 +0.973
+  tab_hurwicz25                mean +1.273 iqm +1.236 worst10 +0.845
+  tab_hurwicz_partition25      mean +1.367 iqm +1.306 worst10 +0.977
+  tab_hurwicz_partition50      mean +1.311 iqm +1.248 worst10 +0.892
+  hand_decode                  mean +1.175 iqm +1.092 worst10 +0.755
+  prior_fit_policy             mean +1.378 iqm +1.337 worst10 +0.937
+  prior_fit_model              mean +1.385 iqm +1.333 worst10 +0.979
+  prior fit took 78s
+  causal_dqn                   mean +1.200 iqm +1.184 worst10 +0.819
+  causal_dqn took 97s
+  conf_dqn                     mean +1.005 iqm +0.922 worst10 +0.578
+  conf_dqn took 78s
+[v3c_wide_favourable/pervasive_confounding] simulated eval set in 2s
+  oracle                       mean +1.258 iqm +1.219 worst10 +0.984
+  behavior_cloning             mean +0.931 iqm +0.918 worst10 +0.625
+  tab_nominal                  mean +0.799 iqm +0.776 worst10 +0.351
+  tab_manski                   mean +0.909 iqm +0.902 worst10 +0.630
+  tab_sharp                    mean +0.915 iqm +0.912 worst10 +0.645
+  tab_sharp_lcb                mean +0.974 iqm +0.957 worst10 +0.724
+  tab_partition                mean +1.137 iqm +1.105 worst10 +0.855
+  tab_partition_lcb            mean +1.135 iqm +1.106 worst10 +0.866
+  tab_partition_lcb_k1         mean +1.141 iqm +1.111 worst10 +0.866
+  tab_hurwicz25                mean +1.040 iqm +1.037 worst10 +0.683
+  tab_hurwicz_partition25      mean +1.160 iqm +1.124 worst10 +0.859
+  tab_hurwicz_partition50      mean +1.099 iqm +1.080 worst10 +0.788
+  hand_decode                  mean +0.951 iqm +0.936 worst10 +0.537
+  prior_fit_policy             mean +1.121 iqm +1.110 worst10 +0.812
+  prior_fit_model              mean +1.141 iqm +1.121 worst10 +0.824
+  prior fit took 78s
+  causal_dqn                   mean +1.014 iqm +0.993 worst10 +0.785
+  causal_dqn took 97s
+  conf_dqn                     mean +0.791 iqm +0.788 worst10 +0.348
+  conf_dqn took 78s
+
+=== summary (mean / iqm / worst decile) ===
+v1_current/confounded_expert_demos {'best_mean': 1.1447910734449047, 'worst_mean': -1.092184503383968}
+  oracle                       +1.145 / +1.133 / +0.942   paired +0.429 ± 0.033
+  behavior_cloning             +0.685 / +0.698 / +0.410   paired -0.030 ± 0.028
+  tab_nominal                  +0.248 / +0.243 / -0.157   paired -0.468 ± 0.047
+  tab_manski                   +0.715 / +0.742 / +0.342   paired +0.000 ± 0.000
+  tab_sharp                    +0.828 / +0.837 / +0.432   paired +0.113 ± 0.045
+  tab_sharp_lcb                +0.950 / +0.945 / +0.654   paired +0.234 ± 0.039
+  tab_partition                +0.971 / +0.969 / +0.654   paired +0.256 ± 0.039
+  tab_partition_lcb            +0.981 / +0.975 / +0.720   paired +0.266 ± 0.036
+  tab_partition_lcb_k1         +0.997 / +0.993 / +0.722   paired +0.282 ± 0.037
+  tab_hurwicz25                +0.862 / +0.856 / +0.487   paired +0.147 ± 0.043
+  tab_hurwicz_partition25      +0.944 / +0.933 / +0.634   paired +0.229 ± 0.038
+  tab_hurwicz_partition50      +0.829 / +0.835 / +0.490   paired +0.114 ± 0.039
+  hand_decode                  +0.926 / +0.913 / +0.595   paired +0.211 ± 0.038
+  prior_fit_policy             +0.992 / +0.999 / +0.662   paired +0.276 ± 0.034
+  prior_fit_model              +1.046 / +1.049 / +0.761   paired +0.330 ± 0.033
+v1_current/pervasive_confounding {'best_mean': 1.0261658058110374, 'worst_mean': -0.9218209122657338}
+  oracle                       +1.026 / +0.978 / +0.761   paired +0.431 ± 0.035
+  behavior_cloning             +0.558 / +0.560 / +0.303   paired -0.038 ± 0.021
+  tab_nominal                  +0.102 / +0.090 / -0.391   paired -0.494 ± 0.053
+  tab_manski                   +0.595 / +0.589 / +0.358   paired +0.000 ± 0.000
+  tab_sharp                    +0.542 / +0.546 / -0.054   paired -0.053 ± 0.052
+  tab_sharp_lcb                +0.769 / +0.770 / +0.440   paired +0.174 ± 0.034
+  tab_partition                +0.728 / +0.699 / +0.380   paired +0.133 ± 0.037
+  tab_partition_lcb            +0.822 / +0.794 / +0.540   paired +0.227 ± 0.031
+  tab_partition_lcb_k1         +0.799 / +0.785 / +0.522   paired +0.204 ± 0.030
+  tab_hurwicz25                +0.594 / +0.552 / +0.269   paired -0.002 ± 0.037
+  tab_hurwicz_partition25      +0.701 / +0.669 / +0.402   paired +0.106 ± 0.033
+  tab_hurwicz_partition50      +0.602 / +0.573 / +0.292   paired +0.007 ± 0.036
+  hand_decode                  +0.657 / +0.654 / +0.227   paired +0.062 ± 0.035
+  prior_fit_policy             +0.839 / +0.810 / +0.572   paired +0.244 ± 0.033
+  prior_fit_model              +0.900 / +0.880 / +0.616   paired +0.304 ± 0.031
+v3a/confounded_expert_demos {'best_mean': 1.6946029211484677, 'worst_mean': -1.7425423611370683}
+  oracle                       +1.695 / +1.686 / +1.177   paired +0.244 ± 0.034
+  behavior_cloning             +1.312 / +1.285 / +0.913   paired -0.138 ± 0.037
+  tab_nominal                  +1.299 / +1.324 / +0.476   paired -0.151 ± 0.051
+  tab_manski                   +1.321 / +1.316 / +0.779   paired -0.129 ± 0.037
+  tab_sharp                    +1.466 / +1.445 / +0.893   paired +0.016 ± 0.035
+  tab_sharp_lcb                +1.502 / +1.480 / +1.014   paired +0.052 ± 0.033
+  tab_partition                +1.647 / +1.638 / +1.155   paired +0.197 ± 0.031
+  tab_partition_lcb            +1.641 / +1.631 / +1.155   paired +0.191 ± 0.031
+  tab_partition_lcb_k1         +1.645 / +1.635 / +1.155   paired +0.194 ± 0.031
+  tab_hurwicz25                +1.586 / +1.563 / +1.072   paired +0.135 ± 0.034
+  tab_hurwicz_partition25      +1.639 / +1.639 / +1.148   paired +0.189 ± 0.032
+  tab_hurwicz_partition50      +1.556 / +1.572 / +0.872   paired +0.106 ± 0.042
+  hand_decode                  +1.378 / +1.374 / +0.550   paired -0.072 ± 0.052
+  prior_fit_policy             +1.635 / +1.613 / +1.150   paired +0.184 ± 0.034
+  prior_fit_model              +1.665 / +1.654 / +1.144   paired +0.215 ± 0.033
+  causal_dqn                   +1.450 / +1.450 / +1.001   paired +0.000 ± 0.000
+  conf_dqn                     +1.292 / +1.272 / +0.692   paired -0.158 ± 0.044
+v3a/pervasive_confounding {'best_mean': 1.3879222774502082, 'worst_mean': -1.3707191059787855}
+  oracle                       +1.388 / +1.361 / +0.944   paired +0.197 ± 0.023
+  behavior_cloning             +1.107 / +1.095 / +0.647   paired -0.084 ± 0.023
+  tab_nominal                  +0.938 / +0.910 / +0.275   paired -0.253 ± 0.042
+  tab_manski                   +1.051 / +1.014 / +0.580   paired -0.140 ± 0.027
+  tab_sharp                    +1.144 / +1.128 / +0.497   paired -0.048 ± 0.033
+  tab_sharp_lcb                +1.200 / +1.176 / +0.609   paired +0.008 ± 0.029
+  tab_partition                +1.308 / +1.291 / +0.839   paired +0.116 ± 0.027
+  tab_partition_lcb            +1.294 / +1.270 / +0.844   paired +0.103 ± 0.029
+  tab_partition_lcb_k1         +1.305 / +1.287 / +0.839   paired +0.113 ± 0.027
+  tab_hurwicz25                +1.245 / +1.237 / +0.671   paired +0.054 ± 0.030
+  tab_hurwicz_partition25      +1.308 / +1.282 / +0.743   paired +0.117 ± 0.023
+  tab_hurwicz_partition50      +1.203 / +1.185 / +0.531   paired +0.011 ± 0.029
+  hand_decode                  +1.052 / +1.026 / +0.368   paired -0.140 ± 0.043
+  prior_fit_policy             +1.281 / +1.253 / +0.832   paired +0.089 ± 0.025
+  prior_fit_model              +1.342 / +1.305 / +0.899   paired +0.151 ± 0.023
+  causal_dqn                   +1.191 / +1.169 / +0.734   paired +0.000 ± 0.000
+  conf_dqn                     +0.956 / +0.939 / +0.311   paired -0.236 ± 0.042
+v3b_weak_transitions/confounded_expert_demos {'best_mean': 1.6871515259884644, 'worst_mean': -1.7502171199225032}
+  oracle                       +1.687 / +1.605 / +1.286   paired +0.235 ± 0.039
+  behavior_cloning             +1.330 / +1.280 / +0.818   paired -0.123 ± 0.031
+  tab_nominal                  +1.298 / +1.241 / +0.511   paired -0.154 ± 0.052
+  tab_manski                   +1.352 / +1.296 / +0.991   paired -0.100 ± 0.025
+  tab_sharp                    +1.463 / +1.399 / +0.998   paired +0.011 ± 0.039
+  tab_sharp_lcb                +1.486 / +1.396 / +1.057   paired +0.033 ± 0.039
+  tab_partition                +1.611 / +1.526 / +1.220   paired +0.159 ± 0.033
+  tab_partition_lcb            +1.594 / +1.515 / +1.224   paired +0.142 ± 0.029
+  tab_partition_lcb_k1         +1.609 / +1.522 / +1.223   paired +0.156 ± 0.032
+  tab_hurwicz25                +1.571 / +1.486 / +1.194   paired +0.118 ± 0.037
+  tab_hurwicz_partition25      +1.621 / +1.530 / +1.206   paired +0.169 ± 0.037
+  tab_hurwicz_partition50      +1.536 / +1.461 / +1.113   paired +0.083 ± 0.037
+  hand_decode                  +1.419 / +1.334 / +0.867   paired -0.034 ± 0.042
+  prior_fit_policy             +1.608 / +1.528 / +1.219   paired +0.155 ± 0.032
+  prior_fit_model              +1.645 / +1.556 / +1.230   paired +0.193 ± 0.036
+  causal_dqn                   +1.453 / +1.372 / +1.126   paired +0.000 ± 0.000
+  conf_dqn                     +1.303 / +1.246 / +0.560   paired -0.149 ± 0.051
+v3b_weak_transitions/pervasive_confounding {'best_mean': 1.4445835712572994, 'worst_mean': -1.466544997653114}
+  oracle                       +1.445 / +1.375 / +1.096   paired +0.273 ± 0.042
+  behavior_cloning             +1.070 / +1.059 / +0.804   paired -0.101 ± 0.017
+  tab_nominal                  +1.002 / +0.969 / +0.467   paired -0.170 ± 0.048
+  tab_manski                   +1.069 / +1.079 / +0.584   paired -0.103 ± 0.036
+  tab_sharp                    +1.136 / +1.113 / +0.711   paired -0.035 ± 0.039
+  tab_sharp_lcb                +1.222 / +1.202 / +0.889   paired +0.050 ± 0.032
+  tab_partition                +1.348 / +1.302 / +1.045   paired +0.177 ± 0.033
+  tab_partition_lcb            +1.344 / +1.294 / +1.034   paired +0.172 ± 0.034
+  tab_partition_lcb_k1         +1.348 / +1.301 / +1.035   paired +0.176 ± 0.034
+  tab_hurwicz25                +1.259 / +1.223 / +0.921   paired +0.087 ± 0.035
+  tab_hurwicz_partition25      +1.368 / +1.304 / +1.039   paired +0.196 ± 0.038
+  tab_hurwicz_partition50      +1.267 / +1.208 / +0.907   paired +0.095 ± 0.044
+  hand_decode                  +1.094 / +1.080 / +0.502   paired -0.078 ± 0.051
+  prior_fit_policy             +1.335 / +1.282 / +1.039   paired +0.163 ± 0.031
+  prior_fit_model              +1.387 / +1.325 / +1.035   paired +0.215 ± 0.033
+  causal_dqn                   +1.172 / +1.138 / +0.972   paired +0.000 ± 0.000
+  conf_dqn                     +1.003 / +1.011 / +0.439   paired -0.169 ± 0.048
+v3c_wide_favourable/confounded_expert_demos {'best_mean': 1.4471247796533744, 'worst_mean': -1.5463761483881646}
+  oracle                       +1.447 / +1.400 / +1.050   paired +0.247 ± 0.052
+  behavior_cloning             +1.114 / +1.135 / +0.695   paired -0.086 ± 0.023
+  tab_nominal                  +1.051 / +0.985 / +0.385   paired -0.149 ± 0.068
+  tab_manski                   +1.130 / +1.126 / +0.749   paired -0.070 ± 0.020
+  tab_sharp                    +1.153 / +1.085 / +0.811   paired -0.047 ± 0.056
+  tab_sharp_lcb                +1.186 / +1.127 / +0.770   paired -0.014 ± 0.055
+  tab_partition                +1.364 / +1.321 / +0.975   paired +0.163 ± 0.051
+  tab_partition_lcb            +1.362 / +1.317 / +0.974   paired +0.161 ± 0.051
+  tab_partition_lcb_k1         +1.365 / +1.324 / +0.973   paired +0.165 ± 0.051
+  tab_hurwicz25                +1.273 / +1.236 / +0.845   paired +0.072 ± 0.054
+  tab_hurwicz_partition25      +1.367 / +1.306 / +0.977   paired +0.167 ± 0.055
+  tab_hurwicz_partition50      +1.311 / +1.248 / +0.892   paired +0.111 ± 0.058
+  hand_decode                  +1.175 / +1.092 / +0.755   paired -0.025 ± 0.053
+  prior_fit_policy             +1.378 / +1.337 / +0.937   paired +0.178 ± 0.054
+  prior_fit_model              +1.385 / +1.333 / +0.979   paired +0.185 ± 0.054
+  causal_dqn                   +1.200 / +1.184 / +0.819   paired +0.000 ± 0.000
+  conf_dqn                     +1.005 / +0.922 / +0.578   paired -0.195 ± 0.058
+v3c_wide_favourable/pervasive_confounding {'best_mean': 1.2584106890814653, 'worst_mean': -1.2749744413064803}
+  oracle                       +1.258 / +1.219 / +0.984   paired +0.245 ± 0.022
+  behavior_cloning             +0.931 / +0.918 / +0.625   paired -0.082 ± 0.023
+  tab_nominal                  +0.799 / +0.776 / +0.351   paired -0.215 ± 0.035
+  tab_manski                   +0.909 / +0.902 / +0.630   paired -0.105 ± 0.026
+  tab_sharp                    +0.915 / +0.912 / +0.645   paired -0.098 ± 0.025
+  tab_sharp_lcb                +0.974 / +0.957 / +0.724   paired -0.040 ± 0.024
+  tab_partition                +1.137 / +1.105 / +0.855   paired +0.124 ± 0.023
+  tab_partition_lcb            +1.135 / +1.106 / +0.866   paired +0.121 ± 0.022
+  tab_partition_lcb_k1         +1.141 / +1.111 / +0.866   paired +0.127 ± 0.022
+  tab_hurwicz25                +1.040 / +1.037 / +0.683   paired +0.027 ± 0.021
+  tab_hurwicz_partition25      +1.160 / +1.124 / +0.859   paired +0.146 ± 0.021
+  tab_hurwicz_partition50      +1.099 / +1.080 / +0.788   paired +0.086 ± 0.022
+  hand_decode                  +0.951 / +0.936 / +0.537   paired -0.063 ± 0.035
+  prior_fit_policy             +1.121 / +1.110 / +0.812   paired +0.108 ± 0.022
+  prior_fit_model              +1.141 / +1.121 / +0.824   paired +0.127 ± 0.019
+  causal_dqn                   +1.014 / +0.993 / +0.785   paired +0.000 ± 0.000
+  conf_dqn                     +0.791 / +0.788 / +0.348   paired -0.222 ± 0.036

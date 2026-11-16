@@ -47,9 +47,14 @@ def simulate(family, cfg, n: int, seed) -> tuple[list[dict], list[dict]]:
     return insts, logs
 
 
-def tabular_qs(logs: list[dict], S: int, A: int, eps: float, term: float) -> dict[str, np.ndarray]:
-    t = tabular.stack_logs(logs)
-    return {k: tabular.solve(t, S, A, eps, term, k) for k in FEATURE_KINDS}
+def tabular_qs(logs: list[dict], S: int, A: int, eps: float, term: float, chunk: int = 128) -> dict[str, np.ndarray]:
+    out: dict[str, list] = {k: [] for k in FEATURE_KINDS}
+    for i in range(0, len(logs), chunk):
+        t = tabular.stack_logs(logs[i:i + chunk])
+        for k in FEATURE_KINDS:
+            out[k].append(tabular.solve(t, S, A, eps, term, k))
+        del t
+    return {k: np.concatenate(v) for k, v in out.items()}
 
 
 def _group_tails(key, vals, alpha, n_sa, SA):
@@ -182,14 +187,11 @@ def plan_on_predicted_rewards(R: np.ndarray, log: dict, S: int, A: int, term: fl
     return [int(a) for a in (R + cont * P @ V).argmax(1)]
 
 
-def train_prior_fit(family, cfg, n_sim: int, seed, kinds=("policy", "model")) -> dict:
-    """Simulate from the public family and fit both predictors."""
-    S, A = cfg.n_states, cfg.n_actions
-    eps, term = cfg.logging_epsilon, cfg.termination_prob
-    insts, logs = simulate(family, cfg, n_sim, seed)
+def fit_from(envs: list[dict], logs: list[dict], S: int, A: int, eps: float, term: float,
+             kinds=("policy", "model")) -> dict:
+    """Fit the predictors on logged instances whose true dynamics are known."""
     qs = tabular_qs(logs, S, A, eps, term)
     X = dataset(logs, qs, S, A, eps)
-    envs = [tabular.env_from_instance(i) for i in insts]
     models = {}
     if "policy" in kinds:
         adv = np.stack([e["Qstar"] - e["Qstar"].max(1, keepdims=True) for e in envs])
@@ -198,6 +200,13 @@ def train_prior_fit(family, cfg, n_sim: int, seed, kinds=("policy", "model")) ->
         R = np.stack([e["Rsa"] for e in envs])
         models["model"] = fit(X, R, S, A, regret=False)
     return models
+
+
+def train_prior_fit(family, cfg, n_sim: int, seed, kinds=("policy", "model")) -> dict:
+    """Simulate from the public family and fit both predictors."""
+    insts, logs = simulate(family, cfg, n_sim, seed)
+    envs = [tabular.env_from_instance(i) for i in insts]
+    return fit_from(envs, logs, cfg.n_states, cfg.n_actions, cfg.logging_epsilon, cfg.termination_prob, kinds)
 
 
 def apply_prior_fit(models: dict, logs: list[dict], S: int, A: int, eps: float, term: float) -> dict[str, list]:

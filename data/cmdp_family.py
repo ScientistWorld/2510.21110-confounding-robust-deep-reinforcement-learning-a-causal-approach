@@ -71,7 +71,7 @@ class FamilyConfig:
     sensitivity_max: Range = (0.7, 0.9)                # per instance
     sensitivity_shape_a: Range = (0.7, 1.2)            # per instance
     sensitivity_shape_b: Range = (1.0, 1.8)            # per instance
-    favorable_threshold: Range = (0.3, 1.5)            # per (s, a)
+    favorable_threshold: Range = (-0.3, 1.0)           # per (s, a)
     response_sharpness: Range = (1.5, 6.0)             # per (s, a)
     reward_noise: Range = (0.05, 0.2)                  # uniform half-width, per instance
     # Transitions: a few candidate next states per (s, a); their logits react
@@ -368,7 +368,7 @@ def load_dataset(split: str, experiment: str, root: Path | str = DATA_DIR) -> di
 
 def env_record(instance_id: str, inst: dict) -> dict:
     """Serialise the true dynamics of one instance (kept with its evaluator)."""
-    r = lambda a: np.round(np.asarray(a, dtype=float), 12).tolist()  # noqa: E731
+    r = lambda a: np.round(np.asarray(a, dtype=float), 10).tolist()  # noqa: E731
     return {
         "id": instance_id,
         "context_probs": r(inst["context_probs"]),

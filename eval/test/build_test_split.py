@@ -21,28 +21,43 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
-SECRET_ENTROPY = 60516820836623623144672442943115842689
-N_INSTANCES = 32
+SECRET_ENTROPY = 24217207746181121126165528235288710488
+N_INSTANCES = 64
 REWARD_SCALE = 32000.0
 
 BASE = {
-    "n_states": 30, "n_contexts": 3, "n_actions": 4, "obs_dim": 16,
-    "termination_prob": 0.05, "demo_temperature": 0.10,
-    "opportunistic_gain": (0.6, 0.9), "opportunistic_loss": (0.6, 0.9),
-    "robust_mean": (-0.6, 0.6), "robust_context_sd": 0.15, "reward_noise": 0.10,
-    "n_next_candidates": 3, "transition_concentration": 0.5,
-    "n_transitions": 10_000, "min_demo_advantage": 1.0,
+    "n_states": 30, "n_actions": 4, "obs_dim": 16, "termination_prob": 0.05, "n_transitions": 30_000,
+    "n_contexts": (12, 32), "context_dim": 2, "context_concentration": (0.3, 3.0),
+    "reward_mean": (-0.3, 0.5), "sensitivity_max": (0.7, 0.9),
+    "favorable_threshold": (-0.3, 1.0), "response_sharpness": (1.5, 6.0), "reward_noise": (0.05, 0.2),
+    "n_next_candidates": 3, "transition_base_sd": 1.0, "transition_sensitivity_max": (2.0, 4.0),
+    "demo_temperature": (0.03, 0.3), "min_demo_advantage": 1.0,
 }
 EXPERIMENTS = {
-    "confounded_expert_demos": {**BASE, "logging_epsilon": 0.10, "demo_skill_noise": 0.60, "p_opportunistic": 0.40},
-    "pervasive_confounding": {**BASE, "logging_epsilon": 0.05, "demo_skill_noise": 0.70, "p_opportunistic": 0.55},
+    "confounded_expert_demos": {**BASE, "logging_epsilon": 0.10, "sensitivity_shape_a": (0.7, 1.2),
+                                "sensitivity_shape_b": (1.0, 1.8), "demo_skill_noise": (0.3, 0.7)},
+    "pervasive_confounding": {**BASE, "logging_epsilon": 0.05, "sensitivity_shape_a": (1.0, 1.8),
+                              "sensitivity_shape_b": (0.7, 1.2), "demo_skill_noise": (0.4, 0.8)},
 }
 
 
-def softmax(z):
-    z = z - z.max(axis=-1, keepdims=True)
+def softmax(z, axis=-1):
+    z = z - z.max(axis=axis, keepdims=True)
     e = np.exp(z)
-    return e / e.sum(axis=-1, keepdims=True)
+    return e / e.sum(axis=axis, keepdims=True)
+
+
+def unit(v):
+    return v / np.maximum(np.linalg.norm(v, axis=-1, keepdims=True), 1e-12)
+
+
+def draw(rng, r, log=False):
+    lo, hi = float(r[0]), float(r[1])
+    if lo == hi:
+        return lo
+    if log:
+        return float(np.exp(rng.uniform(np.log(lo), np.log(hi))))
+    return float(rng.uniform(lo, hi))
 
 
 def dense(cand, weights, S):
@@ -62,22 +77,40 @@ def value(Pu, reward, T, cont, probs):
 
 
 def make_instance(rng, c):
-    S, U, A = c["n_states"], c["n_contexts"], c["n_actions"]
+    S, A, D, C = c["n_states"], c["n_actions"], c["context_dim"], c["n_next_candidates"]
+    eps = c["logging_epsilon"]
     cont = 1.0 - c["termination_prob"]
+    hp = {
+        "n_contexts": int(rng.integers(int(c["n_contexts"][0]), int(c["n_contexts"][1]) + 1)),
+        "context_concentration": draw(rng, c["context_concentration"], log=True),
+        "sensitivity_max": draw(rng, c["sensitivity_max"]),
+        "sensitivity_shape_a": draw(rng, c["sensitivity_shape_a"]),
+        "sensitivity_shape_b": draw(rng, c["sensitivity_shape_b"]),
+        "reward_noise": draw(rng, c["reward_noise"]),
+        "transition_sensitivity_max": draw(rng, c["transition_sensitivity_max"]),
+        "demo_temperature": draw(rng, c["demo_temperature"], log=True),
+        "demo_skill_noise": draw(rng, c["demo_skill_noise"]),
+    }
+    U = hp["n_contexts"]
     while True:
-        Pu = rng.dirichlet(np.ones(U), size=S)
-        opp = rng.random((S, A)) < c["p_opportunistic"]
-        target = rng.integers(U, size=(S, A))
-        gain = rng.uniform(*c["opportunistic_gain"], size=(S, A))
-        loss = rng.uniform(*c["opportunistic_loss"], size=(S, A))
-        r_opp = np.where(np.arange(U)[None, None, :] == target[..., None], gain[..., None], -loss[..., None])
-        mu = rng.uniform(*c["robust_mean"], size=(S, A))
-        r_rob = mu[..., None] + c["robust_context_sd"] * rng.standard_normal((S, A, U))
-        lim = 1.0 - c["reward_noise"]
-        reward = np.clip(np.where(opp[..., None], r_opp, r_rob), -lim, lim)
-        cand = rng.integers(S, size=(S, A, c["n_next_candidates"]))
-        weights = rng.gamma(c["transition_concentration"], size=(S, A, U, c["n_next_candidates"]))
-        weights = weights / weights.sum(-1, keepdims=True)
+        Pu = rng.dirichlet(np.full(U, hp["context_concentration"]), size=S)
+        atoms = rng.standard_normal((S, U, D))
+        mu = rng.uniform(*c["reward_mean"], size=(S, A))
+        amp = hp["sensitivity_max"] * rng.beta(hp["sensitivity_shape_a"], hp["sensitivity_shape_b"], size=(S, A))
+        direction = unit(rng.standard_normal((S, A, D)))
+        threshold = rng.uniform(*c["favorable_threshold"], size=(S, A))
+        sharpness = rng.uniform(*c["response_sharpness"], size=(S, A))
+        proj = np.einsum("sad,sud->sau", direction, atoms)
+        favour = 1.0 / (1.0 + np.exp(-sharpness[..., None] * (proj - threshold[..., None])))
+        lim = 1.0 - hp["reward_noise"]
+        reward = np.clip(mu[..., None] + amp[..., None] * (2.0 * favour - 1.0), -lim, lim)
+        cand = rng.integers(S, size=(S, A, C))
+        base = c["transition_base_sd"] * rng.standard_normal((S, A, C))
+        amp_t = hp["transition_sensitivity_max"] * rng.beta(hp["sensitivity_shape_a"], hp["sensitivity_shape_b"],
+                                                            size=(S, A))
+        dir_t = unit(rng.standard_normal((S, A, C, D)))
+        proj_t = np.einsum("sacd,sud->sauc", dir_t, atoms)
+        weights = softmax(base[:, :, None, :] + amp_t[:, :, None, None] * proj_t, axis=-1)
         T = dense(cand, weights, S)
         V = np.zeros(S)
         for _ in range(5000):
@@ -88,15 +121,16 @@ def make_instance(rng, c):
                 break
             V = V_new
         Qf = reward.transpose(0, 2, 1) + cont * np.einsum("saut,t->sua", T, V)
-        Qd = Qf + c["demo_skill_noise"] * rng.standard_normal((S, U, A))
-        demo = (1 - c["logging_epsilon"]) * softmax(Qd / c["demo_temperature"]) + c["logging_epsilon"] / A
+        Qd = Qf + hp["demo_skill_noise"] * rng.standard_normal((S, U, A))
+        demo = (1 - eps) * softmax(Qd / hp["demo_temperature"]) + eps / A
         obs = rng.standard_normal((S, c["obs_dim"]))
         rho0 = np.full(S, 1.0 / S)
         v_demo = rho0 @ value(Pu, reward, T, cont, demo)
         v_rand = rho0 @ value(Pu, reward, T, cont, np.full((S, U, A), 1.0 / A))
         if v_demo - v_rand >= c["min_demo_advantage"]:
             break
-    return dict(Pu=Pu, reward=reward, cand=cand, weights=weights, T=T, demo=demo, obs=obs, rho0=rho0)
+    return dict(Pu=Pu, reward=reward, cand=cand, weights=weights, T=T, demo=demo, obs=obs, rho0=rho0,
+                noise=hp["reward_noise"], hyper=hp)
 
 
 def collect(inst, c, rng):
@@ -106,6 +140,7 @@ def collect(inst, c, rng):
     cum_t = np.cumsum(inst["T"], -1).tolist()
     cum_0 = np.cumsum(inst["rho0"]).tolist()
     reward = inst["reward"].tolist()
+    noise = inst["noise"]
     draws = rng.random((n, 5)).tolist()
     out = {k: np.zeros(n, np.uint8) for k in ("state", "action", "next_state", "done")}
     y_arr = np.zeros(n)
@@ -118,7 +153,7 @@ def collect(inst, c, rng):
         ru, rx, ry, rs, rd = draws[t]
         u = pick(cum_u[s], ru)
         x = pick(cum_x[s][u], rx)
-        y_arr[t] = reward[s][x][u] + c["reward_noise"] * (2.0 * ry - 1.0)
+        y_arr[t] = reward[s][x][u] + noise * (2.0 * ry - 1.0)
         s2 = pick(cum_t[s][x][u], rs)
         done = rd < c["termination_prob"]
         out["state"][t], out["action"][t], out["next_state"][t], out["done"][t] = s, x, s2, done
@@ -153,11 +188,11 @@ def main() -> None:
                 "n_transitions": int(len(log["state"])),
                 "state": b64(log["state"]),
                 "action": b64(log["action"]),
-                "reward_q": b64(np.round(log["reward"] * REWARD_SCALE).astype("<i2")),
+                "reward_q": b64(np.round(np.clip(log["reward"], -1.0, 1.0) * REWARD_SCALE).astype("<i2")),
                 "next_state": b64(log["next_state"]),
                 "done": b64(log["done"]),
             })
-            r = lambda a: np.round(np.asarray(a, dtype=float), 12).tolist()  # noqa: E731
+            r = lambda a: np.round(np.asarray(a, dtype=float), 10).tolist()  # noqa: E731
             envs.append({
                 "id": iid,
                 "context_probs": r(inst["Pu"]),
@@ -167,6 +202,7 @@ def main() -> None:
                 "demo_policy": r(inst["demo"]),
                 "initial_dist": r(inst["rho0"]),
                 "termination_prob": c["termination_prob"],
+                "hyper": inst["hyper"],
             })
         header = {
             "experiment": experiment, "split": "test",
