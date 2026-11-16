@@ -13,6 +13,11 @@ Instances are deliberately heterogeneous: the number and spread of context
 points, how strongly each action reacts to the context, the reward noise and
 the demonstrator's skill and decisiveness are drawn per instance.
 
+Every action's reward is higher in a favourable region of the hidden context
+space and lower elsewhere; how far apart the two are, how large the
+favourable region is and how sharp the boundary is differ by state-action
+pair. Next-state probabilities also react to the context.
+
 This module contains
 
 * the generator for the family (used to build the public training split and
@@ -43,7 +48,8 @@ Range = tuple[float, float]
 
 @dataclass(frozen=True)
 class FamilyConfig:
-    """Family parameters. ``(lo, hi)`` ranges are drawn once per instance."""
+    """Family parameters. ``(lo, hi)`` ranges are drawn once per instance
+    (per-(state, action) ranges are drawn for every state-action pair)."""
 
     n_states: int = 30
     n_actions: int = 4
@@ -53,47 +59,49 @@ class FamilyConfig:
     n_transitions: int = 30_000
     # Hidden context: per state, ``n_contexts`` points in R^context_dim with
     # Dirichlet(concentration) probabilities; one is drawn at every step.
-    n_contexts: tuple[int, int] = (16, 32)
+    n_contexts: tuple[int, int] = (12, 32)
     context_dim: int = 2
-    context_concentration: Range = (0.3, 3.0)          # log-uniform
+    context_concentration: Range = (0.3, 3.0)          # log-uniform, per instance
     # Reward of action a in state s under context u:
-    #   mu(s,a) + amp(s,a) * tanh(gain(s,a) * <dir(s,a), u> + offset(s,a))
-    # with amp(s,a) = sensitivity_max * Beta(shape_a, shape_b).
-    reward_mean: Range = (-0.5, 0.5)
-    sensitivity_max: Range = (0.6, 0.9)
-    sensitivity_shape_a: Range = (0.7, 1.5)
-    sensitivity_shape_b: Range = (1.0, 2.0)
-    sensitivity_gain: Range = (0.5, 2.0)
-    sensitivity_offset_sd: float = 0.5
-    reward_noise: Range = (0.05, 0.15)                 # uniform noise half-width
+    #   mu + amp * (2 * sigmoid(sharpness * (<dir, u> - threshold)) - 1)
+    # i.e. +amp above mu in a favourable region of context space, -amp
+    # elsewhere, with a graded transition between the two. amp is
+    # sensitivity_max * Beta(shape_a, shape_b); everything is per (s, a).
+    reward_mean: Range = (-0.3, 0.5)
+    sensitivity_max: Range = (0.7, 0.9)                # per instance
+    sensitivity_shape_a: Range = (0.7, 1.2)            # per instance
+    sensitivity_shape_b: Range = (1.0, 1.8)            # per instance
+    favorable_threshold: Range = (0.3, 1.5)            # per (s, a)
+    response_sharpness: Range = (1.5, 6.0)             # per (s, a)
+    reward_noise: Range = (0.05, 0.2)                  # uniform half-width, per instance
     # Transitions: a few candidate next states per (s, a); their logits react
     # to the context with an action-specific strength.
     n_next_candidates: int = 3
     transition_base_sd: float = 1.0
-    transition_sensitivity_max: Range = (0.5, 2.0)
+    transition_sensitivity_max: Range = (2.0, 4.0)     # per instance
     # Demonstrator: plans with full information (s, u), then acts by a
     # Boltzmann choice over noisy action values; with probability
     # ``logging_epsilon`` the logged action is uniform instead.
-    demo_temperature: Range = (0.05, 0.5)              # log-uniform
-    demo_skill_noise: Range = (0.4, 0.8)
+    demo_temperature: Range = (0.03, 0.3)              # log-uniform, per instance
+    demo_skill_noise: Range = (0.3, 0.7)               # per instance
     min_demo_advantage: float = 1.0
 
 
 EXPERIMENTS: dict[str, FamilyConfig] = {
-    # Main setting: a capable demonstrator whose actions react moderately to
-    # the hidden context; 10% uniformly random logged actions.
+    # Main setting: actions react moderately to the hidden context; 10%
+    # uniformly random logged actions.
     "confounded_expert_demos": FamilyConfig(
         logging_epsilon=0.10,
-        sensitivity_shape_a=(0.7, 1.5), sensitivity_shape_b=(1.0, 2.0),
-        demo_skill_noise=(0.4, 0.8),
+        sensitivity_shape_a=(0.7, 1.2), sensitivity_shape_b=(1.0, 1.8),
+        demo_skill_noise=(0.3, 0.7),
     ),
     # Harder setting: actions react more strongly to the hidden context, so
     # the demonstrator relies on it more, and only 5% of logged actions are
     # uniformly random.
     "pervasive_confounding": FamilyConfig(
         logging_epsilon=0.05,
-        sensitivity_shape_a=(1.0, 2.0), sensitivity_shape_b=(0.7, 1.5),
-        demo_skill_noise=(0.5, 0.9),
+        sensitivity_shape_a=(1.0, 1.8), sensitivity_shape_b=(0.7, 1.2),
+        demo_skill_noise=(0.4, 0.8),
     ),
 }
 
@@ -167,12 +175,12 @@ def generate_instance(rng: np.random.Generator, cfg: FamilyConfig) -> dict:
         mu = rng.uniform(*cfg.reward_mean, size=(S, A))
         amp = hp["sensitivity_max"] * rng.beta(hp["sensitivity_shape_a"], hp["sensitivity_shape_b"], size=(S, A))
         direction = _unit(rng.standard_normal((S, A, D)))
-        gain = rng.uniform(*cfg.sensitivity_gain, size=(S, A))
-        offset = cfg.sensitivity_offset_sd * rng.standard_normal((S, A))
+        threshold = rng.uniform(*cfg.favorable_threshold, size=(S, A))
+        sharpness = rng.uniform(*cfg.response_sharpness, size=(S, A))
         proj = np.einsum("sad,sud->sau", direction, atoms)  # [S,A,U]
+        favour = 1.0 / (1.0 + np.exp(-sharpness[..., None] * (proj - threshold[..., None])))
         lim = REWARD_CEILING - hp["reward_noise"]
-        reward = np.clip(mu[..., None] + amp[..., None] * np.tanh(gain[..., None] * proj + offset[..., None]),
-                         -lim, lim)  # [S,A,U]
+        reward = np.clip(mu[..., None] + amp[..., None] * (2.0 * favour - 1.0), -lim, lim)  # [S,A,U]
         cand = rng.integers(S, size=(S, A, C))
         base = cfg.transition_base_sd * rng.standard_normal((S, A, C))
         amp_t = hp["transition_sensitivity_max"] * rng.beta(hp["sensitivity_shape_a"], hp["sensitivity_shape_b"],

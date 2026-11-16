@@ -6,4 +6,4 @@ cd /home/user
 export PYTHONPATH="/home/user"
 export CUBLAS_WORKSPACE_CONFIG=":4096:8"
 python -c "import torch, numpy; print('torch', torch.__version__, 'cuda', torch.cuda.is_available(), 'numpy', numpy.__version__, flush=True)"
-python -m redteam.hardening.explore 256
+python -m redteam.hardening.explore 512

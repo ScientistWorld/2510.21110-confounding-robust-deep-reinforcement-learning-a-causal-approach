@@ -25,7 +25,7 @@ import torch
 
 from redteam.hardening import tabular
 
-FEATURE_KINDS = ("nominal", "manski", "sharp", "sharp_upper")
+FEATURE_KINDS = ("nominal", "manski", "sharp", "sharp_upper", "partition", "partition_upper")
 QUANTILES = (0.0, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 1.0)
 
 

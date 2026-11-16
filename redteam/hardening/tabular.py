@@ -19,7 +19,21 @@ Kinds of value iteration on the empirical observational model:
                   on P(x|s), tail mean lowered by ``kappa`` standard errors,
                   never below the paper's bound, which is also valid);
 * ``sharp_upper`` - the matching upper bound (upper-tail mean);
-* ``hurwicz``   - (1 - lam) * lower + lam * upper of the sharp interval.
+* ``hurwicz``   - (1 - lam) * lower + lam * upper of the sharp interval;
+* ``partition`` - the tighter bound implied by the same logging protocol.
+                  The deliberate (non-random) choices of x happen in a set
+                  C_x of hidden contexts with P(C_x) = (P(x|s) - eps/|A|) /
+                  (1 - eps), and the random picks of x sample the contexts
+                  independently, so the logged outcomes of x are a mixture
+                  of outcomes in C_x (mass 1 - b) and outside it (mass
+                  b = alpha (1 - P(C_x)), alpha = eps / (|A| P(x|s))). Under
+                  do(x) the two parts weigh P(C_x) and 1 - P(C_x). The worst
+                  case puts the outside part at the lowest b of the logged
+                  outcomes:  P(C)(mean - b tail_b) / (1 - b) + (1 - P(C)) tail_b;
+* ``partition_upper`` / ``partition_lcb`` / ``hurwicz_partition`` - its
+                  upper counterpart, finite-sample version (mean lowered by
+                  kappa standard errors, never below the paper's bound) and
+                  (1 - lam) * lower + lam * upper.
 """
 
 from __future__ import annotations
@@ -43,6 +57,15 @@ def stack_logs(logs: list[dict], dev: torch.device | None = None) -> dict[str, t
     for k in ("reward", "done"):
         out[k] = torch.as_tensor(np.stack([np.asarray(l[k], dtype=np.float64) for l in logs]), device=dev)
     return out
+
+
+def _partition(key, vals, mean, p_sa, eps, A, alpha, n_sa, starts, ar, lower: bool):
+    pc = ((p_sa - eps / A) / (1.0 - eps)).clamp(0.0, 1.0)
+    b = (alpha * (1.0 - pc)).clamp(0.0, 1.0)
+    tail, den = _tail(key, vals, b, n_sa, starts, ar, lower)
+    tail = torch.where(den > 1e-12, tail, mean)
+    inside = (mean - b * tail) / (1.0 - b).clamp(min=1e-9)
+    return torch.where(b >= 1.0 - 1e-9, tail, pc * inside + (1.0 - pc) * tail)
 
 
 def _tail(key, vals, alpha, n_sa, starts, ar, lower: bool):
@@ -94,7 +117,8 @@ def solve(logs: dict[str, torch.Tensor], S: int, A: int, eps: float, term: float
     V = torch.zeros(N, S, dtype=torch.float64, device=dev)
     inf = torch.full_like(V, float("inf"))
     Q = zeros
-    sharp_family = kind in ("sharp", "sharp_lcb", "sharp_upper", "hurwicz")
+    sharp_family = kind in ("sharp", "sharp_lcb", "sharp_upper", "hurwicz", "partition", "partition_upper",
+                            "partition_lcb", "hurwicz_partition")
     for _ in range(iters):
         Vn = V.gather(1, s2)
         vals = y + GAMMA * cont * Vn if sharp_family else y + GAMMA * (1.0 - d) * Vn
@@ -105,6 +129,18 @@ def solve(logs: dict[str, torch.Tensor], S: int, A: int, eps: float, term: float
             Q = torch.where(has, mean, fallback)
         elif kind == "manski":
             Q = torch.where(has, p_sa * mean + (1 - p_sa) * (FLOOR + GAMMA * cont_sa * vmin), fallback)
+        elif kind.startswith("partition") or kind == "hurwicz_partition":
+            Qt = _partition(key, vals, mean, p_sa, eps, A, alpha, n_sa, starts, ar, lower=(kind != "partition_upper"))
+            if kind == "hurwicz_partition":
+                hi = _partition(key, vals, mean, p_sa, eps, A, alpha, n_sa, starts, ar, lower=False)
+                Qt = (1 - lam) * Qt + lam * hi
+            if kind == "partition_lcb":
+                sq = zeros.clone().scatter_add_(1, key, vals ** 2)
+                var = (sq - n_sa * mean ** 2) / (n_sa - 1.0).clamp(min=1.0)
+                sd = torch.where(n_sa > 1, var.clamp(min=0.0).sqrt(), torch.full_like(var, 2.0))
+                manski = p_sa * mean + (1 - p_sa) * (FLOOR + GAMMA * cont * vmin)
+                Qt = torch.maximum(Qt - kappa * sd / n_sa.clamp(min=1.0).sqrt(), manski)
+            Q = torch.where(has, Qt, fallback)
         else:
             if kind == "sharp_upper":
                 Qt, den = _tail(key, vals, alpha, n_sa, starts, ar, lower=False)

@@ -40,26 +40,18 @@ OUT = ROOT / "redteam" / "hardening" / "explore_results"
 TMP = ROOT / "tmp" / "explore"
 EXPS = ("confounded_expert_demos", "pervasive_confounding")
 N_EVAL = 32
-N_SIM = int(sys.argv[1]) if len(sys.argv) > 1 else 256
-
-
-def narrow(cfg, shape_a, shape_b, skill):
-    return replace(cfg, n_contexts=(24, 24), context_concentration=(1.0, 1.0), sensitivity_max=(0.8, 0.8),
-                   sensitivity_shape_a=(shape_a, shape_a), sensitivity_shape_b=(shape_b, shape_b),
-                   reward_noise=(0.1, 0.1), transition_sensitivity_max=(1.5, 1.5),
-                   demo_temperature=(0.1, 0.1), demo_skill_noise=(skill, skill))
+N_SIM = int(sys.argv[1]) if len(sys.argv) > 1 else 512
 
 
 CANDIDATES = {
     "v1_current": (family_v1, dict(family_v1.EXPERIMENTS)),
-    "v2_rich": (family_v2, dict(family_v2.EXPERIMENTS)),
-    "v2_narrow": (family_v2, {
-        "confounded_expert_demos": narrow(family_v2.EXPERIMENTS["confounded_expert_demos"], 1.0, 1.5, 0.6),
-        "pervasive_confounding": narrow(family_v2.EXPERIMENTS["pervasive_confounding"], 1.5, 1.0, 0.7)}),
-    "v2_rich_10k": (family_v2, {e: replace(c, n_transitions=10_000) for e, c in family_v2.EXPERIMENTS.items()}),
-    "v2_rich_noisy": (family_v2, {e: replace(c, reward_noise=(0.1, 0.3)) for e, c in family_v2.EXPERIMENTS.items()}),
+    "v3a": (family_v2, dict(family_v2.EXPERIMENTS)),
+    "v3b_weak_transitions": (family_v2, {e: replace(c, transition_sensitivity_max=(0.5, 1.5))
+                                         for e, c in family_v2.EXPERIMENTS.items()}),
+    "v3c_wide_favourable": (family_v2, {e: replace(c, favorable_threshold=(-0.3, 1.0))
+                                        for e, c in family_v2.EXPERIMENTS.items()}),
 }
-WITH_DQN = {"v1_current", "v2_rich", "v2_narrow"}
+WITH_DQN = {"v3a", "v3b_weak_transitions", "v3c_wide_favourable"}
 
 
 def bc_policy(log, S, A):
@@ -104,10 +96,11 @@ def run_candidate(ci: int, cname: str, family, ei: int, exp: str, cfg, models_st
     t = tabular.stack_logs(logs)
     for name, kind, kw in (("tab_nominal", "nominal", {}), ("tab_manski", "manski", {}),
                            ("tab_sharp", "sharp", {}), ("tab_sharp_lcb", "sharp_lcb", {}),
-                           ("tab_sharp_lcb_k1", "sharp_lcb", {"kappa": 1.0}),
-                           ("tab_sharp_lcb_k0", "sharp_lcb", {"kappa": 0.0}),
+                           ("tab_partition", "partition", {}), ("tab_partition_lcb", "partition_lcb", {}),
+                           ("tab_partition_lcb_k1", "partition_lcb", {"kappa": 1.0}),
                            ("tab_hurwicz25", "hurwicz", {"lam": 0.25}),
-                           ("tab_hurwicz50", "hurwicz", {"lam": 0.5})):
+                           ("tab_hurwicz_partition25", "hurwicz_partition", {"lam": 0.25}),
+                           ("tab_hurwicz_partition50", "hurwicz_partition", {"lam": 0.5})):
         try:
             Q = tabular.solve(t, S, A, eps, term, kind, **kw)
             record(name, [q.argmax(1) for q in Q])
@@ -210,7 +203,7 @@ def main() -> None:
             except Exception:
                 traceback.print_exc()
             (OUT / "summary.json").write_text(json.dumps(summary, indent=1))
-        if cname == "v1_current":
+        if cname == "v1_current" and not (OUT / "before_v1_scores_test.json").exists():
             try:
                 before_hidden_test(models_store)
             except Exception:
