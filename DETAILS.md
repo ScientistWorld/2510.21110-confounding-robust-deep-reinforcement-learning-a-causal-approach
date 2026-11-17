@@ -19,6 +19,8 @@ Causal-DQN clearly beats the paper's Conf. DQN baseline in both experiments:
 
 It also beats a behaviour-cloning floor (1.10 / 0.90) and has a much better worst decile (0.76 / 0.67 against 0.52 / 0.27 for Conf. DQN). It does not reach the best achievable policy (1.42 / 1.18), so there is headroom. The paper's own numbers are on a different scale: here the demonstrator is noisy, so a learner can exceed it, as Causal-DQN does in 7 of the paper's 12 games.
 
+---
+
 # Problem
 
 Learn a control policy from logged demonstrations when the demonstrator acted on information the learner cannot see.
@@ -44,6 +46,8 @@ Data:
 - `data/train/<experiment>.json`: 32 public training instances per experiment. Their true dynamics are in `eval/train/envs/` for development scoring.
 - `data/test/<experiment>.json`: 64 held-out instances per experiment. Only the logs are public; the true dynamics are not.
 - Load either split with `data.cmdp_family.load_dataset(split, experiment)`.
+
+---
 
 # Method
 
@@ -72,6 +76,8 @@ The implementation is `method/causal_dqn.py`. It keeps the paper's procedure and
 
 - **`baseline/confounded_dqn.py`:** the paper's Conf. DQN. It uses the same data, network, optimiser and scale, with the standard DQN loss on the logged action only.
 - **`baseline/behavior_cloning.py`:** not in the paper. It picks the most frequent logged action per state and serves as a reward-free sanity floor.
+
+---
 
 # Evaluation
 
@@ -617,6 +623,82 @@ The test instances, run count and normalisation are fixed by the evaluator, not 
 - Restored the paper's Causal-DQN settings: streamed replay, batch 512, learning rate 5e-4, γ 0.99, Double DQN, worst next state sampled from replay.
 - Hidden-test reference (job `cf004967-974`), normalised mean: Causal-DQN 0.804 / 0.695, Conf. DQN 0.353 / 0.133, behaviour cloning 0.717 / 0.608. Both experiments are in the paper's direction, with seed noise of about 0.02.
 - Job `2112f426-6f6`: a train-selected sharper causal bound beats the reference on the hidden test (+0.18 ± 0.04 paired in the main experiment). Every shortcut is below the reference or scored as failed. See `HARDENING.md`.
+
+</details>
+
+### Iteration 11: claude-opus-5-5 (hardener)
+- **Milestone**: `core_claim_plus` | **Status**: done
+- **Working time**: 34m | **GPU**: 2.7h
+- **Jobs**: 6 total (6 completed, 0 failed)
+
+<details>
+<summary>Progress Log</summary>
+
+### [2026-05-29 04:31] - none
+- Started from the paper markdown and identified the central claim: Causal-DQN should learn robustly from hidden-confounded demonstrator data where standard off-policy DQN fails.
+
+### [2026-05-29 05:22] - method_runs
+- Implemented a scaled hidden-confounder CMDP, Causal-DQN's all-action causal Bellman backup, a confounded DQN baseline, and an evaluator that reads saved policy artifacts.
+- First end-to-end CPU job completed but did not yet separate the method clearly enough from the baseline.
+
+### [2026-05-29 05:39] - core_claim
+- Tightened the CMDP so the logged risky action is observationally inflated but harmful under intervention.
+- Job `76913160-30f` showed confounded DQN learned the all-risky policy while Causal-DQN learned the all-safe policy.
+
+### [2026-05-29 05:49] - core_claim_plus
+- Job `3ffe5bba-0a3` ran both `base` and `weaker_bias` variants over seeds `0 1 2`.
+- Causal-DQN outperformed confounded DQN in both settings while reporting constraint metrics for risky and safe action rates.
+
+### [2026-05-29 05:54] - core_claim
+- Continuing-agent audit found the implementation and evaluator structurally sound, but the latest Double-DQN bootstrap cleanup has not yet been validated by a fresh job.
+- Temporarily tracking the active milestone as `core_claim` until the current-code validation run restores `core_claim_plus`.
+
+### [2026-05-29 06:04] - core_claim_plus
+- Job `e6f5da67-7e9` validated the current Double-DQN Causal-DQN and confounded DQN code across `base` and `weaker_bias` variants over seeds `0 1 2`.
+- The run passed `python validate.py --compare` and restored the prior `core_claim_plus` evidence on the current code revision.
+
+### [2026-05-29 06:19] - core_claim_plus
+- Job `99d1d814-ec3` ran the independent train/test CMDP split on the saved final policy artifacts.
+- Both slices preserved the central claim signal: Causal-DQN beat confounded DQN on `mean_return` in both CMDP variants while maintaining substantially higher safe-action rates and lower risky-action rates.
+- `python validate.py --compare` passed after narrowing `scoring/reference.json` to the two executable CMDP experiments.
+
+### [2026-05-29 06:25] - core_claim_plus
+- Final verification preserved the milestone.
+- Cleaned method-agnostic scoring documentation, completed `scores.json` metric coverage, and aligned `scripts/reproduce.sh` defaults with the scored two-variant, three-seed setup.
+- `python validate.py --compare` passed.
+
+### [2026-05-29 06:28] - core_claim_plus
+- Continuing-agent audit found that `scripts/run.sh` depended on ignored checkpoint JSONs.
+- Updated `scripts/run.sh` to regenerate artifacts through `scripts/reproduce.sh` before validation.
+- Local shell syntax checks and `python validate.py --compare` passed; submitting a CPU test job to validate the fresh end-to-end entry point.
+
+### [2026-05-29 06:35] - core_claim_plus
+- Final verifier confirmed method/problem separation, scoring structure, train/test split wiring, and absence of committed `shared/` references.
+- Improved `scripts/evaluate.sh` artifact discovery and clarified scaled-reference notes in `scoring/reference.json`.
+- `bash -n` checks and `python validate.py --compare` passed.
+
+### [2026-11-11] - core_claim_plus
+- Hardening iteration: rebuilt the gym as a hidden-test family of confounded MDPs. 32 hidden test instances per experiment, scored by exact interventional return with the paper's demonstrator normalisation.
+- Restored the paper's Causal-DQN settings: streamed replay, batch 512, learning rate 5e-4, γ 0.99, Double DQN, worst next state sampled from replay.
+- Hidden-test reference (job `cf004967-974`), normalised mean: Causal-DQN 0.804 / 0.695, Conf. DQN 0.353 / 0.133, behaviour cloning 0.717 / 0.608. Both experiments are in the paper's direction, with seed noise of about 0.02.
+- Job `2112f426-6f6`: a train-selected sharper causal bound beats the reference on the hidden test (+0.18 ± 0.04 paired in the main experiment). Every shortcut is below the reference or scored as failed. See `HARDENING.md`.
+
+### [2026-11-17] - core_claim_plus
+- Hardening iteration 13. Measured on the iteration-12 hidden test, prior fitting on the public generator scored 1.066 / 0.861 normalised mean, above the best honest variant (0.987 / 0.716). A hand-written two-cluster decoder also beat the reference.
+- Replaced the instance family:
+  - continuous hidden context with graded, per-pair reward responses;
+  - confounded transitions;
+  - per-instance randomised hyperparameters;
+  - 30k transitions per instance;
+  - 64 hidden test instances per experiment.
+- Hidden-test reference, normalised mean:
+  - Causal-DQN 1.185 / 0.959;
+  - Conf. DQN 1.028 / 0.709;
+  - behaviour cloning 1.098 / 0.897.
+
+  The paper's direction holds in both experiments, beyond seed noise (about 0.015).
+- An honest sharper bound (partition bound, selected on train) beats the reference on every metric in both experiments: +0.161 ± 0.020 and +0.124 ± 0.019 paired.
+- Prior fitting now leads it by only +0.022 ± 0.007 (expert) and +0.004 ± 0.010 (pervasive). See `HARDENING.md`.
 
 </details>
 
