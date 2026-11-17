@@ -18,7 +18,7 @@ The implementation is `method/causal_dqn.py`. It keeps the paper's procedure and
 - Batch size 512, Adam with learning rate 5e-4, discount 0.99, Double DQN with a target network refreshed every 500 updates.
 - 64 sampled candidates for the worst next state.
 - The Q-network is an MLP over the state features: 16 → 128 → 128 → 4.
-- 30,000 updates over the 10,000-transition log.
+- 30,000 updates over the 30,000-transition log (one update per logged transition; the paper's 1M steps give 50,000 updates at one update per 20 steps).
 - One independent network per instance, trained in a batch on GPU.
 
 ## Baselines

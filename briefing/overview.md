@@ -6,15 +6,15 @@ The paper (Li, Zhang & Bareinboim, "Confounding Robust Deep Reinforcement Learni
 
 The workspace scales that experiment down to a procedurally generated family of confounded MDPs:
 
-- The demonstrator sees a hidden context; the learner does not.
-- 32 public train instances and 32 held-out test instances per experiment.
-- Policies are scored by exact interventional return, normalised per instance as in the paper's Table 1.
+- The demonstrator sees a hidden context drawn afresh at every step from a continuous space; the learner does not. Every action's reward and transitions react to the context, to a degree that differs by state-action pair.
+- 32 public train instances and 64 held-out test instances per experiment, 30,000 logged transitions each.
+- Policies are scored by exact interventional return, normalised per instance as in the paper's Table 1 (random 0, demonstrator 1).
 
 ## Reproduced claim (hidden test, 3 runs)
 
 Causal-DQN clearly beats the paper's Conf. DQN baseline in both experiments:
 
-- normalised mean 0.80 vs 0.35 in `confounded_expert_demos`;
-- 0.69 vs 0.13 in `pervasive_confounding`.
+- normalised mean 1.18 vs 1.03 in `confounded_expert_demos`;
+- 0.96 vs 0.71 in `pervasive_confounding`.
 
-It also beats a behaviour-cloning floor (0.72 / 0.61) and has a much better worst decile. It does not reach the best achievable policy (1.18 / 1.05), so there is headroom. In the second experiment it falls further short, matching the paper's own weaker results with a stronger, more information-reliant demonstrator (Appendix E).
+It also beats a behaviour-cloning floor (1.10 / 0.90) and has a much better worst decile (0.76 / 0.67 against 0.52 / 0.27 for Conf. DQN). It does not reach the best achievable policy (1.42 / 1.18), so there is headroom. The paper's own numbers are on a different scale: here the demonstrator is noisy, so a learner can exceed it, as Causal-DQN does in 7 of the paper's 12 games.

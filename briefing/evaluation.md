@@ -10,7 +10,7 @@ checkpoints/<method>/<experiment>/run<k>.json
 ```
 
 - There is one integer action in `[0, 4)` per observed state.
-- Every instance id of both splits must be present (`train_00`..`train_31`, `test_00`..`test_31`).
+- Every instance id of both splits must be present (`train_00`..`train_31`, `test_00`..`test_63`).
 - The three runs are independent repetitions of the method (for example, different seeds). A deterministic method may write the same policy three times.
 - Any other files or keys are ignored.
 
@@ -18,10 +18,10 @@ checkpoints/<method>/<experiment>/run<k>.json
 
 Scores are computed only from these policies:
 
-- **Exact return.** Each policy's expected interventional return (total reward until termination) is computed exactly from the instance's true dynamics. There is no rollout noise.
-- **Per-instance normalisation.** Each return is normalised as `(return - random) / (demonstrator - random)`. Here `random` is the uniform-random policy and `demonstrator` is the logging demonstrator, who sees the hidden context. A value of 1 matches the demonstrator; values above 1 are possible.
+- **Exact return.** Each policy's expected interventional return (total reward until termination) is computed exactly from the instance's true dynamics, with the hidden context drawn from its true distribution at every step. There is no rollout noise.
+- **Per-instance normalisation.** Each return is normalised as `(return - random) / (demonstrator - random)`. Here `random` is the uniform-random policy and `demonstrator` is the logging demonstrator, who sees the hidden context. A value of 1 matches the demonstrator. The demonstrator is noisy, so values above 1 are common: the best possible observed-state policy averages about 1.42 (`confounded_expert_demos`) and 1.18 (`pervasive_confounding`) on the held-out instances.
 
-Metrics (per experiment, over the 32 instances × 3 runs):
+Metrics (per experiment, over the 64 held-out instances × 3 runs; the train slice uses its 32 instances):
 
 | Metric | Direction | Coefficient | Meaning |
 |---|---|---|---|

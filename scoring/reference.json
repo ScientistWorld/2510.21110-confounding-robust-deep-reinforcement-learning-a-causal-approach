@@ -1,8 +1,8 @@
 {
   "experiments": {
     "confounded_expert_demos": {
-      "description": "Offline control from confounded demonstrations: 32 held-out confounded MDP instances, each with 10,000 logged transitions from a capable demonstrator that sees a hidden context the learner cannot observe (10% uniformly random logged actions). Policies are scored by exact interventional return, normalised per instance so that the uniform-random policy is 0 and the demonstrator is 1 (the paper's Table 1 normalisation).",
-      "notes": "Scaled analogue of the paper's 12 masked-Atari games with the diamond demonstrator (Table 1). The paper's Atari numbers are kept under keys starting with '_' for context only; they are not on this gym's scale. Unprefixed results are this gym's measured hidden-test values (3 runs each).",
+      "description": "Offline control from confounded demonstrations: 64 held-out confounded MDP instances, each with 30,000 logged transitions from a demonstrator that sees a hidden context the learner cannot observe (10% uniformly random logged actions). Policies are scored by exact interventional return, normalised per instance so that the uniform-random policy is 0 and the demonstrator is 1 (the paper's Table 1 normalisation).",
+      "notes": "Scaled analogue of the paper's 12 masked-Atari games with the diamond demonstrator (Table 1). The paper's Atari numbers are kept under keys starting with '_' for context only; they are not on this gym's scale (here the demonstrator is noisy, so the best observed-state policy reaches 1.42). Unprefixed results are this gym's measured hidden-test values (3 runs each, iteration 13 instance family).",
       "weight": 0.5,
       "primary_metric": "normalized_mean_return",
       "metrics": {
@@ -25,21 +25,21 @@
       "results": {
         "causal_dqn": {
           "type": "proposed",
-          "normalized_mean_return": 0.80448,
-          "normalized_iqm_return": 0.820072,
-          "worst_decile_normalized_return": 0.491189
+          "normalized_mean_return": 1.184856,
+          "normalized_iqm_return": 1.181122,
+          "worst_decile_normalized_return": 0.760356
         },
         "conf_dqn": {
           "type": "baseline",
-          "normalized_mean_return": 0.352964,
-          "normalized_iqm_return": 0.377436,
-          "worst_decile_normalized_return": -0.216476
+          "normalized_mean_return": 1.027608,
+          "normalized_iqm_return": 1.004327,
+          "worst_decile_normalized_return": 0.522764
         },
         "behavior_cloning": {
           "type": "baseline",
-          "normalized_mean_return": 0.716741,
-          "normalized_iqm_return": 0.725545,
-          "worst_decile_normalized_return": 0.433823
+          "normalized_mean_return": 1.097512,
+          "normalized_iqm_return": 1.096505,
+          "worst_decile_normalized_return": 0.646319
         },
         "_paper_causal_dqn_diamond": {
           "type": "proposed",
@@ -64,8 +64,8 @@
       }
     },
     "pervasive_confounding": {
-      "description": "Same task and scoring on 32 held-out instances where the demonstrator relies on the hidden context for more of its choices and only 5% of logged actions are uniformly random, so the logged action-outcome association is more biased and less of the action space is explored.",
-      "notes": "Scaled analogue of the setting where the paper's method recovers less of the demonstrator's performance (Appendix E / Table 2, sebulba demonstrator: normalised mean 0.55) and of the limitations in Appendix G. The paper's Table 2 numbers are kept under '_' keys for context only.",
+      "description": "Same task and scoring on 64 held-out instances where actions react more strongly to the hidden context, so the demonstrator relies on it more, and only 5% of logged actions are uniformly random: the logged action-outcome association is more biased and less of the action space is explored.",
+      "notes": "Scaled analogue of the setting where the paper's method recovers less of the demonstrator's performance (Appendix E / Table 2, sebulba demonstrator: normalised mean 0.55) and of the limitations in Appendix G. The paper's Table 2 numbers are kept under '_' keys for context only. Unprefixed results are measured hidden-test values (3 runs each, iteration 13 instance family).",
       "weight": 0.5,
       "primary_metric": "normalized_mean_return",
       "metrics": {
@@ -88,21 +88,21 @@
       "results": {
         "causal_dqn": {
           "type": "proposed",
-          "normalized_mean_return": 0.694876,
-          "normalized_iqm_return": 0.676826,
-          "worst_decile_normalized_return": 0.485484
+          "normalized_mean_return": 0.958848,
+          "normalized_iqm_return": 0.948248,
+          "worst_decile_normalized_return": 0.670049
         },
         "conf_dqn": {
           "type": "baseline",
-          "normalized_mean_return": 0.132613,
-          "normalized_iqm_return": 0.142722,
-          "worst_decile_normalized_return": -0.265875
+          "normalized_mean_return": 0.709285,
+          "normalized_iqm_return": 0.689116,
+          "worst_decile_normalized_return": 0.267509
         },
         "behavior_cloning": {
           "type": "baseline",
-          "normalized_mean_return": 0.607493,
-          "normalized_iqm_return": 0.58199,
-          "worst_decile_normalized_return": 0.39523
+          "normalized_mean_return": 0.897194,
+          "normalized_iqm_return": 0.891509,
+          "worst_decile_normalized_return": 0.583932
         },
         "_paper_causal_dqn_sebulba": {
           "type": "proposed",

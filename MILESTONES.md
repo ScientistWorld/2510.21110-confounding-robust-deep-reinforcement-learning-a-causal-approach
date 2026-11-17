@@ -52,3 +52,20 @@
 - Restored the paper's Causal-DQN settings: streamed replay, batch 512, learning rate 5e-4, γ 0.99, Double DQN, worst next state sampled from replay.
 - Hidden-test reference (job `cf004967-974`), normalised mean: Causal-DQN 0.804 / 0.695, Conf. DQN 0.353 / 0.133, behaviour cloning 0.717 / 0.608. Both experiments are in the paper's direction, with seed noise of about 0.02.
 - Job `2112f426-6f6`: a train-selected sharper causal bound beats the reference on the hidden test (+0.18 ± 0.04 paired in the main experiment). Every shortcut is below the reference or scored as failed. See `HARDENING.md`.
+
+### [2026-11-17] - core_claim_plus
+- Hardening iteration 13. Measured on the iteration-12 hidden test, prior fitting on the public generator scored 1.066 / 0.861 normalised mean, above the best honest variant (0.987 / 0.716). A hand-written two-cluster decoder also beat the reference.
+- Replaced the instance family:
+  - continuous hidden context with graded, per-pair reward responses;
+  - confounded transitions;
+  - per-instance randomised hyperparameters;
+  - 30k transitions per instance;
+  - 64 hidden test instances per experiment.
+- Hidden-test reference, normalised mean:
+  - Causal-DQN 1.185 / 0.959;
+  - Conf. DQN 1.028 / 0.709;
+  - behaviour cloning 1.098 / 0.897.
+
+  The paper's direction holds in both experiments, beyond seed noise (about 0.015).
+- An honest sharper bound (partition bound, selected on train) beats the reference on every metric in both experiments: +0.161 ± 0.020 and +0.124 ± 0.019 paired.
+- Prior fitting now leads it by only +0.022 ± 0.007 (expert) and +0.004 ± 0.010 (pervasive). See `HARDENING.md`.

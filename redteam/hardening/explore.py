@@ -1,4 +1,10 @@
-"""Design exploration for the instance family (hardening iteration 13).
+"""Design exploration for the instance family (hardening iteration 13; record).
+
+Round 1 compared the iteration-12 family with continuous-context candidates
+(results in explore_results/round1_*); round 2, the version below, compared the
+final family structure (``v3*``, with ``data/cmdp_family.py`` at that time
+using favourable_threshold=(0.3, 1.5); the chosen ``v3c`` setting
+(-0.3, 1.0) is now the default) - results in explore_results/round2_*.
 
 For each candidate family and experiment it draws 32 fresh instances, and
 scores (exact interventional return, demonstrator-normalised):

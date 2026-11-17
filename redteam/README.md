@@ -1,4 +1,10 @@
-> **Note (iteration 12).** This audit targeted the earlier 6-state gym (`data/confounded_cmdp.py`, removed). Its harness no longer runs against the rebuilt gym; the post-hardening checks are in `redteam/hardening/` and are summarised in `HARDENING.md`.
+> **Note (iterations 12-13).** This audit targeted the earlier 6-state gym (`data/confounded_cmdp.py`, removed). Its harness no longer runs against the rebuilt gym. The post-hardening checks are in `redteam/hardening/`:
+> - `suite.py`: cases and summary;
+> - `prior_fit.py` and `hand_decode.py`: the generator-prior shortcuts;
+> - `tabular.py`: the honest bounds;
+> - `explore.py`: the family-design exploration.
+>
+> They are summarised in `HARDENING.md`. The iteration-12 case results are kept in `redteam/hardening/results_iter12/`.
 
 This audit runs only on a compute node. Run `python -m redteam.run_suite` from
 the repository root, or invoke a case's `run.sh`. Each case installs ordinary

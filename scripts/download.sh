@@ -9,6 +9,7 @@
 # demonstration datasets (data/train/*.json, data/test/*.json) are small,
 # agent-authored files committed to git. The public training split can be
 # rebuilt with:  PYTHONPATH=. python eval/train/build_train_split.py --force
+# (about 23 MB of logs for train + test and 35 MB of true dynamics in eval/).
 # Python dependencies (numpy, torch) are installed by environment/setup.sh.
 
 set -e

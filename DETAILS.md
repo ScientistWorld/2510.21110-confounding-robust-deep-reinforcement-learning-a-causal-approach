@@ -6,48 +6,44 @@ The paper (Li, Zhang & Bareinboim, "Confounding Robust Deep Reinforcement Learni
 
 The workspace scales that experiment down to a procedurally generated family of confounded MDPs:
 
-- The demonstrator sees a hidden context; the learner does not.
-- 32 public train instances and 32 held-out test instances per experiment.
-- Policies are scored by exact interventional return, normalised per instance as in the paper's Table 1.
+- The demonstrator sees a hidden context drawn afresh at every step from a continuous space; the learner does not. Every action's reward and transitions react to the context, to a degree that differs by state-action pair.
+- 32 public train instances and 64 held-out test instances per experiment, 30,000 logged transitions each.
+- Policies are scored by exact interventional return, normalised per instance as in the paper's Table 1 (random 0, demonstrator 1).
 
 ## Reproduced claim (hidden test, 3 runs)
 
 Causal-DQN clearly beats the paper's Conf. DQN baseline in both experiments:
 
-- normalised mean 0.80 vs 0.35 in `confounded_expert_demos`;
-- 0.69 vs 0.13 in `pervasive_confounding`.
+- normalised mean 1.18 vs 1.03 in `confounded_expert_demos`;
+- 0.96 vs 0.71 in `pervasive_confounding`.
 
-It also beats a behaviour-cloning floor (0.72 / 0.61) and has a much better worst decile. It does not reach the best achievable policy (1.18 / 1.05), so there is headroom. In the second experiment it falls further short, matching the paper's own weaker results with a stronger, more information-reliant demonstrator (Appendix E).
-
----
+It also beats a behaviour-cloning floor (1.10 / 0.90) and has a much better worst decile (0.76 / 0.67 against 0.52 / 0.27 for Conf. DQN). It does not reach the best achievable policy (1.42 / 1.18), so there is headroom. The paper's own numbers are on a different scale: here the demonstrator is noisy, so a learner can exceed it, as Causal-DQN does in 7 of the paper's 12 games.
 
 # Problem
 
 Learn a control policy from logged demonstrations when the demonstrator acted on information the learner cannot see.
 
-Each problem instance is a finite Markov decision process with 30 observed states and 4 actions. At every step an unobserved context (one of 3 values, with a state-dependent distribution) is drawn afresh. The context changes both the reward and the next-state distribution of every action. The demonstrator sees the context and chooses actions with it: it is capable but imperfect. The learner sees only the observed state (given as an id and a 16-dimensional feature vector), the logged action, the reward, the next observed state, and whether the episode ended. Because the hidden context drives both the logged action and its outcome, the log overstates how well some actions work when the learner takes them itself.
+Each problem instance is a finite Markov decision process with 30 observed states and 4 actions. At every step an unobserved context is drawn afresh from a state-dependent distribution over a set of points in a continuous context space (12 to 32 points per state, varying by instance). The context changes both the reward and the next-state distribution of every action, smoothly and to a different degree for every state-action pair: each action does better in some region of the context space and worse elsewhere. The demonstrator sees the context and chooses actions with it; it is skilled but noisy. The learner sees only the observed state (given as an id and a 16-dimensional feature vector), the logged action, the reward, the next observed state, and whether the episode ended. Because the hidden context drives both the logged action and its outcome, the log can make an action look much better, or worse, than it is when the learner takes it itself.
 
-The learner never interacts with the environment. For each instance it gets one fixed log of 10,000 consecutive demonstrator transitions and must output one action per observed state. That policy is then executed in the real instance, where the context is still hidden from it.
+The learner never interacts with the environment. For each instance it gets one fixed log of 30,000 consecutive demonstrator transitions and must output one action per observed state. That policy is then executed in the real instance, where the context is still hidden from it.
 
 Known facts about every instance:
 
 - Rewards lie in [-1, 1].
-- Each step ends the episode with probability 0.05, independently of everything else. Episodes start in a uniformly random state.
+- Each step ends the episode with probability 0.05, independently of everything else. Episodes start in a uniformly random state. The score is the expected total reward until the episode ends (no further discounting).
 - With probability `logging_epsilon`, the logged action was replaced by an action drawn uniformly at random, independently of the state, the context and everything else. This is 0.10 in `confounded_expert_demos` and 0.05 in `pervasive_confounding`; the value is stored in each dataset file.
-- The instance family is generated by `data/cmdp_family.py`. That code can produce as many extra development instances as you like.
+- Instances are heterogeneous: how many context points there are and how they are weighted, how strongly each action reacts to the context, the reward noise, and the demonstrator's skill and decisiveness are drawn per instance. The family is generated by `data/cmdp_family.py`.
 
 Experiments:
 
-- `confounded_expert_demos`: the demonstrator uses the hidden context for part of its choices.
-- `pervasive_confounding`: the demonstrator relies on the hidden context more often, and fewer logged actions are random.
+- `confounded_expert_demos`: actions react moderately to the hidden context.
+- `pervasive_confounding`: actions react more strongly to the hidden context, so the demonstrator relies on it more, and fewer logged actions are random.
 
 Data:
 
 - `data/train/<experiment>.json`: 32 public training instances per experiment. Their true dynamics are in `eval/train/envs/` for development scoring.
-- `data/test/<experiment>.json`: 32 held-out instances per experiment. Only the logs are public; the true dynamics are not.
+- `data/test/<experiment>.json`: 64 held-out instances per experiment. Only the logs are public; the true dynamics are not.
 - Load either split with `data.cmdp_family.load_dataset(split, experiment)`.
-
----
 
 # Method
 
@@ -69,15 +65,13 @@ The implementation is `method/causal_dqn.py`. It keeps the paper's procedure and
 - Batch size 512, Adam with learning rate 5e-4, discount 0.99, Double DQN with a target network refreshed every 500 updates.
 - 64 sampled candidates for the worst next state.
 - The Q-network is an MLP over the state features: 16 → 128 → 128 → 4.
-- 30,000 updates over the 10,000-transition log.
+- 30,000 updates over the 30,000-transition log (one update per logged transition; the paper's 1M steps give 50,000 updates at one update per 20 steps).
 - One independent network per instance, trained in a batch on GPU.
 
 ## Baselines
 
 - **`baseline/confounded_dqn.py`:** the paper's Conf. DQN. It uses the same data, network, optimiser and scale, with the standard DQN loss on the logged action only.
 - **`baseline/behavior_cloning.py`:** not in the paper. It picks the most frequent logged action per state and serves as a reward-free sanity floor.
-
----
 
 # Evaluation
 
@@ -91,7 +85,7 @@ checkpoints/<method>/<experiment>/run<k>.json
 ```
 
 - There is one integer action in `[0, 4)` per observed state.
-- Every instance id of both splits must be present (`train_00`..`train_31`, `test_00`..`test_31`).
+- Every instance id of both splits must be present (`train_00`..`train_31`, `test_00`..`test_63`).
 - The three runs are independent repetitions of the method (for example, different seeds). A deterministic method may write the same policy three times.
 - Any other files or keys are ignored.
 
@@ -99,10 +93,10 @@ checkpoints/<method>/<experiment>/run<k>.json
 
 Scores are computed only from these policies:
 
-- **Exact return.** Each policy's expected interventional return (total reward until termination) is computed exactly from the instance's true dynamics. There is no rollout noise.
-- **Per-instance normalisation.** Each return is normalised as `(return - random) / (demonstrator - random)`. Here `random` is the uniform-random policy and `demonstrator` is the logging demonstrator, who sees the hidden context. A value of 1 matches the demonstrator; values above 1 are possible.
+- **Exact return.** Each policy's expected interventional return (total reward until termination) is computed exactly from the instance's true dynamics, with the hidden context drawn from its true distribution at every step. There is no rollout noise.
+- **Per-instance normalisation.** Each return is normalised as `(return - random) / (demonstrator - random)`. Here `random` is the uniform-random policy and `demonstrator` is the logging demonstrator, who sees the hidden context. A value of 1 matches the demonstrator. The demonstrator is noisy, so values above 1 are common: the best possible observed-state policy averages about 1.42 (`confounded_expert_demos`) and 1.18 (`pervasive_confounding`) on the held-out instances.
 
-Metrics (per experiment, over the 32 instances × 3 runs):
+Metrics (per experiment, over the 64 held-out instances × 3 runs; the train slice uses its 32 instances):
 
 | Metric | Direction | Coefficient | Meaning |
 |---|---|---|---|
