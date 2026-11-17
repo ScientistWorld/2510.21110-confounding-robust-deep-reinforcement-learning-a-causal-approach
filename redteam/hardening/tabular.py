@@ -84,12 +84,20 @@ def _tail(key, vals, alpha, n_sa, starts, ar, lower: bool):
 @torch.no_grad()
 def solve(logs: dict[str, torch.Tensor], S: int, A: int, eps: float, term: float, kind: str,
           iters: int = 600, tol: float = 1e-8, z: float = 2.0, kappa: float = 2.0, lam: float = 0.25,
-          chunk: int = 96) -> np.ndarray:
-    """Fixed point of the chosen Bellman operator for every instance -> Q [N,S,A]."""
+          chunk: int = 96, gamma: float = GAMMA) -> np.ndarray:
+    """Fixed point of the chosen Bellman operator for every instance -> Q [N,S,A].
+
+    ``gamma`` is an extra discount on top of the documented termination
+    probability (the scored return is undiscounted until termination, i.e.
+    gamma = 1; 0.99 is the paper's DQN discount). Use gamma = 1 only with the
+    sharp/partition kinds, which discount by the known continuation
+    probability and therefore always contract.
+    """
     N = logs["state"].shape[0]
     if N > chunk:
         return np.concatenate([
-            solve({k: v[i:i + chunk] for k, v in logs.items()}, S, A, eps, term, kind, iters, tol, z, kappa, lam, chunk)
+            solve({k: v[i:i + chunk] for k, v in logs.items()}, S, A, eps, term, kind, iters, tol, z, kappa, lam, chunk,
+                  gamma)
             for i in range(0, N, chunk)])
     s, x, s2 = logs["state"], logs["action"], logs["next_state"]
     y, d = logs["reward"].double(), logs["done"].double()
@@ -121,14 +129,14 @@ def solve(logs: dict[str, torch.Tensor], S: int, A: int, eps: float, term: float
                             "partition_lcb", "hurwicz_partition")
     for _ in range(iters):
         Vn = V.gather(1, s2)
-        vals = y + GAMMA * cont * Vn if sharp_family else y + GAMMA * (1.0 - d) * Vn
+        vals = y + gamma * cont * Vn if sharp_family else y + gamma * (1.0 - d) * Vn
         vmin = torch.where(seen, V, inf).min(1).values[:, None]
         mean = zeros.clone().scatter_add_(1, key, vals) / n_sa.clamp(min=1.0)
-        fallback = (FLOOR + GAMMA * vmin).expand(N, SA)
+        fallback = (FLOOR + gamma * vmin).expand(N, SA)
         if kind == "nominal":
             Q = torch.where(has, mean, fallback)
         elif kind == "manski":
-            Q = torch.where(has, p_sa * mean + (1 - p_sa) * (FLOOR + GAMMA * cont_sa * vmin), fallback)
+            Q = torch.where(has, p_sa * mean + (1 - p_sa) * (FLOOR + gamma * cont_sa * vmin), fallback)
         elif kind.startswith("partition") or kind == "hurwicz_partition":
             Qt = _partition(key, vals, mean, p_sa, eps, A, alpha, n_sa, starts, ar, lower=(kind != "partition_upper"))
             if kind == "hurwicz_partition":
@@ -138,7 +146,7 @@ def solve(logs: dict[str, torch.Tensor], S: int, A: int, eps: float, term: float
                 sq = zeros.clone().scatter_add_(1, key, vals ** 2)
                 var = (sq - n_sa * mean ** 2) / (n_sa - 1.0).clamp(min=1.0)
                 sd = torch.where(n_sa > 1, var.clamp(min=0.0).sqrt(), torch.full_like(var, 2.0))
-                manski = p_sa * mean + (1 - p_sa) * (FLOOR + GAMMA * cont * vmin)
+                manski = p_sa * mean + (1 - p_sa) * (FLOOR + gamma * cont * vmin)
                 Qt = torch.maximum(Qt - kappa * sd / n_sa.clamp(min=1.0).sqrt(), manski)
             Q = torch.where(has, Qt, fallback)
         else:
@@ -154,7 +162,7 @@ def solve(logs: dict[str, torch.Tensor], S: int, A: int, eps: float, term: float
                 var = (sq - n_sa * mean ** 2) / (n_sa - 1.0).clamp(min=1.0)
                 sd = torch.where(n_sa > 1, var.clamp(min=0.0).sqrt(), torch.full_like(var, 2.0))
                 lcb = Qt - kappa * sd / n_sa.clamp(min=1.0).sqrt()
-                manski = p_sa * mean + (1 - p_sa) * (FLOOR + GAMMA * cont * vmin)
+                manski = p_sa * mean + (1 - p_sa) * (FLOOR + gamma * cont * vmin)
                 Qt = torch.maximum(lcb, manski)
             Q = torch.where(has & (den > 0), Qt, fallback)
         V_new = Q.view(N, S, A).max(-1).values

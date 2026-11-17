@@ -6,6 +6,7 @@ reference (``checkpoints/causal_dqn``) and baselines (``checkpoints/conf_dqn``,
 
     PYTHONPATH=. python -m redteam.hardening.suite train     # extra runs, variants, shortcut policies
     PYTHONPATH=. python -m redteam.hardening.suite cases     # hidden-test cases
+    PYTHONPATH=. python -m redteam.hardening.suite grid      # rescore-only honest grid (gamma, Hurwicz weight)
     PYTHONPATH=. python -m redteam.hardening.suite summary   # tables
 
 Every case is scored by ``bash scripts/evaluate_test.sh`` with no arguments,
@@ -97,6 +98,22 @@ TABULAR = {
     "better_sharp_lcb": ("sharp_lcb", {"kappa": 2.0}),
     "variant_causal_tabular": ("manski", {}),
     "shortcut_nominal_planning": ("nominal", {}),
+}
+
+
+# Follow-up grid (rescoring only): the same honest bounds planned on the scored
+# objective (gamma = 1: undiscounted until the documented termination) and a
+# few Hurwicz weights. Which one to call "the" honest improvement is decided on
+# the public train split only (see stage_summary).
+TABULAR_GRID = {
+    "better_partition_lcb_g1": ("partition_lcb", {"kappa": 1.0, "gamma": 1.0}),
+    "better_partition_lcb_g1_k2": ("partition_lcb", {"kappa": 2.0, "gamma": 1.0}),
+    "better_partition_g1": ("partition", {"gamma": 1.0}),
+    "better_hurwicz_partition_g1_l15": ("hurwicz_partition", {"lam": 0.15, "gamma": 1.0}),
+    "better_hurwicz_partition_g1_l25": ("hurwicz_partition", {"lam": 0.25, "gamma": 1.0}),
+    "better_hurwicz_partition_g1_l35": ("hurwicz_partition", {"lam": 0.35, "gamma": 1.0}),
+    "better_hurwicz_partition_l15": ("hurwicz_partition", {"lam": 0.15}),
+    "better_hurwicz_partition_l35": ("hurwicz_partition", {"lam": 0.35}),
 }
 
 
@@ -373,6 +390,21 @@ def stage_cases():
     print("stage cases done", flush=True)
 
 
+def stage_grid():
+    """Rescore-only follow-up: extra honest tabular variants as one case."""
+    for name, (kind, kw) in TABULAR_GRID.items():
+        if not (RUNS / name).exists():
+            t0 = time.time()
+            write_runs(RUNS / name, {e: [p] * 3 for e, p in tabular_policies(kind, kw).items()})
+            print(f"{name}: {time.time() - t0:.0f}s", flush=True)
+    run_case("honest_grid", {n: RUNS / n for n in TABULAR_GRID})
+    install({})
+    sh(["bash", "scripts/evaluate_train.sh"], log=RESULTS / "final_train.log")
+    sh(["bash", "scripts/evaluate_test.sh"], log=RESULTS / "final_test.log")
+    sh(["bash", "scripts/evaluate.sh"], log=RESULTS / "final_dev.log")
+    print("stage grid done", flush=True)
+
+
 # ---------------------------------------------------------------------------
 # Stage 3: summary
 # ---------------------------------------------------------------------------
@@ -429,13 +461,22 @@ def stage_summary():
         for m, det in json.loads(f.read_text())["methods"].items():
             if det:
                 detail[m] = det
+    # The honest improvement is chosen on the PUBLIC TRAIN split only:
+    # highest weighted (unnormalised) train score among the better_* variants.
+    def train_score(m):
+        tr = train_rows.get(m)
+        if not tr:
+            return -np.inf
+        return sum(spec["weight"] * sum(abs(ms["coefficient"]) * tr[e][k] for k, ms in spec["metrics"].items())
+                   for e, spec in ref_json.items())
+    honest_best = max((m for m in rows if m.startswith("better_")), key=train_score)
     paired = {}
     for m, det in detail.items():
         paired[m] = {}
         for exp in EXPS:
             a = np.asarray(det[exp]["scores"]).mean(1)
             paired[m][exp] = {"vs_reference": _paired(a, np.asarray(detail["causal_dqn"][exp]["scores"]).mean(1))}
-            for other in ("better_partition_lcb", "better_hurwicz_partition"):
+            for other in ("better_partition_lcb", "better_hurwicz_partition", honest_best):
                 if other in detail and m != other:
                     paired[m][exp][f"vs_{other}"] = _paired(a, np.asarray(detail[other][exp]["scores"]).mean(1))
     bounds = json.loads((RUNS / "_detail_reference.json").read_text())["bounds"]
@@ -443,7 +484,7 @@ def stage_summary():
                     "worst_policy_mean": float(np.mean(b["worst_policy_normalized"]))}
               for exp, b in bounds.items()}
     seeds = {f"seed_causal_{k}": rows[f"seed_causal_{k}"] for k in range(6) if f"seed_causal_{k}" in rows}
-    summary = {"cohorts": cohorts, "std": {f"{c}/{e}/{m}": v for (c, e, m), v in stds.items()},
+    summary = {"honest_best_selected_on_train": honest_best, "cohorts": cohorts, "std": {f"{c}/{e}/{m}": v for (c, e, m), v in stds.items()},
                "table": table, "paired": paired, "test_bounds": oracle, "per_seed": seeds}
     (RESULTS / "summary.json").write_text(json.dumps(summary, indent=2))
     for m in sorted(table, key=lambda k: -table[k]["rank_vs_reference"]):
@@ -459,7 +500,8 @@ def stage_summary():
         print(m, json.dumps({e: {k: f"{v['mean_diff']:+.3f}±{v['se']:.3f} ({v['wins']}/{v['losses']})"
                                  for k, v in x.items()} for e, x in d.items()}))
     print(json.dumps(oracle, indent=1))
+    print("honest improvement selected on train:", honest_best, f"(train score {train_score(honest_best):.3f})")
 
 
 if __name__ == "__main__":
-    {"train": stage_train, "cases": stage_cases, "summary": stage_summary}[sys.argv[1]]()
+    {"train": stage_train, "cases": stage_cases, "grid": stage_grid, "summary": stage_summary}[sys.argv[1]]()
