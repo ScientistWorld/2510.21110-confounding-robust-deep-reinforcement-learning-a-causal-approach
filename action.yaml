@@ -1,8 +1,6 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: submit
-gpus: 1
-test: true
+action: done
 milestone: core_claim_plus
-notes: "Rescore-only: grid of honest tabular variants (gamma=1 scored objective, Hurwicz weights) through the hidden test; train-selected honest best vs prior-fit shortcut."
+notes: "Hardening 13: replaced the decodable instance family (prior fit had beaten honest best by 0.08/0.15); new hidden test (64 inst.) keeps the paper's claim, honest partition bound beats reference on all metrics in both experiments (+0.16/+0.12, ~7σ); prior-fit residual +0.022±0.007 (expert only) documented."
