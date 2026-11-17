@@ -1,0 +1,136 @@
+{
+  "_slice": "train",
+  "_status": {
+    "behavior_cloning": "ok",
+    "better_hurwicz_partition_g1_l15": "ok",
+    "better_hurwicz_partition_g1_l25": "ok",
+    "better_hurwicz_partition_g1_l35": "ok",
+    "better_hurwicz_partition_l15": "ok",
+    "better_hurwicz_partition_l35": "ok",
+    "better_partition_g1": "ok",
+    "better_partition_lcb_g1": "ok",
+    "better_partition_lcb_g1_k2": "ok",
+    "causal_dqn": "ok",
+    "conf_dqn": "ok"
+  },
+  "experiments": {
+    "confounded_expert_demos": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 1.0793744009914699,
+          "normalized_iqm_return": 1.0689118281517402,
+          "worst_decile_normalized_return": 0.8018087473865542
+        },
+        "better_hurwicz_partition_g1_l15": {
+          "normalized_mean_return": 1.3445715780189502,
+          "normalized_iqm_return": 1.348765312428382,
+          "worst_decile_normalized_return": 0.9775264365974111
+        },
+        "better_hurwicz_partition_g1_l25": {
+          "normalized_mean_return": 1.3426419891025878,
+          "normalized_iqm_return": 1.342119020564013,
+          "worst_decile_normalized_return": 0.9743817294152992
+        },
+        "better_hurwicz_partition_g1_l35": {
+          "normalized_mean_return": 1.3160229530386232,
+          "normalized_iqm_return": 1.3100751410412912,
+          "worst_decile_normalized_return": 0.9081831358802436
+        },
+        "better_hurwicz_partition_l15": {
+          "normalized_mean_return": 1.3446847615268762,
+          "normalized_iqm_return": 1.349291678254214,
+          "worst_decile_normalized_return": 0.976086442309508
+        },
+        "better_hurwicz_partition_l35": {
+          "normalized_mean_return": 1.3133757481033819,
+          "normalized_iqm_return": 1.3100751410412912,
+          "worst_decile_normalized_return": 0.9073580235129581
+        },
+        "better_partition_g1": {
+          "normalized_mean_return": 1.3408322440742977,
+          "normalized_iqm_return": 1.346368358499257,
+          "worst_decile_normalized_return": 0.9796414130960656
+        },
+        "better_partition_lcb_g1": {
+          "normalized_mean_return": 1.3302961794115014,
+          "normalized_iqm_return": 1.338653522544975,
+          "worst_decile_normalized_return": 0.9797209914482312
+        },
+        "better_partition_lcb_g1_k2": {
+          "normalized_mean_return": 1.3290915172565267,
+          "normalized_iqm_return": 1.3352041571910815,
+          "worst_decile_normalized_return": 0.9867875512388593
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 1.1632442534281258,
+          "normalized_iqm_return": 1.1558891679839058,
+          "worst_decile_normalized_return": 0.8486692296905776
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.974126924342852,
+          "normalized_iqm_return": 0.9881050733462043,
+          "worst_decile_normalized_return": 0.43763820150556143
+        }
+      }
+    },
+    "pervasive_confounding": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.8882764024136746,
+          "normalized_iqm_return": 0.9043724015007433,
+          "worst_decile_normalized_return": 0.5449612016259268
+        },
+        "better_hurwicz_partition_g1_l15": {
+          "normalized_mean_return": 1.0418463368519029,
+          "normalized_iqm_return": 1.0623268512938553,
+          "worst_decile_normalized_return": 0.6682149415086822
+        },
+        "better_hurwicz_partition_g1_l25": {
+          "normalized_mean_return": 1.0443954137191482,
+          "normalized_iqm_return": 1.0694730525015421,
+          "worst_decile_normalized_return": 0.6518361495184651
+        },
+        "better_hurwicz_partition_g1_l35": {
+          "normalized_mean_return": 1.0324947281626935,
+          "normalized_iqm_return": 1.0661459302068939,
+          "worst_decile_normalized_return": 0.6404655283285814
+        },
+        "better_hurwicz_partition_l15": {
+          "normalized_mean_return": 1.0444928960766209,
+          "normalized_iqm_return": 1.0638797627317393,
+          "worst_decile_normalized_return": 0.6682149415086822
+        },
+        "better_hurwicz_partition_l35": {
+          "normalized_mean_return": 1.0321654934886688,
+          "normalized_iqm_return": 1.0654874608588445,
+          "worst_decile_normalized_return": 0.6404655283285814
+        },
+        "better_partition_g1": {
+          "normalized_mean_return": 1.03000400580601,
+          "normalized_iqm_return": 1.0467130682715224,
+          "worst_decile_normalized_return": 0.6750714084371974
+        },
+        "better_partition_lcb_g1": {
+          "normalized_mean_return": 1.0315293643644126,
+          "normalized_iqm_return": 1.0495174384022654,
+          "worst_decile_normalized_return": 0.6586683951216691
+        },
+        "better_partition_lcb_g1_k2": {
+          "normalized_mean_return": 1.0281830325311507,
+          "normalized_iqm_return": 1.044038523726964,
+          "worst_decile_normalized_return": 0.6586683951216691
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.9467816632088951,
+          "normalized_iqm_return": 0.9822534958187488,
+          "worst_decile_normalized_return": 0.5745194260849685
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.6711335749088666,
+          "normalized_iqm_return": 0.6632918358221337,
+          "worst_decile_normalized_return": 0.33841814464936537
+        }
+      }
+    }
+  }
+}

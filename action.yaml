@@ -3,6 +3,6 @@
 # only after your turn ends.
 action: submit
 gpus: 1
-test: false
+test: true
 milestone: core_claim_plus
-notes: "Final hardening job: rebuild train/test splits on the new instance family, train Causal-DQN and baselines (3 runs), run honest variants, prior-fit/hand-decode and all other shortcuts through the hidden test, summarize."
+notes: "Rescore-only: grid of honest tabular variants (gamma=1 scored objective, Hurwicz weights) through the hidden test; train-selected honest best vs prior-fit shortcut."
