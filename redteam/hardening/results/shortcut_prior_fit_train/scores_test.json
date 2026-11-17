@@ -1,0 +1,59 @@
+{
+  "_slice": "test",
+  "_status": {
+    "behavior_cloning": "ok",
+    "causal_dqn": "ok",
+    "conf_dqn": "ok",
+    "shortcut_prior_fit_train": "ok"
+  },
+  "experiments": {
+    "confounded_expert_demos": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 1.097511526372842,
+          "normalized_iqm_return": 1.0965047080633437,
+          "worst_decile_normalized_return": 0.6463185845955572
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 1.184855899662869,
+          "normalized_iqm_return": 1.181121840745507,
+          "worst_decile_normalized_return": 0.7603560426727177
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 1.0276083241966292,
+          "normalized_iqm_return": 1.0043265476363723,
+          "worst_decile_normalized_return": 0.5227638963735907
+        },
+        "shortcut_prior_fit_train": {
+          "normalized_mean_return": 1.3581087963986276,
+          "normalized_iqm_return": 1.34856320748408,
+          "worst_decile_normalized_return": 0.9271499496985295
+        }
+      }
+    },
+    "pervasive_confounding": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.8971943389423238,
+          "normalized_iqm_return": 0.8915088689856102,
+          "worst_decile_normalized_return": 0.5839324681910775
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.9588476247293961,
+          "normalized_iqm_return": 0.9482476555428839,
+          "worst_decile_normalized_return": 0.6700487354171643
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.7092853912062133,
+          "normalized_iqm_return": 0.6891164547336448,
+          "worst_decile_normalized_return": 0.2675092612988069
+        },
+        "shortcut_prior_fit_train": {
+          "normalized_mean_return": 1.068458654797805,
+          "normalized_iqm_return": 1.0539385639815197,
+          "worst_decile_normalized_return": 0.7441713461383699
+        }
+      }
+    }
+  }
+}

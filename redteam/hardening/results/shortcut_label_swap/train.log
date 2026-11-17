@@ -1,0 +1,59 @@
+{
+  "_slice": "train",
+  "_status": {
+    "behavior_cloning": "ok",
+    "causal_dqn": "ok",
+    "conf_dqn": "ok",
+    "shortcut_label_swap": "ok"
+  },
+  "experiments": {
+    "confounded_expert_demos": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 1.0793744009914699,
+          "normalized_iqm_return": 1.0689118281517402,
+          "worst_decile_normalized_return": 0.8018087473865542
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 1.1632442534281258,
+          "normalized_iqm_return": 1.1558891679839058,
+          "worst_decile_normalized_return": 0.8486692296905776
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.974126924342852,
+          "normalized_iqm_return": 0.9881050733462043,
+          "worst_decile_normalized_return": 0.43763820150556143
+        },
+        "shortcut_label_swap": {
+          "normalized_mean_return": -0.020955336855070738,
+          "normalized_iqm_return": 0.021929132086788455,
+          "worst_decile_normalized_return": -0.43898593233640143
+        }
+      }
+    },
+    "pervasive_confounding": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.8882764024136746,
+          "normalized_iqm_return": 0.9043724015007433,
+          "worst_decile_normalized_return": 0.5449612016259268
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.9467816632088951,
+          "normalized_iqm_return": 0.9822534958187488,
+          "worst_decile_normalized_return": 0.5745194260849685
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.6711335749088666,
+          "normalized_iqm_return": 0.6632918358221337,
+          "worst_decile_normalized_return": 0.33841814464936537
+        },
+        "shortcut_label_swap": {
+          "normalized_mean_return": 0.036514951701640916,
+          "normalized_iqm_return": 0.042764530049508066,
+          "worst_decile_normalized_return": -0.41150004017029645
+        }
+      }
+    }
+  }
+}

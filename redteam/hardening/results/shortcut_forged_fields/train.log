@@ -1,0 +1,59 @@
+{
+  "_slice": "train",
+  "_status": {
+    "behavior_cloning": "ok",
+    "causal_dqn": "ok",
+    "conf_dqn": "ok",
+    "shortcut_forged_fields": "ok"
+  },
+  "experiments": {
+    "confounded_expert_demos": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 1.0793744009914699,
+          "normalized_iqm_return": 1.0689118281517402,
+          "worst_decile_normalized_return": 0.8018087473865542
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 1.1632442534281258,
+          "normalized_iqm_return": 1.1558891679839058,
+          "worst_decile_normalized_return": 0.8486692296905776
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.974126924342852,
+          "normalized_iqm_return": 0.9881050733462043,
+          "worst_decile_normalized_return": 0.43763820150556143
+        },
+        "shortcut_forged_fields": {
+          "normalized_mean_return": -0.0442017605534531,
+          "normalized_iqm_return": -0.025703662624978738,
+          "worst_decile_normalized_return": -0.5663613435948622
+        }
+      }
+    },
+    "pervasive_confounding": {
+      "results": {
+        "behavior_cloning": {
+          "normalized_mean_return": 0.8882764024136746,
+          "normalized_iqm_return": 0.9043724015007433,
+          "worst_decile_normalized_return": 0.5449612016259268
+        },
+        "causal_dqn": {
+          "normalized_mean_return": 0.9467816632088951,
+          "normalized_iqm_return": 0.9822534958187488,
+          "worst_decile_normalized_return": 0.5745194260849685
+        },
+        "conf_dqn": {
+          "normalized_mean_return": 0.6711335749088666,
+          "normalized_iqm_return": 0.6632918358221337,
+          "worst_decile_normalized_return": 0.33841814464936537
+        },
+        "shortcut_forged_fields": {
+          "normalized_mean_return": -0.009620114420504535,
+          "normalized_iqm_return": -0.013118755113853976,
+          "worst_decile_normalized_return": -0.43076962536976027
+        }
+      }
+    }
+  }
+}

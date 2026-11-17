@@ -1,0 +1,2373 @@
+{
+  "cohorts": {
+    "all_attempts": [
+      "behavior_cloning",
+      "better_ensemble",
+      "better_hurwicz_partition",
+      "better_partition",
+      "better_partition_lcb",
+      "better_sharp_lcb",
+      "causal_dqn",
+      "causal_dqn_rep2",
+      "conf_dqn",
+      "stronger_x3_updates",
+      "variant_causal_tabular",
+      "weaker_paper_replay_ratio",
+      "weaker_third_updates",
+      "shortcut_constant_action",
+      "shortcut_data_edit",
+      "shortcut_extra_runs",
+      "shortcut_forged_fields",
+      "shortcut_hand_decode",
+      "shortcut_invalid_action",
+      "shortcut_label_swap",
+      "shortcut_missing_experiment",
+      "shortcut_missing_states",
+      "shortcut_nominal_planning",
+      "shortcut_null_action",
+      "shortcut_prior_fit",
+      "shortcut_prior_fit_model",
+      "shortcut_prior_fit_train",
+      "shortcut_train_oracle"
+    ],
+    "honest_only": [
+      "behavior_cloning",
+      "better_ensemble",
+      "better_hurwicz_partition",
+      "better_partition",
+      "better_partition_lcb",
+      "better_sharp_lcb",
+      "causal_dqn",
+      "causal_dqn_rep2",
+      "conf_dqn",
+      "stronger_x3_updates",
+      "variant_causal_tabular",
+      "weaker_paper_replay_ratio",
+      "weaker_third_updates"
+    ]
+  },
+  "std": {
+    "all_attempts/confounded_expert_demos/normalized_mean_return": 0.9687794487984543,
+    "all_attempts/confounded_expert_demos/normalized_iqm_return": 0.9554078901901474,
+    "all_attempts/confounded_expert_demos/worst_decile_normalized_return": 1.033579983680414,
+    "all_attempts/pervasive_confounding/normalized_mean_return": 0.7796543790141724,
+    "all_attempts/pervasive_confounding/normalized_iqm_return": 0.7594712990323661,
+    "all_attempts/pervasive_confounding/worst_decile_normalized_return": 0.8812175736203254,
+    "honest_only/confounded_expert_demos/normalized_mean_return": 0.09034146859767739,
+    "honest_only/confounded_expert_demos/normalized_iqm_return": 0.0900982874487738,
+    "honest_only/confounded_expert_demos/worst_decile_normalized_return": 0.1102256109807203,
+    "honest_only/pervasive_confounding/normalized_mean_return": 0.09226330255360714,
+    "honest_only/pervasive_confounding/normalized_iqm_return": 0.08986600041619884,
+    "honest_only/pervasive_confounding/worst_decile_normalized_return": 0.12506511279613416
+  },
+  "table": {
+    "behavior_cloning": {
+      "rank_vs_reference": -0.17745131506655062,
+      "rank_vs_reference_honest_cohort": -1.6409507271155692,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.097511526372842,
+          "normalized_iqm_return": 1.0965047080633437,
+          "worst_decile_normalized_return": 0.6463185845955572
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.8971943389423238,
+          "normalized_iqm_return": 0.8915088689856102,
+          "worst_decile_normalized_return": 0.5839324681910775
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.0793744009914699,
+          "normalized_iqm_return": 1.0689118281517402,
+          "worst_decile_normalized_return": 0.8018087473865542
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.8882764024136746,
+          "normalized_iqm_return": 0.9043724015007433,
+          "worst_decile_normalized_return": 0.5449612016259268
+        }
+      }
+    },
+    "better_ensemble": {
+      "rank_vs_reference": -0.008247000795512736,
+      "rank_vs_reference_honest_cohort": -0.05260745585368196,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1889989644513934,
+          "normalized_iqm_return": 1.1884051614249922,
+          "worst_decile_normalized_return": 0.7624739516200423
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9502494131693605,
+          "normalized_iqm_return": 0.9426398590994527,
+          "worst_decile_normalized_return": 0.6508617741194436
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.159419952779653,
+          "normalized_iqm_return": 1.1487451409289586,
+          "worst_decile_normalized_return": 0.8734537275290899
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9529746950210628,
+          "normalized_iqm_return": 0.9917697650434718,
+          "worst_decile_normalized_return": 0.5762679707767324
+        }
+      }
+    },
+    "better_hurwicz_partition": {
+      "rank_vs_reference": 0.28969171472394084,
+      "rank_vs_reference_honest_cohort": 2.7154989117395067,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3447730444931156,
+          "normalized_iqm_return": 1.3346082338130731,
+          "worst_decile_normalized_return": 0.8983802538549023
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.0747010496849319,
+          "normalized_iqm_return": 1.0471473054078777,
+          "worst_decile_normalized_return": 0.7643582686465681
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3430941289346663,
+          "normalized_iqm_return": 1.342119020564013,
+          "worst_decile_normalized_return": 0.9743817294152992
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.043487152897137,
+          "normalized_iqm_return": 1.0690203217056864,
+          "worst_decile_normalized_return": 0.6518361495184651
+        }
+      }
+    },
+    "better_partition": {
+      "rank_vs_reference": 0.28445120786031,
+      "rank_vs_reference_honest_cohort": 2.6602878663382437,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3335061987702572,
+          "normalized_iqm_return": 1.3210624819737349,
+          "worst_decile_normalized_return": 0.9318197562493081
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.0710970306752643,
+          "normalized_iqm_return": 1.047368661262331,
+          "worst_decile_normalized_return": 0.7582571166382003
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3411470890866812,
+          "normalized_iqm_return": 1.347052299921604,
+          "worst_decile_normalized_return": 0.9796381660367646
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.0291684209724472,
+          "normalized_iqm_return": 1.0467743872368414,
+          "worst_decile_normalized_return": 0.6804266394054752
+        }
+      }
+    },
+    "better_partition_lcb": {
+      "rank_vs_reference": 0.28859618421262817,
+      "rank_vs_reference_honest_cohort": 2.7067344737460215,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3374366496429835,
+          "normalized_iqm_return": 1.3240614720461454,
+          "worst_decile_normalized_return": 0.9471407722224355
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.06998596938481,
+          "normalized_iqm_return": 1.045966654903208,
+          "worst_decile_normalized_return": 0.7540269425230681
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3305395515768554,
+          "normalized_iqm_return": 1.3391402668756829,
+          "worst_decile_normalized_return": 0.9797209914482312
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.0317961767911974,
+          "normalized_iqm_return": 1.0495174384022654,
+          "worst_decile_normalized_return": 0.6607946463139948
+        }
+      }
+    },
+    "better_sharp_lcb": {
+      "rank_vs_reference": -0.11162053293072872,
+      "rank_vs_reference_honest_cohort": -0.957699234492686,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1578090000163024,
+          "normalized_iqm_return": 1.1379444148654991,
+          "worst_decile_normalized_return": 0.7637621209128397
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9036076025614053,
+          "normalized_iqm_return": 0.879379037449548,
+          "worst_decile_normalized_return": 0.5675064977382573
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.219750114449861,
+          "normalized_iqm_return": 1.2179477578242017,
+          "worst_decile_normalized_return": 0.8808673901594064
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.887118525141279,
+          "normalized_iqm_return": 0.8762890975017079,
+          "worst_decile_normalized_return": 0.5829881980433725
+        }
+      }
+    },
+    "causal_dqn": {
+      "rank_vs_reference": 0.0,
+      "rank_vs_reference_honest_cohort": 0.0,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.184855899662869,
+          "normalized_iqm_return": 1.181121840745507,
+          "worst_decile_normalized_return": 0.7603560426727177
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9588476247293961,
+          "normalized_iqm_return": 0.9482476555428839,
+          "worst_decile_normalized_return": 0.6700487354171643
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1632442534281258,
+          "normalized_iqm_return": 1.1558891679839058,
+          "worst_decile_normalized_return": 0.8486692296905776
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9467816632088951,
+          "normalized_iqm_return": 0.9822534958187488,
+          "worst_decile_normalized_return": 0.5745194260849685
+        }
+      }
+    },
+    "causal_dqn_rep2": {
+      "rank_vs_reference": -0.01361430231332371,
+      "rank_vs_reference_honest_cohort": -0.14140312710327657,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1701406871249518,
+          "normalized_iqm_return": 1.1700063908174776,
+          "worst_decile_normalized_return": 0.7496110331689685
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9581556815676479,
+          "normalized_iqm_return": 0.9471301941832412,
+          "worst_decile_normalized_return": 0.6711046001226388
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1638472059504583,
+          "normalized_iqm_return": 1.150249972811412,
+          "worst_decile_normalized_return": 0.8688764663441397
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9468783973014601,
+          "normalized_iqm_return": 0.9772040652527662,
+          "worst_decile_normalized_return": 0.580630037247881
+        }
+      }
+    },
+    "conf_dqn": {
+      "rank_vs_reference": -0.5444339287296153,
+      "rank_vs_reference_honest_cohort": -4.77772267597632,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.0276083241966292,
+          "normalized_iqm_return": 1.0043265476363723,
+          "worst_decile_normalized_return": 0.5227638963735907
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.7092853912062133,
+          "normalized_iqm_return": 0.6891164547336448,
+          "worst_decile_normalized_return": 0.2675092612988069
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 0.974126924342852,
+          "normalized_iqm_return": 0.9881050733462043,
+          "worst_decile_normalized_return": 0.43763820150556143
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.6711335749088666,
+          "normalized_iqm_return": 0.6632918358221337,
+          "worst_decile_normalized_return": 0.33841814464936537
+        }
+      }
+    },
+    "seed_causal_0": {
+      "rank_vs_reference": 0.010207992867353324,
+      "rank_vs_reference_honest_cohort": 0.10070680171619859,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.196525155513874,
+          "normalized_iqm_return": 1.191094718532214,
+          "worst_decile_normalized_return": 0.764576860219279
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9573397868270753,
+          "normalized_iqm_return": 0.9403038780082555,
+          "worst_decile_normalized_return": 0.684630140364071
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1680297366943615,
+          "normalized_iqm_return": 1.173885535918558,
+          "worst_decile_normalized_return": 0.8561024358642382
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.943874559422596,
+          "normalized_iqm_return": 0.9776504048281146,
+          "worst_decile_normalized_return": 0.5682625685897085
+        }
+      }
+    },
+    "seed_causal_1": {
+      "rank_vs_reference": -0.009243545884149908,
+      "rank_vs_reference_honest_cohort": -0.10110487316181108,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1748881070708743,
+          "normalized_iqm_return": 1.1662602077306283,
+          "worst_decile_normalized_return": 0.759812239501242
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9582882960175164,
+          "normalized_iqm_return": 0.9430397029155569,
+          "worst_decile_normalized_return": 0.6770785800393856
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1632614950555897,
+          "normalized_iqm_return": 1.1460603136019099,
+          "worst_decile_normalized_return": 0.8567765354051262
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9369323194031366,
+          "normalized_iqm_return": 0.9707013649778103,
+          "worst_decile_normalized_return": 0.5727090201958205
+        }
+      }
+    },
+    "seed_causal_2": {
+      "rank_vs_reference": 0.00024365083438236158,
+      "rank_vs_reference_honest_cohort": 0.011387645931275954,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1831544364038586,
+          "normalized_iqm_return": 1.1859360531904923,
+          "worst_decile_normalized_return": 0.7614848743991537
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9609147913435961,
+          "normalized_iqm_return": 0.9610473042027133,
+          "worst_decile_normalized_return": 0.6490757445980966
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1584415285344258,
+          "normalized_iqm_return": 1.1482821453467509,
+          "worst_decile_normalized_return": 0.8355090728069108
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.959538110800953,
+          "normalized_iqm_return": 0.9987273940475329,
+          "worst_decile_normalized_return": 0.5908610770667089
+        }
+      }
+    },
+    "seed_causal_3": {
+      "rank_vs_reference": -0.009879787868584516,
+      "rank_vs_reference_honest_cohort": -0.1008639625103213,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1724419198181675,
+          "normalized_iqm_return": 1.169405507289459,
+          "worst_decile_normalized_return": 0.7661130047748818
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9598946600441027,
+          "normalized_iqm_return": 0.9461520181472375,
+          "worst_decile_normalized_return": 0.6637706086096972
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1665955806800365,
+          "normalized_iqm_return": 1.144786743373241,
+          "worst_decile_normalized_return": 0.8630101272742434
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.945704556358637,
+          "normalized_iqm_return": 0.9770375954487766,
+          "worst_decile_normalized_return": 0.5870427663071593
+        }
+      }
+    },
+    "seed_causal_4": {
+      "rank_vs_reference": -0.009278475925663693,
+      "rank_vs_reference_honest_cohort": -0.10998121725902361,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1694761207706847,
+          "normalized_iqm_return": 1.1686881242907425,
+          "worst_decile_normalized_return": 0.7556621123785542
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9593986460047134,
+          "normalized_iqm_return": 0.9445987302513114,
+          "worst_decile_normalized_return": 0.6837811544537455
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1631562007525993,
+          "normalized_iqm_return": 1.1518047782891008,
+          "worst_decile_normalized_return": 0.877914725889511
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9478224595916965,
+          "normalized_iqm_return": 0.9744361656893002,
+          "worst_decile_normalized_return": 0.5855663391719418
+        }
+      }
+    },
+    "seed_causal_5": {
+      "rank_vs_reference": -0.020442674062875026,
+      "rank_vs_reference_honest_cohort": -0.2015853590146259,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1685040207860034,
+          "normalized_iqm_return": 1.1724823346249598,
+          "worst_decile_normalized_return": 0.7317431303284351
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9551737386541275,
+          "normalized_iqm_return": 0.9503545037421576,
+          "worst_decile_normalized_return": 0.6659628307076958
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1617898364187387,
+          "normalized_iqm_return": 1.1545204786878747,
+          "worst_decile_normalized_return": 0.8700518081543454
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9471081759540464,
+          "normalized_iqm_return": 0.979923458649958,
+          "worst_decile_normalized_return": 0.5737847090252833
+        }
+      }
+    },
+    "stronger_x3_updates": {
+      "rank_vs_reference": -0.010326028183728042,
+      "rank_vs_reference_honest_cohort": -0.09394955544144157,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1795506785730197,
+          "normalized_iqm_return": 1.1761718900060287,
+          "worst_decile_normalized_return": 0.7515035364544694
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9576191476103575,
+          "normalized_iqm_return": 0.9473467747045218,
+          "worst_decile_normalized_return": 0.6592376762353741
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1642535730818326,
+          "normalized_iqm_return": 1.1561040670176352,
+          "worst_decile_normalized_return": 0.8392366210426833
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9470608581835612,
+          "normalized_iqm_return": 0.9838712448015133,
+          "worst_decile_normalized_return": 0.56347832042131
+        }
+      }
+    },
+    "variant_causal_tabular": {
+      "rank_vs_reference": -0.14663991657653636,
+      "rank_vs_reference_honest_cohort": -1.2926389078902716,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1320526528608015,
+          "normalized_iqm_return": 1.136699321118291,
+          "worst_decile_normalized_return": 0.6910650861434997
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.8968342830205769,
+          "normalized_iqm_return": 0.8987062600558732,
+          "worst_decile_normalized_return": 0.5469393693705369
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1048028408033475,
+          "normalized_iqm_return": 1.109717510433527,
+          "worst_decile_normalized_return": 0.7733172833774061
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.8674414689405662,
+          "normalized_iqm_return": 0.875634465753777,
+          "worst_decile_normalized_return": 0.5903368357576184
+        }
+      }
+    },
+    "weaker_paper_replay_ratio": {
+      "rank_vs_reference": -0.0025817730693578423,
+      "rank_vs_reference_honest_cohort": -0.036190782266615346,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1800148729816209,
+          "normalized_iqm_return": 1.1804622408878631,
+          "worst_decile_normalized_return": 0.7477711852449597
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9591222618945582,
+          "normalized_iqm_return": 0.9453304457044256,
+          "worst_decile_normalized_return": 0.6838573717988737
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1535047280226884,
+          "normalized_iqm_return": 1.1429231643677156,
+          "worst_decile_normalized_return": 0.8603872959641341
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9406706127936175,
+          "normalized_iqm_return": 0.969798290051819,
+          "worst_decile_normalized_return": 0.5980296750169594
+        }
+      }
+    },
+    "weaker_third_updates": {
+      "rank_vs_reference": -0.0022687983683174484,
+      "rank_vs_reference_honest_cohort": -0.022288016186174556,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1836291622410204,
+          "normalized_iqm_return": 1.1848673739793216,
+          "worst_decile_normalized_return": 0.750434817004152
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.9584886499375879,
+          "normalized_iqm_return": 0.9449094800010117,
+          "worst_decile_normalized_return": 0.6739720428749008
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1691384804869687,
+          "normalized_iqm_return": 1.1600703981588634,
+          "worst_decile_normalized_return": 0.8593218317709402
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.952147259170022,
+          "normalized_iqm_return": 0.9880525739898776,
+          "worst_decile_normalized_return": 0.5909486121173673
+        }
+      }
+    },
+    "shortcut_constant_action": {
+      "rank_vs_reference": -2.5059231012184426,
+      "rank_vs_reference_honest_cohort": -23.100669759069284,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -0.02151911352083789,
+          "normalized_iqm_return": -0.017684627422825658,
+          "worst_decile_normalized_return": -0.5100206398957302
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -0.013587627541110045,
+          "normalized_iqm_return": -0.016063172682009266,
+          "worst_decile_normalized_return": -0.46238884304407285
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -0.03260798372805318,
+          "normalized_iqm_return": -0.03006172430458698,
+          "worst_decile_normalized_return": -0.49091447692488865
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.06538834112096645,
+          "normalized_iqm_return": 0.04817626552037341,
+          "worst_decile_normalized_return": -0.17921534548943271
+        }
+      }
+    },
+    "shortcut_data_edit": {
+      "rank_vs_reference": -2.5059231012184426,
+      "rank_vs_reference_honest_cohort": -23.100669759069284,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -0.02151911352083789,
+          "normalized_iqm_return": -0.017684627422825658,
+          "worst_decile_normalized_return": -0.5100206398957302
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -0.013587627541110045,
+          "normalized_iqm_return": -0.016063172682009266,
+          "worst_decile_normalized_return": -0.46238884304407285
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -0.03260798372805318,
+          "normalized_iqm_return": -0.03006172430458698,
+          "worst_decile_normalized_return": -0.49091447692488865
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.06538834112096645,
+          "normalized_iqm_return": 0.04817626552037341,
+          "worst_decile_normalized_return": -0.17921534548943271
+        }
+      }
+    },
+    "shortcut_extra_runs": {
+      "rank_vs_reference": -2.4366675126570083,
+      "rank_vs_reference_honest_cohort": -22.418196195824518,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 0.0381369470993537,
+          "normalized_iqm_return": 0.025447306100229022,
+          "worst_decile_normalized_return": -0.45299114572090365
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -0.007670198477265282,
+          "normalized_iqm_return": -0.008215965634924407,
+          "worst_decile_normalized_return": -0.43768707360309417
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -0.0442017605534531,
+          "normalized_iqm_return": -0.025703662624978738,
+          "worst_decile_normalized_return": -0.5663613435948622
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -0.009620114420504535,
+          "normalized_iqm_return": -0.013118755113853976,
+          "worst_decile_normalized_return": -0.43076962536976027
+        }
+      }
+    },
+    "shortcut_forged_fields": {
+      "rank_vs_reference": -2.4366675126570083,
+      "rank_vs_reference_honest_cohort": -22.418196195824518,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 0.0381369470993537,
+          "normalized_iqm_return": 0.025447306100229022,
+          "worst_decile_normalized_return": -0.45299114572090365
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -0.007670198477265282,
+          "normalized_iqm_return": -0.008215965634924407,
+          "worst_decile_normalized_return": -0.43768707360309417
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -0.0442017605534531,
+          "normalized_iqm_return": -0.025703662624978738,
+          "worst_decile_normalized_return": -0.5663613435948622
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -0.009620114420504535,
+          "normalized_iqm_return": -0.013118755113853976,
+          "worst_decile_normalized_return": -0.43076962536976027
+        }
+      }
+    },
+    "shortcut_hand_decode": {
+      "rank_vs_reference": -0.2486854565081522,
+      "rank_vs_reference_honest_cohort": -2.133435159903304,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.1454353397839092,
+          "normalized_iqm_return": 1.1459480589106037,
+          "worst_decile_normalized_return": 0.5973768549612873
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.8331050305373099,
+          "normalized_iqm_return": 0.8001703066375319,
+          "worst_decile_normalized_return": 0.4926365387202426
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.0810391533175914,
+          "normalized_iqm_return": 1.107972170041222,
+          "worst_decile_normalized_return": 0.5694452414569828
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.7997531517146749,
+          "normalized_iqm_return": 0.8124290644542455,
+          "worst_decile_normalized_return": 0.43789155138961966
+        }
+      }
+    },
+    "shortcut_invalid_action": {
+      "rank_vs_reference": -5.550703033941079,
+      "rank_vs_reference_honest_cohort": -51.17006618266126,
+      "status": "failed: run0.json: instance test_00 has illegal action 7",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4826278036814813,
+          "normalized_iqm_return": -1.4466503148886904,
+          "worst_decile_normalized_return": -2.1124397587781396
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.209998667002833,
+          "normalized_iqm_return": -1.164660781939569,
+          "worst_decile_normalized_return": -1.815291555165363
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4647565241784883,
+          "normalized_iqm_return": -1.4626268959871584,
+          "worst_decile_normalized_return": -1.9256715049551012
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.1596022139497701,
+          "normalized_iqm_return": -1.1451086683777396,
+          "worst_decile_normalized_return": -1.6031981306962138
+        }
+      }
+    },
+    "shortcut_label_swap": {
+      "rank_vs_reference": -2.4283507583703767,
+      "rank_vs_reference_honest_cohort": -22.430807501318,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 0.0014665759421722917,
+          "normalized_iqm_return": -0.008601252108641613,
+          "worst_decile_normalized_return": -0.439383134624741
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.010945028167895943,
+          "normalized_iqm_return": 0.004003311260719673,
+          "worst_decile_normalized_return": -0.37811552375440877
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -0.020955336855070738,
+          "normalized_iqm_return": 0.021929132086788455,
+          "worst_decile_normalized_return": -0.43898593233640143
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.036514951701640916,
+          "normalized_iqm_return": 0.042764530049508066,
+          "worst_decile_normalized_return": -0.41150004017029645
+        }
+      }
+    },
+    "shortcut_missing_experiment": {
+      "rank_vs_reference": -5.550703033941079,
+      "rank_vs_reference_honest_cohort": -51.17006618266126,
+      "status": "failed: missing checkpoints/shortcut_missing_experiment/pervasive_confounding/run0.json",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4826278036814813,
+          "normalized_iqm_return": -1.4466503148886904,
+          "worst_decile_normalized_return": -2.1124397587781396
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.209998667002833,
+          "normalized_iqm_return": -1.164660781939569,
+          "worst_decile_normalized_return": -1.815291555165363
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4647565241784883,
+          "normalized_iqm_return": -1.4626268959871584,
+          "worst_decile_normalized_return": -1.9256715049551012
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.1596022139497701,
+          "normalized_iqm_return": -1.1451086683777396,
+          "worst_decile_normalized_return": -1.6031981306962138
+        }
+      }
+    },
+    "shortcut_missing_states": {
+      "rank_vs_reference": -5.550703033941079,
+      "rank_vs_reference_honest_cohort": -51.17006618266126,
+      "status": "failed: run0.json: instance test_00 needs a list of 30 actions",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4826278036814813,
+          "normalized_iqm_return": -1.4466503148886904,
+          "worst_decile_normalized_return": -2.1124397587781396
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.209998667002833,
+          "normalized_iqm_return": -1.164660781939569,
+          "worst_decile_normalized_return": -1.815291555165363
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4647565241784883,
+          "normalized_iqm_return": -1.4626268959871584,
+          "worst_decile_normalized_return": -1.9256715049551012
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.1596022139497701,
+          "normalized_iqm_return": -1.1451086683777396,
+          "worst_decile_normalized_return": -1.6031981306962138
+        }
+      }
+    },
+    "shortcut_nominal_planning": {
+      "rank_vs_reference": -0.5524410340809285,
+      "rank_vs_reference_honest_cohort": -4.815537647467279,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.0413647698362907,
+          "normalized_iqm_return": 1.019533831857455,
+          "worst_decile_normalized_return": 0.5284557758661895
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.6968172306274987,
+          "normalized_iqm_return": 0.6596154968084379,
+          "worst_decile_normalized_return": 0.25779463885447995
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 0.9865546198059937,
+          "normalized_iqm_return": 1.009436298392809,
+          "worst_decile_normalized_return": 0.4153030832197597
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.6867037377737225,
+          "normalized_iqm_return": 0.6875665717191173,
+          "worst_decile_normalized_return": 0.3310446108278729
+        }
+      }
+    },
+    "shortcut_null_action": {
+      "rank_vs_reference": -5.550703033941079,
+      "rank_vs_reference_honest_cohort": -51.17006618266126,
+      "status": "failed: run0.json: instance test_00 has illegal action None",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4826278036814813,
+          "normalized_iqm_return": -1.4466503148886904,
+          "worst_decile_normalized_return": -2.1124397587781396
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.209998667002833,
+          "normalized_iqm_return": -1.164660781939569,
+          "worst_decile_normalized_return": -1.815291555165363
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": -1.4647565241784883,
+          "normalized_iqm_return": -1.4626268959871584,
+          "worst_decile_normalized_return": -1.9256715049551012
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": -1.1596022139497701,
+          "normalized_iqm_return": -1.1451086683777396,
+          "worst_decile_normalized_return": -1.6031981306962138
+        }
+      }
+    },
+    "shortcut_prior_fit": {
+      "rank_vs_reference": 0.32365656777136403,
+      "rank_vs_reference_honest_cohort": 3.0332161823555195,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3597415292003916,
+          "normalized_iqm_return": 1.3511035634195159,
+          "worst_decile_normalized_return": 0.9385877908545058
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.0791560545512022,
+          "normalized_iqm_return": 1.0643371774621937,
+          "worst_decile_normalized_return": 0.777337779975602
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3360477172864786,
+          "normalized_iqm_return": 1.3428905586822637,
+          "worst_decile_normalized_return": 0.965552527466744
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.0488630646253083,
+          "normalized_iqm_return": 1.0834840022494434,
+          "worst_decile_normalized_return": 0.7392525526719828
+        }
+      }
+    },
+    "shortcut_prior_fit_model": {
+      "rank_vs_reference": 0.33301272055197306,
+      "rank_vs_reference_honest_cohort": 3.136509723614236,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3673741668620607,
+          "normalized_iqm_return": 1.3580639984216283,
+          "worst_decile_normalized_return": 0.9480918536232903
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.086660989477374,
+          "normalized_iqm_return": 1.0736029823493294,
+          "worst_decile_normalized_return": 0.7541921686263755
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3404967799663912,
+          "normalized_iqm_return": 1.3532286269754163,
+          "worst_decile_normalized_return": 0.9658533306656005
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.055246397005074,
+          "normalized_iqm_return": 1.079002083516701,
+          "worst_decile_normalized_return": 0.7173851905478599
+        }
+      }
+    },
+    "shortcut_prior_fit_train": {
+      "rank_vs_reference": 0.29969001381460403,
+      "rank_vs_reference_honest_cohort": 2.83799042930556,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3581087963986276,
+          "normalized_iqm_return": 1.34856320748408,
+          "worst_decile_normalized_return": 0.9271499496985295
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.068458654797805,
+          "normalized_iqm_return": 1.0539385639815197,
+          "worst_decile_normalized_return": 0.7441713461383699
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.3912260814282709,
+          "normalized_iqm_return": 1.3845024538815587,
+          "worst_decile_normalized_return": 1.0357006559776492
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.1233113094324991,
+          "normalized_iqm_return": 1.1494701286920568,
+          "worst_decile_normalized_return": 0.7975944660004091
+        }
+      }
+    },
+    "shortcut_train_oracle": {
+      "rank_vs_reference": -0.17745131506655062,
+      "rank_vs_reference_honest_cohort": -1.6409507271155692,
+      "status": "ok",
+      "metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.097511526372842,
+          "normalized_iqm_return": 1.0965047080633437,
+          "worst_decile_normalized_return": 0.6463185845955572
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 0.8971943389423238,
+          "normalized_iqm_return": 0.8915088689856102,
+          "worst_decile_normalized_return": 0.5839324681910775
+        }
+      },
+      "train_metrics": {
+        "confounded_expert_demos": {
+          "normalized_mean_return": 1.396383113665637,
+          "normalized_iqm_return": 1.3900864662234464,
+          "worst_decile_normalized_return": 1.04175051464301
+        },
+        "pervasive_confounding": {
+          "normalized_mean_return": 1.1344789349095536,
+          "normalized_iqm_return": 1.1591396828483607,
+          "worst_decile_normalized_return": 0.8139161802579096
+        }
+      }
+    }
+  },
+  "paired": {
+    "behavior_cloning": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.08734437329002685,
+          "se": 0.014310622772883823,
+          "wins": 8,
+          "losses": 56
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.23992512327014145,
+          "se": 0.02436005493759589,
+          "wins": 2,
+          "losses": 62
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.24726151812027364,
+          "se": 0.026698957079179013,
+          "wins": 4,
+          "losses": 60
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.061653285787072326,
+          "se": 0.011779518324868218,
+          "wins": 12,
+          "losses": 52
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.17279163044248624,
+          "se": 0.023786752335375087,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.17750671074260813,
+          "se": 0.025413968448485914,
+          "wins": 4,
+          "losses": 60
+        }
+      }
+    },
+    "better_ensemble": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.004143064788524348,
+          "se": 0.003194164177483865,
+          "wins": 32,
+          "losses": 30
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.14843768519159026,
+          "se": 0.019099198146660536,
+          "wins": 5,
+          "losses": 59
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.15577408004172247,
+          "se": 0.020970858187454273,
+          "wins": 6,
+          "losses": 58
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.008598211560035462,
+          "se": 0.004845490828688064,
+          "wins": 27,
+          "losses": 30
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.1197365562154494,
+          "se": 0.021558242772072567,
+          "wins": 9,
+          "losses": 55
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.12445163651557127,
+          "se": 0.022904228427000156,
+          "wins": 7,
+          "losses": 57
+        }
+      }
+    },
+    "better_hurwicz_partition": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.15991714483024677,
+          "se": 0.020580940483899177,
+          "wins": 59,
+          "losses": 5
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.007336394850132195,
+          "se": 0.008616353524229521,
+          "wins": 32,
+          "losses": 31
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.1158534249555358,
+          "se": 0.019590570404574757,
+          "wins": 56,
+          "losses": 8
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.004715080300121872,
+          "se": 0.008036041384648999,
+          "wins": 36,
+          "losses": 27
+        }
+      }
+    },
+    "better_partition": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.14865029910738836,
+          "se": 0.01905503118725095,
+          "wins": 59,
+          "losses": 5
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.003930450872726218,
+          "se": 0.003628346901339924,
+          "wins": 13,
+          "losses": 9
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.011266845722858413,
+          "se": 0.009627621027957502,
+          "wins": 28,
+          "losses": 34
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.11224940594586824,
+          "se": 0.01906816378717966,
+          "wins": 56,
+          "losses": 8
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.0011110612904543203,
+          "se": 0.0015211851823086838,
+          "wins": 20,
+          "losses": 12
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.0036040190096675515,
+          "se": 0.007725177926760765,
+          "wins": 28,
+          "losses": 35
+        }
+      }
+    },
+    "better_partition_lcb": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.1525807499801146,
+          "se": 0.018643865923473682,
+          "wins": 60,
+          "losses": 4
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.007336394850132195,
+          "se": 0.008616353524229521,
+          "wins": 31,
+          "losses": 32
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.11113834465541392,
+          "se": 0.018949078498311244,
+          "wins": 56,
+          "losses": 8
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.004715080300121872,
+          "se": 0.008036041384648999,
+          "wins": 27,
+          "losses": 36
+        }
+      }
+    },
+    "better_sharp_lcb": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.02704689964656664,
+          "se": 0.02564196760182319,
+          "wins": 23,
+          "losses": 41
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.17962764962668124,
+          "se": 0.014450253414205423,
+          "wins": 1,
+          "losses": 63
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.18696404447681345,
+          "se": 0.016990634752258958,
+          "wins": 2,
+          "losses": 62
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.055240022167990815,
+          "se": 0.025376999541712738,
+          "wins": 22,
+          "losses": 42
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.16637836682340473,
+          "se": 0.01688679614006542,
+          "wins": 3,
+          "losses": 61
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.17109344712352664,
+          "se": 0.01535815363686321,
+          "wins": 2,
+          "losses": 62
+        }
+      }
+    },
+    "causal_dqn": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.0,
+          "se": 0.0,
+          "wins": 0,
+          "losses": 0
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.1525807499801146,
+          "se": 0.018643865923473682,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.15991714483024677,
+          "se": 0.020580940483899177,
+          "wins": 5,
+          "losses": 59
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.0,
+          "se": 0.0,
+          "wins": 0,
+          "losses": 0
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11113834465541392,
+          "se": 0.018949078498311244,
+          "wins": 8,
+          "losses": 56
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.1158534249555358,
+          "se": 0.019590570404574757,
+          "wins": 8,
+          "losses": 56
+        }
+      }
+    },
+    "causal_dqn_rep2": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.014715212537917216,
+          "se": 0.004538366533974952,
+          "wins": 20,
+          "losses": 41
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.1672959625180318,
+          "se": 0.01990399929345509,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.17463235736816402,
+          "se": 0.021852972774767266,
+          "wins": 5,
+          "losses": 59
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.0006919431617481899,
+          "se": 0.0048771126421431905,
+          "wins": 27,
+          "losses": 35
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11183028781716212,
+          "se": 0.019737510011361623,
+          "wins": 9,
+          "losses": 55
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11654536811728398,
+          "se": 0.020745817220266305,
+          "wins": 9,
+          "losses": 55
+        }
+      }
+    },
+    "conf_dqn": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.1572475754662399,
+          "se": 0.023927779183024467,
+          "wins": 9,
+          "losses": 55
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.30982832544635447,
+          "se": 0.019112909249985554,
+          "wins": 1,
+          "losses": 63
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.3171647202964867,
+          "se": 0.018611784227045562,
+          "wins": 0,
+          "losses": 64
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.24956223352318269,
+          "se": 0.026431669608989274,
+          "wins": 5,
+          "losses": 59
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.36070057817859663,
+          "se": 0.023124282291471763,
+          "wins": 1,
+          "losses": 63
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.3654156584787185,
+          "se": 0.02138480529486759,
+          "wins": 0,
+          "losses": 64
+        }
+      }
+    },
+    "seed_causal_0": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.01166925585100502,
+          "se": 0.005123705600995011,
+          "wins": 37,
+          "losses": 25
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.14091149412910958,
+          "se": 0.019088368605601022,
+          "wins": 7,
+          "losses": 57
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.1482478889792418,
+          "se": 0.02054279750316003,
+          "wins": 8,
+          "losses": 56
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.0015078379023205496,
+          "se": 0.0037762484819764976,
+          "wins": 26,
+          "losses": 31
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11264618255773448,
+          "se": 0.019938804028924065,
+          "wins": 9,
+          "losses": 55
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11736126285785635,
+          "se": 0.02028396371560874,
+          "wins": 10,
+          "losses": 54
+        }
+      }
+    },
+    "seed_causal_1": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.009967792591994484,
+          "se": 0.004339287475380412,
+          "wins": 25,
+          "losses": 37
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.16254854257210904,
+          "se": 0.019443870657396913,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.16988493742224126,
+          "se": 0.02123997578616572,
+          "wins": 4,
+          "losses": 60
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.0005593287118795826,
+          "se": 0.006455618887243722,
+          "wins": 29,
+          "losses": 28
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11169767336729351,
+          "se": 0.018382252443218665,
+          "wins": 11,
+          "losses": 53
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11641275366741538,
+          "se": 0.018679237973112783,
+          "wins": 8,
+          "losses": 56
+        }
+      }
+    },
+    "seed_causal_2": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.0017014632590105615,
+          "se": 0.0049352863109388325,
+          "wins": 33,
+          "losses": 29
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.15428221323912517,
+          "se": 0.019229927545446324,
+          "wins": 5,
+          "losses": 59
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.16161860808925735,
+          "se": 0.021610670022080707,
+          "wins": 7,
+          "losses": 57
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.002067166614200113,
+          "se": 0.0058228108125061,
+          "wins": 31,
+          "losses": 26
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.10907117804121381,
+          "se": 0.020774499040617882,
+          "wins": 10,
+          "losses": 54
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.1137862583413357,
+          "se": 0.02192848432132729,
+          "wins": 9,
+          "losses": 55
+        }
+      }
+    },
+    "seed_causal_3": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.012413979844701661,
+          "se": 0.007604549315012468,
+          "wins": 27,
+          "losses": 36
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.16499472982481625,
+          "se": 0.02194905195656425,
+          "wins": 6,
+          "losses": 58
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.17233112467494843,
+          "se": 0.023742022273474245,
+          "wins": 6,
+          "losses": 58
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.0010470353147067398,
+          "se": 0.005642265585576894,
+          "wins": 31,
+          "losses": 30
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11009130934070718,
+          "se": 0.01911485380596879,
+          "wins": 12,
+          "losses": 52
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11480638964082905,
+          "se": 0.02031654799399156,
+          "wins": 9,
+          "losses": 55
+        }
+      }
+    },
+    "seed_causal_4": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.015379778892184177,
+          "se": 0.007097887804019247,
+          "wins": 25,
+          "losses": 37
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.1679605288722988,
+          "se": 0.019605912262782733,
+          "wins": 5,
+          "losses": 59
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.17529692372243097,
+          "se": 0.021594543125014888,
+          "wins": 7,
+          "losses": 57
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.0005510212753172799,
+          "se": 0.0058046361626944015,
+          "wins": 26,
+          "losses": 35
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11058732338009665,
+          "se": 0.02007978230571607,
+          "wins": 11,
+          "losses": 53
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.1153024036802185,
+          "se": 0.021054776724316496,
+          "wins": 8,
+          "losses": 56
+        }
+      }
+    },
+    "seed_causal_5": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.01635187887686579,
+          "se": 0.005916279251180976,
+          "wins": 20,
+          "losses": 43
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.16893262885698038,
+          "se": 0.02009418113595166,
+          "wins": 6,
+          "losses": 58
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.1762690237071126,
+          "se": 0.022001603855688064,
+          "wins": 6,
+          "losses": 58
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.0036738860752686016,
+          "se": 0.007137333155819213,
+          "wins": 27,
+          "losses": 33
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11481223073068253,
+          "se": 0.021100815486644945,
+          "wins": 10,
+          "losses": 54
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11952731103080441,
+          "se": 0.02191375947735245,
+          "wins": 10,
+          "losses": 54
+        }
+      }
+    },
+    "stronger_x3_updates": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.005305221089849269,
+          "se": 0.003670740030050873,
+          "wins": 26,
+          "losses": 34
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.15788597106996388,
+          "se": 0.018541686232816868,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.16522236592009606,
+          "se": 0.020468472136784172,
+          "wins": 6,
+          "losses": 58
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.0012284771190385277,
+          "se": 0.0038783311263139307,
+          "wins": 25,
+          "losses": 35
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11236682177445245,
+          "se": 0.019338464540924614,
+          "wins": 10,
+          "losses": 54
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11708190207457433,
+          "se": 0.020281992266126918,
+          "wins": 9,
+          "losses": 55
+        }
+      }
+    },
+    "variant_causal_tabular": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.05280324680206745,
+          "se": 0.013039189024990865,
+          "wins": 19,
+          "losses": 45
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.20538399678218205,
+          "se": 0.024065163623132237,
+          "wins": 6,
+          "losses": 58
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.2127203916323142,
+          "se": 0.025384137322443486,
+          "wins": 5,
+          "losses": 59
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.062013341708819135,
+          "se": 0.013224921940142704,
+          "wins": 18,
+          "losses": 46
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.17315168636423306,
+          "se": 0.021441549945383612,
+          "wins": 5,
+          "losses": 59
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.17786676666435491,
+          "se": 0.021777550940304712,
+          "wins": 1,
+          "losses": 63
+        }
+      }
+    },
+    "weaker_paper_replay_ratio": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.0048410266812482835,
+          "se": 0.0038854324638537946,
+          "wins": 30,
+          "losses": 30
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.15742177666136287,
+          "se": 0.019093719698833705,
+          "wins": 5,
+          "losses": 59
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.16475817151149508,
+          "se": 0.021145272741540252,
+          "wins": 4,
+          "losses": 60
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.0002746371651620675,
+          "se": 0.004297223525444086,
+          "wins": 33,
+          "losses": 29
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11086370749025186,
+          "se": 0.0195544364923506,
+          "wins": 9,
+          "losses": 55
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11557878779037373,
+          "se": 0.020437451834849133,
+          "wins": 10,
+          "losses": 54
+        }
+      }
+    },
+    "weaker_third_updates": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.0012267374218485737,
+          "se": 0.0033046344974598,
+          "wins": 27,
+          "losses": 32
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.15380748740196318,
+          "se": 0.018794261567418185,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.16114388225209536,
+          "se": 0.02026648901785084,
+          "wins": 4,
+          "losses": 60
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.0003589747918081466,
+          "se": 0.0038156968301110024,
+          "wins": 30,
+          "losses": 30
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.11149731944722208,
+          "se": 0.019011654000344654,
+          "wins": 10,
+          "losses": 54
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.11621239974734393,
+          "se": 0.020026650100459717,
+          "wins": 10,
+          "losses": 54
+        }
+      }
+    },
+    "shortcut_constant_action": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -1.206375013183707,
+          "se": 0.048206678154394146,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.3589557631638214,
+          "se": 0.049959179796376665,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.3662921580139535,
+          "se": 0.05159274618249652,
+          "wins": 0,
+          "losses": 64
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.972435252270506,
+          "se": 0.037103300020552794,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.0835735969259201,
+          "se": 0.043844152617485144,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.0882886772260418,
+          "se": 0.045022275985121096,
+          "wins": 0,
+          "losses": 64
+        }
+      }
+    },
+    "shortcut_data_edit": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -1.206375013183707,
+          "se": 0.048206678154394146,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.3589557631638214,
+          "se": 0.049959179796376665,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.3662921580139535,
+          "se": 0.05159274618249652,
+          "wins": 0,
+          "losses": 64
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.972435252270506,
+          "se": 0.037103300020552794,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.0835735969259201,
+          "se": 0.043844152617485144,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.0882886772260418,
+          "se": 0.045022275985121096,
+          "wins": 0,
+          "losses": 64
+        }
+      }
+    },
+    "shortcut_extra_runs": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -1.1467189525635155,
+          "se": 0.0413558772248757,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.29929970254363,
+          "se": 0.043171459922855385,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.306636097393762,
+          "se": 0.04554403038869397,
+          "wins": 0,
+          "losses": 64
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.9665178232066614,
+          "se": 0.03988875231497332,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.077656167862075,
+          "se": 0.04306756747421095,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.0823712481621972,
+          "se": 0.04190081395518579,
+          "wins": 0,
+          "losses": 64
+        }
+      }
+    },
+    "shortcut_forged_fields": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -1.1467189525635155,
+          "se": 0.0413558772248757,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.29929970254363,
+          "se": 0.043171459922855385,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.306636097393762,
+          "se": 0.04554403038869397,
+          "wins": 0,
+          "losses": 64
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.9665178232066614,
+          "se": 0.03988875231497332,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.077656167862075,
+          "se": 0.04306756747421095,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.0823712481621972,
+          "se": 0.04190081395518579,
+          "wins": 0,
+          "losses": 64
+        }
+      }
+    },
+    "shortcut_hand_decode": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.03942055987895997,
+          "se": 0.024244228282052627,
+          "wins": 21,
+          "losses": 43
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.1920013098590746,
+          "se": 0.01825084572271407,
+          "wins": 5,
+          "losses": 59
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.19933770470920675,
+          "se": 0.016862136522686807,
+          "wins": 1,
+          "losses": 63
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.1257425941920861,
+          "se": 0.022665263757575035,
+          "wins": 15,
+          "losses": 49
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.23688093884750003,
+          "se": 0.01952516289826732,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.24159601914762194,
+          "se": 0.017186913399835843,
+          "wins": 3,
+          "losses": 61
+        }
+      }
+    },
+    "shortcut_label_swap": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -1.183389323720697,
+          "se": 0.044923135631704504,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.3359700737008113,
+          "se": 0.04424344526707818,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.3433064685509435,
+          "se": 0.04592186694602803,
+          "wins": 0,
+          "losses": 64
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.9479025965615001,
+          "se": 0.038105524127372226,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -1.059040941216914,
+          "se": 0.03871233836481369,
+          "wins": 0,
+          "losses": 64
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -1.0637560215170359,
+          "se": 0.03865943385274925,
+          "wins": 0,
+          "losses": 64
+        }
+      }
+    },
+    "shortcut_nominal_planning": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.1434911298265782,
+          "se": 0.024908316900384732,
+          "wins": 12,
+          "losses": 52
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.2960718798066928,
+          "se": 0.021187775412932312,
+          "wins": 1,
+          "losses": 63
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.303408274656825,
+          "se": 0.021223733931756167,
+          "wins": 0,
+          "losses": 64
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.2620303941018973,
+          "se": 0.028845034245497527,
+          "wins": 7,
+          "losses": 57
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.3731687387573112,
+          "se": 0.025872414792165937,
+          "wins": 3,
+          "losses": 61
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.37788381905743307,
+          "se": 0.024559532643902364,
+          "wins": 1,
+          "losses": 63
+        }
+      }
+    },
+    "shortcut_prior_fit": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.17488562953752274,
+          "se": 0.020273280374728413,
+          "wins": 61,
+          "losses": 3
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.022304879557408105,
+          "se": 0.007569023648310305,
+          "wins": 36,
+          "losses": 26
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": 0.01496848470727591,
+          "se": 0.007213626788971936,
+          "wins": 33,
+          "losses": 29
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.12030842982180631,
+          "se": 0.01803566369044406,
+          "wins": 57,
+          "losses": 7
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.009170085166392384,
+          "se": 0.005648140016160154,
+          "wins": 39,
+          "losses": 24
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": 0.004455004866270512,
+          "se": 0.008795807119014776,
+          "wins": 27,
+          "losses": 36
+        }
+      }
+    },
+    "shortcut_prior_fit_model": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.18251826719919156,
+          "se": 0.020259390785698418,
+          "wins": 59,
+          "losses": 5
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.029937517219076944,
+          "se": 0.009071578609393883,
+          "wins": 38,
+          "losses": 26
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": 0.022601122368944748,
+          "se": 0.006300704122560356,
+          "wins": 44,
+          "losses": 19
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.12781336474797791,
+          "se": 0.01879442718230276,
+          "wins": 57,
+          "losses": 7
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.016675020092564,
+          "se": 0.009906593825550567,
+          "wins": 40,
+          "losses": 24
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": 0.011959939792442129,
+          "se": 0.009987309166371597,
+          "wins": 37,
+          "losses": 27
+        }
+      }
+    },
+    "shortcut_prior_fit_train": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": 0.1732528967357586,
+          "se": 0.022235672968994074,
+          "wins": 56,
+          "losses": 8
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": 0.020672146755643994,
+          "se": 0.009602019438970344,
+          "wins": 35,
+          "losses": 28
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": 0.0133357519055118,
+          "se": 0.007704846006329441,
+          "wins": 37,
+          "losses": 25
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": 0.10961103006840897,
+          "se": 0.01768653706810039,
+          "wins": 54,
+          "losses": 10
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.0015273145870049482,
+          "se": 0.0104378572784711,
+          "wins": 31,
+          "losses": 33
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.00624239488712682,
+          "se": 0.010989338178309896,
+          "wins": 26,
+          "losses": 38
+        }
+      }
+    },
+    "shortcut_train_oracle": {
+      "confounded_expert_demos": {
+        "vs_reference": {
+          "mean_diff": -0.08734437329002685,
+          "se": 0.014310622772883823,
+          "wins": 8,
+          "losses": 56
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.23992512327014145,
+          "se": 0.02436005493759589,
+          "wins": 2,
+          "losses": 62
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.24726151812027364,
+          "se": 0.026698957079179013,
+          "wins": 4,
+          "losses": 60
+        }
+      },
+      "pervasive_confounding": {
+        "vs_reference": {
+          "mean_diff": -0.061653285787072326,
+          "se": 0.011779518324868218,
+          "wins": 12,
+          "losses": 52
+        },
+        "vs_better_partition_lcb": {
+          "mean_diff": -0.17279163044248624,
+          "se": 0.023786752335375087,
+          "wins": 4,
+          "losses": 60
+        },
+        "vs_better_hurwicz_partition": {
+          "mean_diff": -0.17750671074260813,
+          "se": 0.025413968448485914,
+          "wins": 4,
+          "losses": 60
+        }
+      }
+    }
+  },
+  "test_bounds": {
+    "confounded_expert_demos": {
+      "best_policy_mean": 1.4237386803697323,
+      "worst_policy_mean": -1.4826278036814813
+    },
+    "pervasive_confounding": {
+      "best_policy_mean": 1.1770622594860427,
+      "worst_policy_mean": -1.209998667002833
+    }
+  },
+  "per_seed": {
+    "seed_causal_0": {
+      "confounded_expert_demos": {
+        "normalized_mean_return": 1.196525155513874,
+        "normalized_iqm_return": 1.191094718532214,
+        "worst_decile_normalized_return": 0.764576860219279
+      },
+      "pervasive_confounding": {
+        "normalized_mean_return": 0.9573397868270753,
+        "normalized_iqm_return": 0.9403038780082555,
+        "worst_decile_normalized_return": 0.684630140364071
+      }
+    },
+    "seed_causal_1": {
+      "confounded_expert_demos": {
+        "normalized_mean_return": 1.1748881070708743,
+        "normalized_iqm_return": 1.1662602077306283,
+        "worst_decile_normalized_return": 0.759812239501242
+      },
+      "pervasive_confounding": {
+        "normalized_mean_return": 0.9582882960175164,
+        "normalized_iqm_return": 0.9430397029155569,
+        "worst_decile_normalized_return": 0.6770785800393856
+      }
+    },
+    "seed_causal_2": {
+      "confounded_expert_demos": {
+        "normalized_mean_return": 1.1831544364038586,
+        "normalized_iqm_return": 1.1859360531904923,
+        "worst_decile_normalized_return": 0.7614848743991537
+      },
+      "pervasive_confounding": {
+        "normalized_mean_return": 0.9609147913435961,
+        "normalized_iqm_return": 0.9610473042027133,
+        "worst_decile_normalized_return": 0.6490757445980966
+      }
+    },
+    "seed_causal_3": {
+      "confounded_expert_demos": {
+        "normalized_mean_return": 1.1724419198181675,
+        "normalized_iqm_return": 1.169405507289459,
+        "worst_decile_normalized_return": 0.7661130047748818
+      },
+      "pervasive_confounding": {
+        "normalized_mean_return": 0.9598946600441027,
+        "normalized_iqm_return": 0.9461520181472375,
+        "worst_decile_normalized_return": 0.6637706086096972
+      }
+    },
+    "seed_causal_4": {
+      "confounded_expert_demos": {
+        "normalized_mean_return": 1.1694761207706847,
+        "normalized_iqm_return": 1.1686881242907425,
+        "worst_decile_normalized_return": 0.7556621123785542
+      },
+      "pervasive_confounding": {
+        "normalized_mean_return": 0.9593986460047134,
+        "normalized_iqm_return": 0.9445987302513114,
+        "worst_decile_normalized_return": 0.6837811544537455
+      }
+    },
+    "seed_causal_5": {
+      "confounded_expert_demos": {
+        "normalized_mean_return": 1.1685040207860034,
+        "normalized_iqm_return": 1.1724823346249598,
+        "worst_decile_normalized_return": 0.7317431303284351
+      },
+      "pervasive_confounding": {
+        "normalized_mean_return": 0.9551737386541275,
+        "normalized_iqm_return": 0.9503545037421576,
+        "worst_decile_normalized_return": 0.6659628307076958
+      }
+    }
+  }
+}

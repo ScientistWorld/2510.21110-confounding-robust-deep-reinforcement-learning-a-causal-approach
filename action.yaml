@@ -3,6 +3,6 @@
 # only after your turn ends.
 action: submit
 gpus: 1
-test: true
+test: false
 milestone: core_claim_plus
-notes: "Design exploration round 2: v3 instance family candidates (graded opportunistic rewards, confounded transitions) with the partition bound, prior-fit shortcut (512 simulated instances), Causal-DQN/Conf-DQN one run each."
+notes: "Final hardening job: rebuild train/test splits on the new instance family, train Causal-DQN and baselines (3 runs), run honest variants, prior-fit/hand-decode and all other shortcuts through the hidden test, summarize."
